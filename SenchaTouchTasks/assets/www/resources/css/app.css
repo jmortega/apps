@@ -1,0 +1,91 @@
+.list-item-titulo
+{
+    float:right;
+    width:100%;
+    font-size:20px;
+    white-space: nowrap;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    padding-right:25px;
+    line-height:150%;
+}
+.list-item-prioridad
+{
+	color:red;
+	background-image:url('../images/alert.png');
+	background-position:right;
+	background-repeat:no-repeat;
+    float:left;
+    width:95%;
+    font-size:20px;
+    white-space: nowrap;  
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    padding-right:25px;
+}
+
+.completada
+{
+    color:green;
+	background-image:url('../images/ok.png');
+	background-position:right;
+	background-repeat:no-repeat;
+    font-size:20px;
+    margin:  auto 0px;
+	padding: 10px;
+}
+
+.alert
+{
+    color:red;
+	background-image:url('../images/alert.png');
+	background-position:right;
+	background-repeat:no-repeat;
+    font-size:20px;
+    margin:  auto 0px;
+	padding: 10px;
+}
+
+.x-item-selected .list-item-titulo 
+{
+    color:#ffffff;
+}
+.x-item-selected .list-item-prioridad
+{
+    color:#ffffff;
+}
+.list-empty-text 
+{
+    padding:10px;
+}
+
+.x-badge-aux
+{
+ -webkit-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 0.2em;
+  border-radius: 0.2em;
+  padding: .1em .3em;
+  z-index: 2;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0.1em 0.1em;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0.1em 0.1em;
+  overflow: hidden;
+  color: #ffffff;
+  border: 1px solid green;
+  position: absolute;
+  width: auto;
+  min-width: 2em;
+  line-height: 1.2em;
+  font-size: .6em;
+  right: 0px;
+  top: -0.2em;
+  max-width: 95%;
+  background-image: none;
+  background-color: green;
+  display: inline-block;
+}
+
+.x-panel {
+    -webkit-backface-visibility: hidden;
+}
