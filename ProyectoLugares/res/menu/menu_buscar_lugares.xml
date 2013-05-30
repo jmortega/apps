@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/volver" android:title="@string/volver"
+		android:icon="@drawable/volver" />
+	<item android:id="@+id/btnBuscarLugaresNombre" android:title="@string/buscar_nombre"
+		android:icon="@drawable/buscar2" />
+	<item android:id="@+id/btnBuscarLugaresDesc" android:title="@string/buscar_descripcion"
+		android:icon="@drawable/buscar2" />
+</menu>

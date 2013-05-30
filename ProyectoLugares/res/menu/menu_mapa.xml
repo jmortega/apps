@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/posicion" android:title="@string/ObtenerPosicion"
+		android:icon="@drawable/my_location" />
+	<item android:id="@+id/verMapaCompleto" android:title="@string/ver_mapa_completo"
+		android:icon="@drawable/vermapa" />
+	<item android:id="@+id/buscarLugar" android:title="@string/buscar_lugar"
+		android:icon="@drawable/buscar" />
+	<item android:id="@+id/reconocimientoVoz" android:title="@string/buscar_voz"
+		android:icon="@drawable/voz" />
+	<item android:id="@+id/gps_sistema" android:title="@string/gps_sistema"
+		android:icon="@drawable/gps" />
+</menu>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/btnExportar" android:title="@string/exportar"
+		android:icon="@drawable/export" />
+	<item android:id="@+id/btnImportar" android:title="@string/importar"
+		android:icon="@drawable/export" />
+	<item android:id="@+id/btnInfo" android:title="@string/info"
+		android:icon="@drawable/info" />
+	<item android:id="@+id/btnRecargarLugares" android:title="@string/recargar_lugares"
+		android:icon="@drawable/reload" />
+</menu>

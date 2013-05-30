@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:background="@drawable/fondo"
+	android:scrollbarStyle="outsideOverlay" android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip" android:smoothScrollbar="true">
+
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_height="wrap_content"  android:layout_width="fill_parent">
+		
+		<LinearLayout android:id="@+id/linearLayoutLugaresCategoriaAux"
+		android:orientation="horizontal" android:background="@drawable/fondo"
+		android:layout_width="fill_parent" android:layout_height="50dip">
+		<ImageView android:padding="1dp" android:layout_width="50dp"
+			android:src="@drawable/network" android:layout_margin="1dip"
+			android:adjustViewBounds="true" android:layout_gravity="center"
+			android:layout_height="50dp" android:id="@+id/iconCategory"></ImageView>
+
+		<TextView android:id="@+id/textCategoria"
+			android:layout_width="fill_parent" android:textColor="@color/negro"
+			android:textStyle="bold" android:textSize="20dip"
+			android:layout_height="50dip" android:background="@drawable/fondo"
+			android:cacheColorHint="@android:color/transparent"
+			android:singleLine="false" android:gravity="center_vertical|center_horizontal" />
+	</LinearLayout>
+	
+		<LinearLayout android:layout_marginLeft="10dip" android:layout_gravity="center" android:orientation="horizontal" android:layout_height="100dp" android:layout_width="280dp">
+			<Button android:onClick="editar" android:layout_width="125dip" android:layout_gravity="center" android:textStyle="bold" android:layout_height="50dp" android:id="@+id/botonEditarAux" android:drawableTop="@drawable/edit" android:layout_marginTop="20dip"></Button>
+			<Button android:onClick="eliminar" android:text="@string/eliminar" android:layout_width="125dip" android:layout_gravity="center" android:textStyle="bold" android:layout_height="50dp" android:id="@+id/botonEliminarAux" android:layout_marginLeft="17dip" android:drawableTop="@drawable/delete" android:layout_marginTop="20dip"></Button>
+		</LinearLayout>
+
+
+
+		<RatingBar android:id="@+id/idRatingbar"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginTop="20dip" android:numStars="5"
+			android:stepSize="1.0" />
+
+		<LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:layout_width="280dp" android:layout_height="78dp">
+			
+		<Button android:layout_marginTop="5dip"
+			android:layout_marginLeft="10dip" android:textStyle="bold"
+			android:layout_gravity="center" android:layout_height="65dp"
+			android:id="@+id/botonCompartir"
+			android:drawableTop="@drawable/share"
+			android:onClick="compartir" android:text="@string/compartir" android:layout_width="115dp"></Button>
+
+		<Button android:layout_marginTop="5dip"
+			android:layout_marginLeft="15dip" android:textStyle="bold"
+			android:layout_gravity="center" android:layout_height="65dp"
+			android:id="@+id/botonRutaGoogle"
+			android:drawableTop="@drawable/google_map"
+			android:onClick="rutaGoogle" android:text="@string/ruta_google" android:layout_width="115dp"></Button>
+			
+		</LinearLayout>
+			
+		<TextView android:text="@string/nombre" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:textColor="@color/negro"
+			android:textStyle="bold" android:paddingTop="10px" />
+
+		<TextView android:id="@+id/lugarNombre" android:layout_width="fill_parent"
+			android:textColor="@color/gris" android:background="@drawable/fondo3"
+			android:textStyle="bold"
+        	android:textSize="17dip"
+			android:layout_height="60dp" />
+
+		<TextView android:text="@string/descripcion"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<TextView android:id="@+id/lugarDescripcion"
+			android:layout_width="fill_parent" android:background="@drawable/fondo3"
+			android:textStyle="bold"
+        	android:textSize="17dip"
+			android:layout_height="60dp" android:textColor="@color/gris" />
+
+		<TextView android:text="@string/latitud"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<TextView android:id="@+id/lugarLatitud"
+			android:layout_width="fill_parent" android:background="@drawable/fondo3"
+			android:textStyle="bold"
+        	android:textSize="17dip"
+			android:layout_height="30dp" android:textColor="@color/gris" />
+
+		<TextView android:text="@string/longitud"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<TextView android:id="@+id/lugarLongitud"
+			android:layout_width="fill_parent" android:background="@drawable/fondo3"
+			android:textStyle="bold"
+        	android:textSize="17dip"
+			android:layout_height="30dp" android:textColor="@color/gris" />
+
+		<FrameLayout android:id="@+id/FLMapa"
+			android:layout_width="match_parent" android:layout_height="175dp"
+			android:layout_margin="10dp">
+			<com.google.android.maps.MapView
+				android:id="@+id/vistaMapa" android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:enabled="true"
+				android:clickable="false" android:apiKey="@string/googlemaps_apikey" />
+			<LinearLayout android:orientation="vertical"
+				android:layout_width="244dp" android:layout_height="132dp">
+
+			</LinearLayout>
+		</FrameLayout>
+
+		<Button android:textStyle="bold" android:layout_gravity="center"
+			android:layout_height="50dp" android:id="@+id/botonZoomImagen" android:onClick="zoomImagen"
+			android:text="@string/zoom_imagen" android:paddingTop="10dp"
+			android:drawableTop="@drawable/zoom" android:layout_width="155dp"></Button>
+
+		<ImageView android:id="@+id/imagenFoto" android:src="@drawable/no_imagen"
+			android:padding="5dp" android:adjustViewBounds="true"
+			android:layout_gravity="center" android:layout_width="match_parent"
+			android:layout_height="175dp" />
+
+	</LinearLayout>
+</ScrollView>

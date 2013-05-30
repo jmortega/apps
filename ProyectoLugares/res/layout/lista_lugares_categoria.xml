@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/linearLayoutLugaresCategoria" android:orientation="vertical"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<LinearLayout android:id="@+id/linearLayoutLugaresCategoriaAux"
+		android:orientation="horizontal" android:background="@drawable/list_selector_aux2"
+		android:layout_width="fill_parent" android:layout_height="50dip">
+		<ImageView android:padding="1dp" android:layout_width="50dp"
+			android:src="@drawable/network" android:layout_margin="1dip"
+			android:adjustViewBounds="true" android:layout_gravity="center"
+			android:layout_height="50dp" android:id="@+id/iconCategory"></ImageView>
+
+		<TextView android:id="@+id/textCategoria"
+			android:layout_width="fill_parent" android:textColor="@color/negro"
+			android:textStyle="bold" android:textSize="20dip"
+			android:layout_height="50dip" android:background="@drawable/list_selector_aux2"
+			android:cacheColorHint="@android:color/transparent"
+			android:singleLine="false" android:gravity="center_vertical|center_horizontal" />
+	</LinearLayout>
+	<com.proyecto.utility.ContentViewFlipper
+		android:id="@+id/viewflipper" android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+
+		<ListView android:id="@android:id/list" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:dividerHeight="4dip"
+			android:divider="@android:color/darker_gray" 
+			android:background="@drawable/list_selector_aux"
+			android:cacheColorHint="@android:color/transparent"
+			android:fastScrollEnabled="true"
+        	android:scrollingCache="true" 
+			android:layout_weight="2"
+			android:smoothScrollbar="true"
+			android:scrollbarStyle="outsideOverlay"
+			android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+			android:scrollbarSize="20dip" />
+		<TextView android:id="@android:id/empty"
+			android:layout_width="fill_parent" android:textColor="@color/negro"
+			android:textStyle="bold" android:textSize="20dip"
+			android:layout_height="fill_parent" android:text="@string/no_existen_lugares"
+			android:background="@drawable/list_selector_aux"
+			android:cacheColorHint="@android:color/transparent"
+			android:singleLine="false" android:gravity="center_vertical|center_horizontal"
+			style="@style/Lugares" />
+
+	</com.proyecto.utility.ContentViewFlipper>
+</LinearLayout>

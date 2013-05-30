@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/btnMisLugares" android:title="@string/MisLugares"
+		android:icon="@drawable/lista" />
+	<item android:id="@+id/btnVerMapa" android:title="@string/VerMapa"
+		android:icon="@drawable/vermapa" />
+	<item android:id="@+id/acerca" android:title="@string/acercaDe"
+		android:icon="@drawable/acerca" />
+	<item android:id="@+id/salir" android:title="@string/salir_text"
+		android:icon="@drawable/salir" />
+	<item android:id="@+id/cambiarIdioma" android:title="@string/cambiar_idioma"
+		android:icon="@drawable/idioma" />
+	<item android:id="@+id/cambiarVista" android:title="@string/vista_normal"
+		android:icon="@drawable/vista_normal" />
+</menu>

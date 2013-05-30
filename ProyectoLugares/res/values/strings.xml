@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lugares favoritos</string>
+    <string name="MisLugares">Mis lugares</string>
+
+    <!-- Google api Key-->
+    <string name="googlemaps_apikey">0hRrFJV6Z8CFMn69kC64FDNGBrkGDRTmCnK7uZQ</string>
+    
+    
+    <!--Dialogos-->
+    <string name="salir_text">Salir</string>
+    <string name="acercaDe">Acerca de</string>
+    <string name="salir">¿Confirma salir de la aplicación?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="lugares_encontrados">Lugares registrados</string>
+    <string name="categorias_encontradas">Categorías registradas</string>
+    <string name="VerMapa">Ver Mapa</string>
+    
+    <!--Info-->
+
+    <string name="InfoAplicacion">Lugares</string>
+    <string name="InfoNombre">Jose Manuel Ortega Candel</string>
+    <string name="InfoDescripcion">Gestión de lugares favoritos</string>
+    <string name="Aceptar">Aceptar</string>
+    <string name="no_existen_lugares">No existen lugares registrados</string>
+    <string name="no_existen_lugares_busqueda">No hay resultados</string>
+    <string name="lugar_favorito">Lugar favorito</string>
+    <string name="info">Info</string>
+    <string name="info_delete">Las imágenes no se eliminan al eliminar los lugares registrados</string>
+    
+    <!--AR VIEWER-->
+    <string name="info_arviewer">Esta funcionalidad usa el visor de realidad aumentada ARVIEWER</string>
+    <string name="obtener_arviewer">Obtener ARVIEWER</string>
+    <string name="ordenar_distancia_asc">Ordenar Distancia ASC</string>
+    <string name="ordenar_distancia_desc">Ordenar Distancia DESC</string>
+    
+    <!--Crear/Editar/Visualizar Lugar-->
+    
+    <string name="nombre">Nombre</string>
+    <string name="descripcion">Descripción</string>
+    <string name="foto">Foto</string>
+    <string name="imagen">Imagen</string>
+    <string name="latitud">Latitud</string>
+    <string name="longitud">Longitud</string>
+    <string name="editar">Editar</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="guardar">Guardar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="inicio">Inicio</string>
+    <string name="volver">Volver</string>
+    <string name="eliminar_lugares">Eliminar lugares</string>
+    <string name="confirmar_eliminar_lugares">¿Desea eliminar todos los lugares registrados?</string>
+    <string name="errorRegistroBD">Error al recuperar de la BD</string>
+    <string name="galeriaImagenes">Galería de imágenes</string>
+    <string name="lugar_editado_ok">Lugar actualizado correctamente</string>
+    <string name="datos_no_validos">Debe comprobar el formulario</string>
+    <string name="informar_nombre">Debe informar el campo nombre</string>
+    <string name="informar_descripcion">Debe informar el campo descripción</string>
+    <string name="informar_busqueda">Debe informar el campo de búsqueda</string>
+    <string name="informar_telefono">Debe informar el campo de teléfono</string>
+    <string name="informar_mensaje">Debe informar el campo de mensaje</string>
+    <string name="informar_destinatario">Debe informar el campo destinatario</string>
+    <string name="sd_no_montada">No se puede acceder a la Tarjeta SD</string>
+    <string name="lugar_actualizado_ok">Lugar actualizado correctamente</string>
+    <string name="lugar_actualizado_error">El lugar no se ha podido actualizar</string>
+    <string name="lugar_creado_ok">Lugar registrado correctamente</string>
+    <string name="lugar_creado_error">El lugar no se ha podido crear</string>
+    <string name="lugar_eliminado_ok">Lugar eliminado correctamente</string>
+    <string name="lugares_eliminados_ok">Lugares eliminados correctamente</string>
+    <string name="lugar_eliminado_error">El lugar no se ha podido eliminar</string>
+    <string name="lugares_eliminados_error">Los lugares no se han podido eliminar</string>
+    <string name="puntuacion">Puntuación para el lugar</string>
+    <string name="puntuacion_actualizada">Puntuación actualizada</string>
+    <string name="imagen_camara_ok">Imagen cargada correctamente de la cámara.La imagen se ha añadido a la galería</string>
+    <string name="imagen_galeria_ok">Imagen cargada correctamente de la galería</string>
+    <string name="comprobar_campos">Compruebe los campos del formulario.Nombre y Descripción son obligatorios</string>
+    <string name="registro_lugar_favorito">Registrado nuevo lugar favorito</string>
+    <string name="registro_lugar_text">Se ha registrado el lugar</string>
+    <string name="actualiza_lugar_favorito">Actualizado lugar favorito</string>
+    <string name="actualiza_lugar_text">Se ha actualizado el lugar</string>
+    <string name="elimina_lugar_favorito">Eliminado lugar favorito</string>
+    <string name="elimina_lugar_text">Se ha eliminado el lugar</string>
+    <string name="guardar_lugar">Guardar lugar</string>
+	<string name="confirmar_guardar_lugar">¿Desea guardar este punto?</string>
+	<string name="eliminar_lugar">Eliminar lugar</string>
+	<string name="confirmar_eliminar_lugar">¿Confirma eliminar el lugar seleccionado?</string>
+	<string name="vista_galeria">Vista Galería</string>
+	<string name="vista_lista">Vista Lista</string>
+	<string name="cambiar_idioma">Cambiar idioma</string>
+	<string name="idiomas_soportados">Idiomas soportados:Español/Inglés</string>
+	<string name="obtener">Obtener</string>
+	<string name="obtener_imagen_camara">Obtener imagen de la cámara</string>
+	<string name="obtener_imagen_galeria">Obtener imagen de la galería</string>
+	<string name="obtener_imagen">Obtener imagen</string>
+	<string name="resolucion">Resolución</string>
+	<string name="lista">Lista</string>
+	<string name="combo">Combo lugares</string>
+	<string name="ruta_google">Ruta Google</string>
+	<string name="fotos_panoramio">Fotos en Panoramio</string>
+	<string name="ir_al_sitio">Ir al sitio</string>
+	
+	<!--GPS/MAPA-->
+	<string name="vista_satelite_on">Vista Satelite On</string>
+	<string name="vista_satelite_off">Vista Satelite Off</string>
+	<string name="ObtenerPosicion">Mi posición</string>
+	<string name="red_habilitada">Red Habilitada</string>
+	<string name="red_deshabilitada">Red Deshabilitada</string>
+	<string name="red_deshabilitada_info">Red Deshabilitada.Se recomienda tener una red activa para visualizar el mapa</string>
+	<string name="no_posicion_gps">No se ha podido obtener la posición actual</string>
+	<string name="posicion_actual">Posición actual</string>
+	<string name="no_provider_found">No se ha encontrado ningun provider</string>
+	<string name="editar_localizacion">Editar localización</string>
+	<string name="nueva_localizacion">Nueva localización</string>
+	<string name="actual_localizacion">Actual localización</string>
+	<string name="gps_sistema">Estado Red/GPS Sistema</string>
+	<string name="gps_habilitado">GPS Habilitado</string>
+	<string name="gps_deshabilitado">GPS Deshabilitado</string>
+	<string name="localizacion_actualizada">Localización actualizada</string>
+	<string name="cargando_datos">Cargando datos ...</string>
+	<string name="cargando">Espere</string>
+	<string name="preferencias">Preferencias</string>
+	<string name="preferencia_idioma">Idioma</string>
+	<string name="seleccione_idioma">Seleccione idioma</string>
+	<string name="seleccione_lugar">Seleccione lugar</string>
+	<string name="status_changed">Status changed</string>
+	<string name="gps_provider_no_disponible">GPS Provider no disponible</string>
+	<string name="ver_detalle_lugar">Ver detalles lugar</string>
+	<string name="ver_mapa_completo">Ver mapa completo</string>
+	<string name="aceptar_localizacion">Aceptar nueva localización</string>
+	<string name="buscar_lugar">Buscar Lugar</string>
+	<string name="buscar_nombre">Buscar por nombre</string>
+	<string name="buscar_descripcion">Buscar por descripción</string>
+	<string name="buscando">Buscando</string>
+	<string name="escriba_lugar">Escriba Lugar</string>
+	<string name="buscar">Buscar</string>
+	<string name="ciudad">Ciudad</string>
+	<string name="pais">Pais</string>
+	<string name="codigo_postal">Código postal</string>
+	<string name="telefono">Teléfono</string>
+	<string name="area">Area</string>
+	<string name="mensaje">Mensaje</string>
+	<string name="encontrado_lugar_mapa">Se ha encontrado el lugar en el mapa</string>
+	<string name="no_encontrado_lugar_mapa">No se ha encontrado el lugar en el mapa</string>
+	<string name="no_encontrado_lugar_mapa_aux">No se ha encontrado el lugar en el mapa.Intenténtelo más tarde</string>
+	<string name="conexion_internet_ok">Conexión internet OK</string>
+	<string name="conexion_internet_error">No dispone de conexión a internet</string>
+	<string name="conexion_internet_info">Debe disponer de una conexión a internet para acceder a esta funcionalidad</string>
+	<string name="nueva_notificacion">Tiene una nueva notificación en la barra de notificaciones</string>
+	<string name="crear_lugar">Para crear un lugar pinche en cualquier punto del mapa</string>
+	<string name="crear_lugar_mapa">Para crear un lugar debe visualizar el mapa y pinchar en cualquier punto del mapa</string>
+	<string name="al_menos_un_lugar">Debe tener registrado al menos 1 lugar para acceder a la galería</string>
+	<string name="error_en_el_proceso">Error procesando</string>
+	<string name="error_imagen_camara">Error al obtener la foto de la camara</string>
+	<string name="error_imagen_galeria">Error al obtener la imagen de la galería</string>
+	<string name="compartir">Compartir</string>
+	<string name="vista_3d">Vista Cubo 3D</string>
+	<string name="vista_normal">Restaurar vista</string>
+	<string name="zoom_imagen">Zoom imagen</string>
+	<string name="introduce_criterio_busqueda">Introduce criterio de búsqueda</string>
+	<string name="buscando_posicion_actual">Buscando posicion actual</string>
+	<string name="buscar_voz">Buscar por voz</string>
+	<string name="buscar_voz_texto">Lugar a buscar</string>
+	<string name="voice_not_installed">No tiene instalado el reconocimiento de voz</string>
+	<string name="ordenar_por_nombre">Ordenar por nombre</string>
+	<string name="ordenar_por_categoria">Ordenar por categoria</string>
+	<string name="mostrar_imagenes">Mostrar imágenes</string>
+	<string name="ocultar_imagenes">Ocultar imágenes</string>
+	
+	<!-- CATEGORIAS -->
+	<string name="categoria">Categoría</string>
+	<string name="categorias">Categorías</string>
+	<string name="seleccione_categoria">Seleccione categoría</string>
+	<string name="seleccione_nueva_categoria">Seleccione nueva categoría</string>
+	<string name="nueva_categoria">Nueva categoría</string>
+	<string name="categoria_create_ok">Categoría creada correctamente</string>
+	<string name="categoria_update_ok">Categoría actualizada correctamente</string>
+	<string name="registro_categoria">Registrada nueva categoria</string>
+    <string name="registro_categoria_text">Se ha registrado la categoria</string>
+    <string name="actualiza_categoria">Categoría actualizada</string>
+    <string name="actualiza_categoria_text">Se ha actualizado la categoría</string>
+    <string name="no_lugares_categoria">No existen lugares registrados para la categoria seleccionada</string>
+    <string name="confirmar_eliminar_lugares_categoria">¿Desea eliminar los lugares registrados de la categoria</string>
+    <string name="accion">Acción</string>
+    <string name="listar_lugares">Listar lugares</string>
+    <string name="editar_categoria">Editar categoría</string>
+	<string name="restaurantes">Restaurantes</string>
+	<string name="bares">Bares</string>
+	<string name="cafe">Cafe</string>
+	<string name="compras">Compras</string>
+	<string name="hoteles">Hoteles</string>
+	<string name="musica">Musica</string>
+	<string name="parques">Parques</string>
+	<string name="aeropuertos">Aeropuertos</string>
+	<string name="parking">Parking</string>
+	<string name="universidades">Universidades</string>
+	
+	<string name="realidad_aumentada">Realidad aumentada</string>
+	<string name="distancia">Distancia</string>
+	<string name="desconocida">Desconocida</string>
+	
+	<!-- EXPORTAR/IMPORTAR BD -->
+	<string name="exportar_importar">Exportar/Importar</string>
+	<string name="exportar">Exportar</string>
+	<string name="importar">Importar</string>
+	<string name="procesando">Procesando datos</string>
+	<string name="exportar_ok">Exportación correcta de lugares</string>
+	<string name="exportar_error">Error en la exportación</string>
+	<string name="importar_ok">Importación correcta de lugares</string>
+	<string name="importar_error">Error en la importación</string>
+	<string name="importar_pregunta">La lista de lugares actual se sobreescribirá ¿Desea continuar?</string>
+	<string name="exportar_importar_info">La exportación e importación de datos se realiza desde la ruta de la tarjeta SD: /Android/data/com.proyecto.database.lugaresDB/backup/lugaresDataBaseRespaldo.db</string>
+	<string name="recargar_lugares">Recargar lista de lugares</string>
+	<string name="acerca_de_export_import">Acerca de Importar/Exportar</string>
+	
+	
+	<!-- SMS -->
+	<string name="comprobar_campos_sms">Compruebe los campos del formulario.Teléfono y Mensaje son obligatorios</string>
+	<string name="enviar_sms">Enviar SMS</string>
+	<string name="envio_sms_ok">SMS enviado correctamente</string>
+	<string name="envio_sms_error">Error al enviar el SMS</string>
+	<string name="recibido_sms_ok">Mensaje recibido con éxito</string>
+	<string name="enviado_sms_ok">Mensaje enviado con éxito</string>
+	
+	
+	<!-- MAIL -->
+	<string name="comprobar_campos_mail">Compruebe los campos del formulario.Destinatario y Mensaje son obligatorios</string>
+	<string name="enviar_mail">Enviar MAIL</string>
+	<string name="envio_mail_ok">Correo enviado correctamente</string>
+	<string name="envio_mail_error">Error al enviar el Correo</string>
+	<string name="enviar_imagen_adjunta">Enviar imagen adjunta</string>
+	<string name="asunto">Asunto</string>
+	<string name="para">Para</string>
+	
+	<!-- Contactos -->
+	<string name="mostrar_contactos">Mostrar Contactos</string>
+	<string name="seleccione_telefono">Seleccione teléfono</string>
+	<string name="seleccione_email">Seleccione email</string>
+	<string name="contactos_no_encontrados">No se han encontrado contactos</string>
+	<string name="contactos_encontrados">contactos encontrados</string>
+	
+	<!-- Conexion -->
+	<string name="conectado">Conectado</string>
+	<string name="desconectado">Desconectado</string>
+	<string name="conectando">Conectando</string>
+	<string name="desconectando">Desconectando</string>
+	<string name="suspendido">Suspendido</string>
+	<string name="desconocido">Desconocido</string>
+	<string name="tipo_red">Tipo de Red</string>
+	<string name="estado_red">Estado de Red</string>
+	<string name="conexion">Conexion</string>
+</resources>

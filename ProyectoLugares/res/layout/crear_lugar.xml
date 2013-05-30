@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:background="@drawable/fondo"
+	android:scrollbarStyle="outsideOverlay" android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip" android:smoothScrollbar="true" >
+
+
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+
+<LinearLayout android:id="@+id/linearLayoutLugaresCategoriaAux"
+	android:orientation="horizontal" android:background="@drawable/fondo"
+	android:layout_width="fill_parent" android:layout_height="50dip">
+	<ImageView android:padding="1dp" android:layout_width="50dp"
+		android:src="@drawable/network" android:layout_margin="1dip"
+		android:adjustViewBounds="true" android:layout_gravity="center"
+		android:layout_height="50dp" android:id="@+id/iconCategory"></ImageView>
+
+	<TextView android:id="@+id/textCategoria"
+		android:layout_width="fill_parent" android:textColor="@color/negro"
+		android:textStyle="bold" android:textSize="20dip"
+		android:layout_height="50dip" android:background="@drawable/fondo"
+		android:cacheColorHint="@android:color/transparent"
+		android:singleLine="false" android:gravity="center_vertical|center_horizontal" />
+</LinearLayout>
+
+			<LinearLayout android:layout_gravity="center_horizontal"
+				android:orientation="horizontal" android:layout_height="100dp" android:layout_marginLeft="15dip" android:layout_width="271dp">
+
+				<Button android:layout_marginTop="20dip"
+					android:textStyle="bold"
+					android:layout_gravity="center" android:layout_height="50dp"
+					android:layout_width="125dip" android:id="@+id/botonGuardar"
+					android:drawableTop="@drawable/add"
+					android:onClick="guardar" android:text="@string/guardar"></Button>
+				<Button android:layout_marginTop="20dip"
+					android:layout_marginLeft="15dip" android:layout_gravity="center"
+					android:layout_height="50dp"
+					android:id="@+id/botonCancelar" android:layout_width="126dip"
+					android:drawableTop="@drawable/volver2"
+					android:textStyle="bold" android:onClick="cancelar"></Button>
+
+			</LinearLayout>
+	
+		<RatingBar android:id="@+id/idRatingbar"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginTop="20dip" android:numStars="5"
+			android:stepSize="1.0" />
+
+		<TextView android:text="@string/nombre" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:textColor="@color/negro"
+			android:textStyle="bold" android:paddingTop="10px" />
+
+		<EditText android:id="@+id/editLugarNombre"
+			android:layout_width="fill_parent" android:layout_height="60dp"
+			android:textColor="@color/gris" />
+
+		<TextView android:text="@string/descripcion"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<EditText android:id="@+id/editLugarDescripcion"
+			android:layout_width="fill_parent" android:layout_height="100dp"
+			android:textColor="@color/gris" />
+
+		<TextView android:text="@string/latitud"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<TextView android:id="@+id/lugarLatitud"
+			android:layout_width="fill_parent" android:background="@drawable/fondo3"
+			android:layout_height="30dp" android:textColor="@color/gris" />
+
+		<TextView android:text="@string/longitud"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<TextView android:id="@+id/lugarLongitud"
+			android:layout_width="fill_parent" android:background="@drawable/fondo3"
+			android:layout_height="30dp" android:textColor="@color/gris" />
+
+		<LinearLayout android:orientation="horizontal"
+			android:gravity="center_vertical|center_horizontal"
+			android:layout_width="fill_parent" android:layout_height="82dp">
+
+			<RadioGroup android:id="@+id/rgrp01" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:orientation="vertical"
+				android:layout_alignParentTop="true" android:layout_alignParentLeft="true">
+
+				<RadioButton android:id="@+id/radiobtnGaleria"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:checked="true" android:text="@string/obtener_imagen_galeria">
+				</RadioButton>
+
+				<RadioButton android:id="@+id/radiobtnCamara"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="@string/obtener_imagen_camara">
+				</RadioButton>
+
+			</RadioGroup>
+
+		</LinearLayout>
+
+<LinearLayout android:layout_gravity="center_horizontal"
+				android:orientation="horizontal" android:layout_height="100dp" android:layout_marginLeft="15dip" android:layout_width="271dp">
+
+		<Button android:textStyle="bold" android:onClick="obtenerImagen"
+			android:layout_width="126dp"
+			android:layout_height="50dp"
+			android:layout_gravity="center" 
+			android:drawableTop="@drawable/camara"
+			android:id="@+id/btnObtenerImagen"></Button>
+			
+			<Button android:onClick="zoomImagen" android:layout_gravity="center"
+				android:layout_width="126dip" android:id="@+id/botonZoomImagen"
+				android:layout_marginLeft="15dip"
+				android:layout_height="52dp"
+				android:drawableTop="@drawable/zoom"
+				android:textStyle="bold"></Button>
+
+</LinearLayout>
+		<LinearLayout android:orientation="horizontal"
+			android:gravity="center_vertical|center_horizontal"
+			android:layout_width="fill_parent" android:layout_height="175dp">
+
+			<ImageView android:id="@+id/imagenFoto" android:src="@drawable/no_imagen"
+				android:padding="5dp" android:adjustViewBounds="true"
+				android:layout_gravity="center" android:layout_height="175dp"
+				android:layout_width="212dp" />
+			
+		</LinearLayout>
+
+	</LinearLayout>
+</ScrollView>

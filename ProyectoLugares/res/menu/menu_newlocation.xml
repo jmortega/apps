@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/btnAceptarLocalizacion" android:title="@string/aceptar_localizacion"
+		android:icon="@drawable/nueva_location" />
+	<item android:id="@+id/volver" android:title="@string/volver"
+		android:icon="@drawable/volver" />
+	<item android:id="@+id/verMapaCompleto" android:title="@string/ver_mapa_completo"
+		android:icon="@drawable/vermapa" />
+</menu>

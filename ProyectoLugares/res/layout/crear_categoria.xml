@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+	<LinearLayout android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/fondo"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+
+			<LinearLayout android:layout_gravity="center_horizontal"
+				android:orientation="horizontal" android:layout_height="100dp" android:layout_marginLeft="15dip" android:layout_width="280dp">
+
+				<Button android:layout_marginTop="20dip"
+					android:textStyle="bold"
+					android:layout_gravity="center" android:layout_height="50dp"
+					android:layout_width="125dip" android:id="@+id/botonGuardarCategoria"
+					android:drawableTop="@drawable/add"
+					android:onClick="guardar" android:text="@string/guardar"></Button>
+				<Button android:layout_marginTop="20dip"
+					android:layout_marginLeft="15dip" android:layout_gravity="center"
+					android:layout_height="50dp"
+					android:id="@+id/botonCancelar" android:layout_width="126dip"
+					android:drawableTop="@drawable/volver2"
+					android:textStyle="bold" android:onClick="cancelar"></Button>
+
+			</LinearLayout>
+	
+
+		<TextView android:text="@string/nombre" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:textColor="@color/negro"
+			android:textStyle="bold" android:paddingTop="10px" />
+
+		<EditText android:id="@+id/editNombreCategoria"
+			android:layout_width="fill_parent" android:layout_height="60dp"
+			android:textColor="@color/gris" />
+
+		<TextView android:text="@string/descripcion"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/negro" android:textStyle="bold"
+			android:paddingTop="10px" />
+
+		<EditText android:id="@+id/editDescripcionCategoria"
+			android:layout_width="fill_parent" android:layout_height="60dp"
+			android:textColor="@color/gris" />
+
+	</LinearLayout>
+
+

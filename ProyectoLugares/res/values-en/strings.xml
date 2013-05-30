@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Favourite places</string>
+    <string name="MisLugares">My Places</string>
+
+    <!-- Google api Key-->
+    <string name="googlemaps_apikey">0hRrFJV6Z8CFMn69kC64FDNGBrkGDRTmCnK7uZQ</string>
+    
+    <!--Diálogos-->
+    <string name="salir_text">Exit</string>
+    <string name="acercaDe">About</string>
+    <string name="salir">Are you sure exit the application?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="lugares_encontrados">found places</string>
+    <string name="categorias_encontradas">found categories</string>
+    <string name="VerMapa">View Map</string>
+    
+    <!--Info-->
+
+    <string name="InfoAplicacion">Places</string>
+    <string name="InfoNombre">Jose Manuel Ortega Candel</string>
+    <string name="InfoDescripcion">Favourite places</string>
+    <string name="Aceptar">Agree</string>
+    <string name="no_existen_lugares">No places registered</string>
+    <string name="no_existen_lugares_busqueda">No results</string>
+    <string name="lugar_favorito">Favourite place</string>
+    <string name="info">Info</string>
+    <string name="info_delete">Images are not deleted when deleting registered locations</string>
+    
+    <!--AR VIEWER-->
+    <string name="info_arviewer">This functionality uses augmented reality viewer ARVIEWER</string>
+    <string name="obtener_arviewer">Get ARVIEWER</string>
+    <string name="ordenar_distancia_asc">Distance Order By ASC</string>
+    <string name="ordenar_distancia_desc">Distance Order By DESC</string>
+    
+    <!--Crear/Editar/Visualizar Lugar-->
+    
+    <string name="nombre">Name</string>
+    <string name="descripcion">Description</string>
+    <string name="foto">Photo</string>
+    <string name="imagen">Picture</string>
+    <string name="latitud">Latitude</string>
+    <string name="longitud">Longitude</string>
+    <string name="editar">Edit</string>
+    <string name="mostrar">View</string>
+    <string name="eliminar">Delete</string>
+    <string name="guardar">Save</string>
+    <string name="actualizar">Update</string>
+    <string name="cancelar">Cancel</string>
+    <string name="inicio">Start</string>
+    <string name="volver">Return</string>
+    <string name="eliminar_lugares">Delete places</string>
+    <string name="confirmar_eliminar_lugares">Do you want to delete all registered places?</string>
+    <string name="errorRegistroBD">Failed to retrieve from the DB</string>
+    <string name="galeriaImagenes">Image Gallery</string>
+    <string name="lugar_editado_ok">Location successfully updated</string>
+    <string name="datos_no_validos">You should check the form</string>
+    <string name="informar_nombre">You must report the name field</string>
+    <string name="informar_descripcion">You must report the description field</string>
+    <string name="informar_busqueda">You must report the search field</string>
+    <string name="informar_telefono">You must report the phone field</string>
+    <string name="informar_mensaje">You must report the message field</string>
+    <string name="informar_destinatario">You must report the addressee field</string>
+    <string name="sd_no_montada">You can not access the SD Card</string>
+    <string name="lugar_actualizado_ok">Location successfully updated</string>
+    <string name="lugar_actualizado_error">The place has not been able to update</string>
+    <string name="lugar_creado_ok">Location successfully registered</string>
+    <string name="lugar_creado_error">The place has not been able to create</string>
+    <string name="lugar_eliminado_ok">Location successfully removed</string>
+    <string name="lugares_eliminados_ok">Places disposed of properly</string>
+    <string name="lugar_eliminado_error">The place has not been able to eliminate</string>
+    <string name="lugares_eliminados_error">Places have not been able to eliminate</string>
+    <string name="puntuacion">Score for the place</string>
+    <string name="puntuacion_actualizada">Updated Rating</string>
+    <string name="imagen_camara_ok">Correctly loaded image from the camera.The image has been added to the gallery</string>
+    <string name="imagen_galeria_ok">Correctly loaded image gallery</string>
+    <string name="comprobar_campos">Check the form fields.Name and Description are required</string>
+    <string name="registro_lugar_favorito">Joined new favorite place</string>
+    <string name="registro_lugar_text">There has been the place</string>
+    <string name="actualiza_lugar_favorito">Updated favorite place</string>
+    <string name="actualiza_lugar_text">Updated the place</string>
+    <string name="elimina_lugar_favorito">Removed favorite place</string>
+    <string name="elimina_lugar_text">Place has been removed</string>
+    <string name="guardar_lugar">Save place</string>
+	<string name="confirmar_guardar_lugar">Want to save this point?</string>
+	<string name="eliminar_lugar">Delete place</string>
+	<string name="confirmar_eliminar_lugar">Are you sure to delete the selected location?</string>
+	<string name="vista_galeria">Gallery View</string>
+	<string name="vista_lista">List View</string>
+	<string name="cambiar_idioma">Change Language</string>
+	<string name="idiomas_soportados">Supported Languages:Spanish/English</string>
+	<string name="obtener">Get</string>
+	<string name="obtener_imagen_camara">Get camera picture</string>
+	<string name="obtener_imagen_galeria">Get picture from gallery</string>
+	<string name="obtener_imagen">Get picture</string>
+	<string name="resolucion">Resolution</string>
+	<string name="lista">List</string>
+	<string name="combo">Places combo</string>
+	<string name="ruta_google">Google Route</string>
+	<string name="fotos_panoramio">Panoramio Photos</string>
+	<string name="ir_al_sitio">Go to site</string>
+	
+	<!--GPS/MAPA-->
+	<string name="vista_satelite_on">Satellite View On</string>
+	<string name="vista_satelite_off">Satellite View Off</string>
+	<string name="ObtenerPosicion">My position</string>
+	<string name="red_habilitada">Network Enabled</string>
+	<string name="red_deshabilitada">Network Disabled</string>
+	<string name="red_deshabilitada_info">Network Disabled.It is recommended to have an active network to view the map</string>
+	<string name="no_posicion_gps">Could not get the current position</string>
+	<string name="posicion_actual">Current Position</string>
+	<string name="no_provider_found">Not found any provider</string>
+	<string name="editar_localizacion">Edit location</string>
+	<string name="nueva_localizacion">New location</string>
+	<string name="actual_localizacion">Actually location</string>
+	<string name="gps_sistema">Network/GPS System State </string>
+	<string name="gps_habilitado">GPS Enabled</string>
+	<string name="gps_deshabilitado">GPS Disabled</string>
+	<string name="localizacion_actualizada">Updated current location</string>
+	<string name="cargando_datos">Loading data ...</string>
+	<string name="cargando">Loading</string>
+	<string name="preferencias">Preferences</string>
+	<string name="preferencia_idioma">Language</string>
+	<string name="seleccione_idioma">Select Language</string>
+	<string name="seleccione_lugar">Select place</string>
+	<string name="status_changed">Status changed</string>
+	<string name="gps_provider_no_disponible">GPS Provider not available</string>
+	<string name="ver_detalle_lugar">View place details</string>
+	<string name="ver_mapa_completo">View Full Map</string>
+	<string name="aceptar_localizacion">Accept new location</string>
+	<string name="buscar_lugar">Place searching</string>
+	<string name="buscar_nombre">Name Searching</string>
+	<string name="buscar_descripcion">Description Searching</string>
+	<string name="buscando">Searching</string>
+	<string name="escriba_lugar">Place writing</string>
+	<string name="buscar">Search</string>
+	<string name="ciudad">City</string>
+	<string name="pais">Country</string>
+	<string name="codigo_postal">Postal code</string>
+	<string name="telefono">Phone</string>
+	<string name="area">Area</string>
+	<string name="mensaje">Message</string>
+	<string name="encontrado_lugar_mapa">Place is found in map</string>
+	<string name="no_encontrado_lugar_mapa">Place not found in map</string>
+	<string name="no_encontrado_lugar_mapa_aux">Place not found in map.Try after</string>
+	<string name="conexion_internet_ok">Internet Connection OK</string>
+	<string name="conexion_internet_error">No Internet Connection  available</string>
+	<string name="conexion_internet_info">You must have an Internet connection to access this functionality</string>
+	<string name="nueva_notificacion">Have a new notification in the notification bar</string>
+	<string name="crear_lugar">To create a new place click anywhere on the map</string>
+	<string name="crear_lugar_mapa">To create a place to display the map and click on any point on the map</string>
+	<string name="al_menos_un_lugar">You must have at least one place registered to access the gallery view</string>
+	<string name="error_en_el_proceso">Processing error</string>
+	<string name="error_imagen_camara">Failed to get the camera photo</string>
+	<string name="error_imagen_galeria">Failed to get the gallery picture</string>
+	<string name="compartir">Share</string>
+	<string name="vista_3d">Cube 3D View</string>
+	<string name="vista_normal">View restore</string>
+	<string name="zoom_imagen">Picture Zoom</string>
+	<string name="introduce_criterio_busqueda">Enter search criteria</string>
+	<string name="buscando_posicion_actual">Searching current position</string>
+	<string name="buscar_voz">Voice Searching</string>
+	<string name="buscar_voz_texto">Searching place</string>
+	<string name="voice_not_installed">You have not installed voice recognition</string>
+	<string name="ordenar_por_nombre">Order by name</string>
+	<string name="ordenar_por_categoria">Order by category</string>
+	<string name="mostrar_imagenes">Show images</string>
+	<string name="ocultar_imagenes">Hide images</string>
+	
+	<!-- CATEGORIAS -->
+	<string name="categoria">Category</string>
+	<string name="categorias">Category</string>
+	<string name="seleccione_categoria">Select category</string>
+	<string name="seleccione_nueva_categoria">Select new category</string>
+	<string name="nueva_categoria">Add category</string>
+	<string name="categoria_create_ok">Category created correctly</string>
+	<string name="categoria_update_ok">Category updated correctly</string>
+	<string name="registro_categoria">New category registered</string>
+    <string name="registro_categoria_text">Category registered</string>
+    <string name="actualiza_categoria">Updated category</string>
+    <string name="actualiza_categoria_text">Updated category</string>
+    <string name="no_lugares_categoria">No places registered for selected category</string>
+    <string name="confirmar_eliminar_lugares_categoria">Do you want to delete registered places in the category</string>
+    <string name="accion">Action</string>
+    <string name="listar_lugares">Places list</string>
+    <string name="editar_categoria">Category edit</string>
+	<string name="restaurantes">Restaurants</string>
+	<string name="bares">Bars</string>
+	<string name="cafe">Coffee</string>
+	<string name="compras">Shopping</string>
+	<string name="hoteles">hotels</string>
+	<string name="musica">Music</string>
+	<string name="parques">Parks</string>
+	<string name="aeropuertos">Airports</string>
+	<string name="parking">Parking</string>
+	<string name="universidades">University</string>
+	
+	<string name="realidad_aumentada">Augmented Reality</string>
+	<string name="distancia">Distance</string>
+	<string name="desconocida">Unknown</string>
+	
+	<!-- EXPORTAR/IMPORTAR BD -->
+	<string name="exportar_importar">Export/Import</string>
+	<string name="exportar">Export</string>
+	<string name="importar">Import</string>
+	<string name="procesando">Data Processing</string>
+	<string name="exportar_ok">Places export correct</string>
+	<string name="exportar_error">Export error</string>
+	<string name="importar_ok">Places import correct</string>
+	<string name="importar_error">Import error</string>
+	<string name="importar_pregunta">The current place list is overwritten, continue?</string>
+	<string name="exportar_importar_info">Export and import data is from the SD card path: /Android/data/com.proyecto.database.lugaresDB/backup/lugaresDataBaseRespaldo.db</string>
+	<string name="recargar_lugares">List places reload</string>
+	<string name="acerca_de_export_import">Import/Export info</string>
+	
+	<!-- SMS -->
+	<string name="comprobar_campos_sms">Check the form fields.Phone and Message are required</string>
+	<string name="enviar_sms">Send SMS</string>
+	<string name="envio_sms_ok">SMS sending successfully</string>
+	<string name="envio_sms_error">Error sending SMS</string>
+	<string name="recibido_sms_ok">Message received successfully</string>
+	<string name="enviado_sms_ok">Message sent successfully</string>
+	
+	<!-- MAIL -->
+	<string name="comprobar_campos_mail">Check the form fields.Mail and Message are required</string>
+	<string name="enviar_mail">Send MAIL</string>
+	<string name="envio_mail_ok">Mail sent successfully</string>
+	<string name="envio_mail_error">Error sending Email</string>
+	<string name="enviar_imagen_adjunta">Send attached picture</string>
+	<string name="asunto">Issue</string>
+	<string name="para">For</string>
+	
+	<!-- Contactos -->
+	<string name="mostrar_contactos">Show Contacts</string>
+	<string name="seleccione_telefono">Choose a phone</string>
+	<string name="seleccione_email">Choose email</string>
+	<string name="contactos_no_encontrados">No contacts found</string>
+	<string name="contactos_encontrados">contacts found</string>
+	
+	<!-- Conexion -->
+	<string name="conectado">Connected</string>
+	<string name="desconectado">Desconectado</string>
+	<string name="conectando">Conectando</string>
+	<string name="desconectando">Desconectando</string>
+	<string name="suspendido">Suspendido</string>
+	<string name="desconocido">Desconocido</string>
+	<string name="tipo_red">Tipo de Red</string>
+	<string name="estado_red">Estado de Red</string>
+	<string name="conexion">Connection</string>
+</resources>

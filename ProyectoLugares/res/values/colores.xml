@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="negro">#000000</color>
+    <color name="blanco">#FFFFFF</color>
+    <color name="verde">#669966</color>
+    <color name="rojo">#FF0000</color>
+    <color name="azul">#336699</color>
+    <color name="gris">#646363</color>
+    <color name="gris_aux">#CCCCCC</color>
+    <color name="gris_aux2">#848284</color>
+    <color name="naranja">#F2BA59</color>
+    <color name="transparente">#00000000</color>
+    <color name="transparente_azul">#800000FF</color>
+    <color name="android">#292c29</color>
+    <color name="actionbar_title_color">#262325</color>
+</resources>

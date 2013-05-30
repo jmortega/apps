@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/linearLayoutLugares" android:orientation="vertical"
+	android:background="@drawable/fondo" android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+
+
+	<EditText android:id="@+id/editBuscarLugar"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginBottom="2dp" android:layout_marginTop="5dp"
+		android:paddingLeft="10dp" android:gravity="left|center_vertical"
+		android:hint="@string/introduce_criterio_busqueda"
+		android:layout_alignParentLeft="true" android:textColor="@color/transparente_azul" />
+
+	<ListView android:id="@android:id/list" 
+			android:layout_width="fill_parent"
+			android:dividerHeight="4dip" 
+			android:divider="@android:color/darker_gray"
+			android:background="@drawable/list_selector_aux"
+			android:cacheColorHint="@android:color/transparent"
+			android:fastScrollEnabled="true"
+        	android:scrollingCache="true" 
+			android:smoothScrollbar="true" 
+			android:scrollbarStyle="outsideOverlay"
+			android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+			android:scrollbarSize="20dip" 
+			android:layout_height="match_parent" />
+
+	<TextView android:id="@+id/noResultados" android:layout_width="fill_parent"
+		android:textColor="@color/negro" android:textStyle="bold"
+		android:textSize="20dip" android:text="@string/no_existen_lugares_busqueda"
+		android:background="@drawable/list_selector_aux"
+		android:cacheColorHint="@android:color/transparent"
+		android:singleLine="false" android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip" android:gravity="center_vertical|center_horizontal"
+		style="@style/Lugares"
+		android:layout_height="match_parent" />
+
+
+
+</LinearLayout>
+

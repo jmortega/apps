@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<SlidingDrawer android:id="@+id/slidingDrawer"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:topOffset="0dip" android:handle="@+id/handle"
+		android:content="@+id/content" android:background="@drawable/list_selector_aux2">
+
+		<Button android:text="Mostrar imágenes" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:id="@+id/handle"></Button>
+
+		<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:id="@+id/content" android:orientation="vertical"
+			android:smoothScrollbar="true" android:background="@drawable/list_selector"
+			android:scrollbarStyle="outsideOverlay"
+			android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+			android:scrollbarSize="20dip">
+
+			<LinearLayout android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:orientation="vertical"
+				android:gravity="center" android:background="@drawable/list_selector_aux">
+
+				<Gallery android:id="@+id/Galeria" android:layout_width="fill_parent"
+					android:layout_height="wrap_content"></Gallery>
+
+				<ImageSwitcher android:id="@+id/ImageSwitcher"
+					android:background="@drawable/mapa" android:layout_height="200dip"
+					android:layout_width="fill_parent">
+				</ImageSwitcher>
+
+
+
+			</LinearLayout>
+
+		</ScrollView>
+
+	</SlidingDrawer>
+</LinearLayout>
+

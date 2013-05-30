@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+		<com.google.android.maps.MapView
+			android:id="@+id/mapa" android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:enabled="true"
+			android:clickable="true" android:apiKey="@string/googlemaps_apikey" android:layout_gravity="center_vertical" />
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent">
+		<ToggleButton android:layout_width="wrap_content"
+			android:id="@+id/idToggleButtonAux" android:textOff="@string/vista_satelite_off"
+			android:textOn="@string/vista_satelite_on" android:layout_height="wrap_content"
+			android:layout_alignParentTop="true" android:layout_alignParentLeft="true"></ToggleButton>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:gravity="right">
+		<EditText android:id="@+id/texto_lugar" android:layout_width="155dip"
+			android:layout_height="35dip" android:layout_marginTop="7dp"
+			android:layout_marginRight="4dp" android:paddingLeft="10dp"
+			android:gravity="left|center_vertical" android:hint="@string/buscar_lugar"
+			android:layout_alignParentLeft="true" android:textColor="@color/transparente_azul"
+			android:background="@drawable/fondo3" />
+
+		<Button android:id="@+id/botonBuscarMapa" android:background="@drawable/boton_lupa"
+			android:layout_height="35dp" android:layout_width="35dp" />
+			</LinearLayout>
+	</LinearLayout>
+	<Button android:id="@+id/idBotonMiPosicion" android:background="@drawable/my_location"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"></Button>
+</RelativeLayout>

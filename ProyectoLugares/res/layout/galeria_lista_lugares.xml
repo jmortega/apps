@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:smoothScrollbar="true"
+	android:scrollbarStyle="outsideOverlay" android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip">
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/linearLayoutLugares" android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<TextView android:id="@+id/contadorLugares"
+			android:layout_width="fill_parent" android:textColor="@color/negro"
+			android:textStyle="bold" android:textSize="20dip"
+			android:layout_height="30dp" android:background="@drawable/list_selector"
+			android:singleLine="true" android:layout_marginRight="5dip"
+			android:layout_marginLeft="5dip" android:gravity="center_vertical|center_horizontal" />
+
+		<Gallery android:id="@android:id/list" android:layout_width="fill_parent"
+			android:dividerHeight="4dip" android:divider="@android:color/darker_gray"
+			android:background="@drawable/list_selector" android:cacheColorHint="@android:color/transparent"
+			android:layout_marginLeft="5dip" android:spacing="10dip"
+			android:layout_marginRight="5dip" android:clickable="true"
+			android:smoothScrollbar="true" android:scrollbarStyle="outsideOverlay"
+			android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+			android:layout_marginTop="10dip" android:layout_height="180dp" />
+
+		<ViewFlipper android:id="@+id/viewflipper"
+			android:layout_width="fill_parent" android:background="@drawable/mapa"
+			android:visibility="visible" android:animationCache="true"
+			android:foregroundGravity="center" android:layout_height="200dp">
+			<com.google.android.maps.MapView
+				android:id="@+id/mapa" android:layout_width="fill_parent"
+				android:enabled="true" android:layout_height="200dp"
+				android:layout_marginRight="5dip" android:layout_marginLeft="5dip"
+				android:layout_marginTop="2dip" android:layout_gravity="center_vertical"
+				android:apiKey="@string/googlemaps_apikey" />
+		</ViewFlipper>
+	</LinearLayout>
+</ScrollView>

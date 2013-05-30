@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/linearLayoutLugares" 
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:layout_weight="0">
+
+ <RelativeLayout
+         android:id="@+id/scroll"
+         android:layout_width="fill_parent"
+         android:layout_height="match_parent">
+
+	<com.proyecto.utility.ContentViewFlipper
+ android:id="@+id/viewflipper"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent">
+ 		
+	<ListView android:id="@android:id/list" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:dividerHeight="4dip"
+		android:divider="@android:color/darker_gray"
+		android:background="@drawable/list_selector_aux"
+		android:cacheColorHint="@color/transparente"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="true"
+		android:layout_weight="2"
+		android:smoothScrollbar="true"
+		android:scrollbarStyle="outsideOverlay"
+		android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+		android:scrollbarSize="20dip" />
+	<TextView android:id="@android:id/empty" 
+		android:layout_width="fill_parent"
+		android:textColor="@color/negro"
+		android:textStyle="bold"
+		android:textSize="20dip"
+		android:layout_height="fill_parent" 
+		android:text="@string/no_existen_lugares"
+		android:background="@drawable/list_selector_aux"
+		android:cacheColorHint="@android:color/transparent"
+		android:singleLine="false"
+		android:gravity="center_vertical|center_horizontal" />
+
+</com.proyecto.utility.ContentViewFlipper>
+
+</RelativeLayout>
+</LinearLayout>

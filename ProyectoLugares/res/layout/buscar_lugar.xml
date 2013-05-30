@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:smoothScrollbar="true" android:background="@drawable/list_selector"
+	android:scrollbarStyle="outsideOverlay" android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip">
+
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<EditText android:id="@+id/busqueda" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_marginBottom="10dp"
+			android:layout_marginTop="50dp" android:paddingLeft="10dp"
+			android:gravity="left|center_vertical" android:hint="@string/escriba_lugar"
+			android:layout_alignParentLeft="true" android:textColor="@color/transparente_azul" />
+
+		<Button android:layout_alignParentLeft="true"
+			android:layout_marginBottom="10dp" android:layout_marginTop="20dp"
+			android:textStyle="bold" android:background="@drawable/boton"
+			android:layout_height="50dp" android:layout_width="fill_parent"
+			android:id="@+id/botonBuscar" android:onClick="buscar" android:text="@string/buscar" />
+
+		<ImageView android:id="@+id/imagenFoto" android:src="@drawable/mapa"
+			android:adjustViewBounds="true" android:scaleType="fitXY"
+			android:layout_gravity="center" android:layout_width="fill_parent"
+			android:layout_height="200px" />
+
+	</LinearLayout>
+</ScrollView>

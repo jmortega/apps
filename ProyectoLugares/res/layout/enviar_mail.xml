@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:background="@drawable/fondo"
+	android:smoothScrollbar="true" android:scrollbarStyle="outsideOverlay"
+	android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip">
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<ImageView android:id="@+id/imagenEdit"
+			android:layout_marginTop="20dip" android:adjustViewBounds="true"
+			android:src="@drawable/arroba" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:visibility="visible"></ImageView>
+
+
+
+
+		<Button android:text="@string/mostrar_contactos"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:textStyle="bold" android:layout_gravity="center_horizontal"
+			android:id="@+id/BotonMostrarContactos" android:gravity="center"></Button>
+
+
+
+
+		<Button android:text="@string/enviar_mail"
+			android:layout_height="wrap_content" android:layout_marginTop="20dip"
+			android:textStyle="bold" android:id="@+id/BotonEnviarMAIL"
+			android:layout_gravity="center_horizontal" android:layout_width="150dp"></Button>
+
+		<TextView android:gravity="bottom|left" android:layout_width="wrap_content"
+			android:text="@string/para" android:layout_height="wrap_content"
+			android:textStyle="bold"></TextView>
+
+		<EditText android:id="@+id/Destino" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_weight="4"
+			android:lines="3" />
+
+		<TextView android:gravity="bottom|left" android:layout_width="wrap_content"
+			android:text="@string/asunto" android:layout_height="wrap_content"
+			android:textStyle="bold"></TextView>
+
+		<EditText android:id="@+id/Asunto" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_weight="4"
+			android:lines="1" />
+
+		<LinearLayout android:orientation="vertical"
+			android:layout_height="wrap_content" android:layout_width="254dp">
+			<ImageView android:layout_width="wrap_content"
+				android:layout_marginTop="10dip" android:layout_height="wrap_content"
+				android:adjustViewBounds="true" android:id="@+id/imagenEdit"
+				android:visibility="visible" android:padding="5dp" android:src="@drawable/text_edit"></ImageView>
+
+		</LinearLayout>
+
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="@string/mensaje"
+			android:textStyle="bold" android:gravity="top|left" />
+
+		<EditText android:id="@+id/Texto" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="" android:lines="8"
+			android:layout_weight="4" />
+
+
+		<CheckBox android:text="@string/enviar_imagen_adjunta"
+			android:id="@+id/checkImagenAdjunta" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></CheckBox>
+
+		<ImageView android:id="@+id/imagenFoto" android:src="@drawable/no_imagen"
+			android:padding="5dp" android:adjustViewBounds="true"
+			android:layout_gravity="center" android:layout_width="match_parent"
+			android:layout_height="150dp" />
+
+
+	</LinearLayout>
+</ScrollView>

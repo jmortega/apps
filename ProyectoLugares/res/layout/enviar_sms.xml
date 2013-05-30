@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:background="@drawable/fondo"
+	android:scrollbarStyle="outsideOverlay" android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip" android:smoothScrollbar="true">
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<ImageView android:padding="5dp" android:id="@+id/imagenPhone"
+			android:src="@drawable/phone" android:layout_marginTop="20dip"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:visibility="visible"></ImageView>
+
+
+
+		<Button android:layout_width="wrap_content" android:textStyle="bold"
+			android:layout_height="wrap_content" android:id="@+id/BotonMostrarContactos"
+			android:layout_gravity="center_horizontal" android:text="@string/mostrar_contactos"></Button>
+
+
+
+
+		<Button android:text="@string/enviar_sms"
+			android:layout_height="wrap_content" android:layout_marginTop="20dip"
+			android:textStyle="bold" android:id="@+id/BotonEnviarSMS"
+			android:layout_gravity="center_horizontal" android:layout_width="150dp"></Button>
+
+
+
+		<TextView android:gravity="bottom|left" android:layout_width="wrap_content"
+			android:text="@string/telefono" android:layout_height="wrap_content"
+			android:textStyle="bold"></TextView>
+
+		<EditText android:id="@+id/NumeroTelefono"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_weight="4" android:lines="1" />
+
+		<LinearLayout android:orientation="vertical"
+			android:layout_height="wrap_content" android:layout_width="fill_parent">
+			<ImageView android:layout_width="wrap_content"
+				android:layout_marginTop="15dip" android:layout_height="wrap_content"
+				android:adjustViewBounds="true" android:id="@+id/imagenEdit"
+				android:visibility="visible" android:padding="5dp" android:src="@drawable/text_edit"></ImageView>
+
+		</LinearLayout>
+
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="@string/mensaje"
+			android:textStyle="bold" android:gravity="top|left" />
+
+		<EditText android:id="@+id/TextoSms" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="" android:lines="10"
+			android:layout_weight="4" />
+	</LinearLayout>
+</ScrollView>

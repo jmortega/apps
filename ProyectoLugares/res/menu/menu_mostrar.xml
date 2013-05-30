@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/btnCompartirLugar" android:title="@string/compartir"
+		android:icon="@drawable/compartir" />
+	<item android:id="@+id/btnEditarLugar" android:title="@string/editar"
+		android:icon="@drawable/editar" />
+	<item android:id="@+id/btnEliminarLugar" android:title="@string/eliminar_lugar"
+		android:icon="@drawable/eliminar" />
+	<item android:id="@+id/volver" android:title="@string/volver"
+		android:icon="@drawable/volver" />
+	<item android:id="@+id/rutaGoogle" android:title="@string/ruta_google"
+		android:icon="@drawable/google_map" />
+</menu>

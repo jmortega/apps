@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<com.google.android.maps.MapView
+		android:id="@+id/mapa" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:enabled="true"
+		android:clickable="true" android:apiKey="@string/googlemaps_apikey" />
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent">
+		<ToggleButton android:textOff="@string/vista_satelite_off"
+			android:layout_height="wrap_content" android:id="@+id/idToggleButton"
+			android:textOn="@string/vista_satelite_on" android:layout_width="wrap_content"
+			android:paddingBottom="5dp" android:layout_alignParentTop="true"
+			android:layout_alignLeft="@+id/relativeLayout1"></ToggleButton>
+		<com.proyecto.utility.ContentViewFlipper android:id="@+id/viewflipper"
+			android:layout_width="fill_parent" android:layout_height="120dp">
+			<RelativeLayout android:id="@+id/relativeLayout1"
+				android:paddingLeft="5dp" android:background="@drawable/fondo2"
+				android:layout_width="170dp" android:paddingRight="20dp"
+				android:paddingBottom="5dp" android:layout_height="120dp"
+				android:layout_below="@+id/idToggleButton" android:layout_gravity="right|center_vertical"
+				android:layout_alignParentLeft="true" android:layout_marginLeft="28dp">
+				<TextView android:text="@string/nueva_localizacion"
+					android:textColor="@color/negro" android:id="@+id/localizacionLabel"
+					android:textStyle="bold" android:layout_width="fill_parent"
+					android:layout_height="wrap_content"></TextView>
+				<LinearLayout android:layout_width="wrap_content"
+					android:orientation="vertical" android:layout_below="@+id/localizacionLabel"
+					android:layout_height="wrap_content" android:layout_alignLeft="@+id/localizacionLabel">
+					<TextView android:layout_height="wrap_content"
+						android:text="@string/latitud" android:textColor="@color/azul"
+						android:id="@+id/latitud" android:textStyle="bold"
+						android:layout_width="wrap_content"></TextView>
+					<TextView android:layout_height="wrap_content"
+						android:textColor="@color/negro" android:id="@+id/latitudText"
+						android:textStyle="bold" android:layout_width="wrap_content"></TextView>
+					<TextView android:layout_height="wrap_content"
+						android:text="@string/longitud" android:textColor="@color/azul"
+						android:id="@+id/longitud" android:textStyle="bold"
+						android:layout_width="wrap_content"></TextView>
+					<TextView android:layout_height="wrap_content"
+						android:textColor="@color/negro" android:id="@+id/longitudText"
+						android:textStyle="bold" android:layout_width="wrap_content"></TextView>
+				</LinearLayout>
+			</RelativeLayout>
+		</com.proyecto.utility.ContentViewFlipper>
+	</LinearLayout>
+</RelativeLayout>

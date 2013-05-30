@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical" android:smoothScrollbar="true" android:background="@drawable/list_selector"
+	android:scrollbarStyle="outsideOverlay" android:scrollbarThumbVertical="@drawable/list_selector_aux2"
+	android:scrollbarSize="20dip">
+	<RelativeLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:orientation="vertical" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
+			<RelativeLayout android:id="@+id/main"
+				android:layout_width="fill_parent" android:background="@drawable/fondo" android:layout_height="426dp">
+				<Button android:textStyle="bold" android:textColor="@color/negro"
+					android:background="@drawable/boton" android:id="@+id/VerMapa"
+					android:layout_height="50dp" android:layout_width="wrap_content"
+					android:text="@string/VerMapa" android:layout_marginTop="24dp"
+					android:layout_alignLeft="@+id/imageView1"
+					android:layout_alignRight="@+id/imageView1"></Button>
+				<Button android:textStyle="bold" android:background="@drawable/boton"
+					android:id="@+id/MisLugares" android:layout_height="50dp"
+					android:layout_width="wrap_content" android:text="@string/MisLugares"
+					android:textColor="@color/negro" android:layout_below="@+id/imageView1"
+					android:layout_alignLeft="@+id/imageView1"
+					android:layout_marginTop="20dp" android:layout_alignRight="@+id/imageView1"></Button>
+
+				<LinearLayout android:layout_marginTop="20dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal" android:layout_width="fill_parent"
+					android:layout_below="@+id/MisLugares" android:id="@+id/linearLayout1" android:layout_toRightOf="@+id/analogClock1">
+					<DigitalClock android:id="@+id/digitalClock1" android:layout_marginTop="20dp" android:layout_marginLeft="15dp" android:layout_height="wrap_content" android:text="DigitalClock" android:textStyle="bold" android:textColor="@color/azul" android:background="@drawable/list_selector" android:layout_width="wrap_content"></DigitalClock>
+					<ImageView android:id="@+id/imageNetWork"
+						android:layout_marginLeft="45dp" android:layout_width="50dp" 
+						android:layout_height="50dp" android:scaleType="centerCrop"
+						android:background="@drawable/boton_wifi"
+						android:adjustViewBounds="true" android:onClick="estadoRed"></ImageView>
+
+				</LinearLayout>
+				<ImageView android:layout_height="150dp" android:id="@+id/imageView1"
+					android:layout_width="230dp" android:scaleType="centerCrop"
+					android:background="@drawable/mapa" android:adjustViewBounds="true"
+					android:layout_below="@+id/VerMapa"
+					android:layout_centerHorizontal="true" android:layout_marginTop="20dp"></ImageView>
+					
+				<AnalogClock  android:layout_width="100dp" android:layout_height="100dp"  android:id="@+id/analogClock1" android:layout_alignLeft="@+id/MisLugares" android:layout_below="@+id/MisLugares"></AnalogClock>
+
+			</RelativeLayout>
+
+		</LinearLayout>
+
+	</RelativeLayout>
+</ScrollView>

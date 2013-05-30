@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/galeriaImagenes" android:title="@string/galeriaImagenes"
+		android:icon="@drawable/galeria" />	
+	<item android:id="@+id/vistaLista" android:title="@string/lista"
+		android:icon="@drawable/lista" />
+	<item android:id="@+id/volver" android:title="@string/volver"
+		android:icon="@drawable/volver" />
+	<item android:id="@+id/delete_lugares" android:title="@string/eliminar_lugares"
+		android:icon="@drawable/eliminar" />	
+	
+</menu>
