@@ -4,7 +4,11 @@ Ext.define("TareasApp.view.NuevaTarea", {
     alias: "widget.NuevaTarea",
     config: {
         scrollable: 'vertical',
-		id: 'formulario'
+		id: 'formulario',
+        defaults:{
+            styleHtmlContent: true
+        },
+
     },
     initialize: function () {
 
@@ -16,7 +20,8 @@ Ext.define("TareasApp.view.NuevaTarea", {
             text: "Home",
 			iconMask: true,
             handler: this.onVolver,
-            scope: this
+            scope: this,
+            style: 'width:100px;height:30px;font-size:25px;'
         };
 
         var guardarTarea = {
@@ -25,7 +30,8 @@ Ext.define("TareasApp.view.NuevaTarea", {
             text: "Guardar",
 			iconMask: true,
             handler: this.onGuardarTarea,
-            scope: this
+            scope: this,
+            style: 'width:100px;height:30px;font-size:25px;'
         };
 
         var topToolbar = {
@@ -45,6 +51,7 @@ Ext.define("TareasApp.view.NuevaTarea", {
             iconCls: "trash",
 			ui:"decline",
 			text:"Limpiar campos",
+			style: 'width:100px;height:30px;font-size:25px;',
             iconMask: true,
             handler: function(){
 				Ext.getCmp('formulario').reset();
@@ -69,7 +76,8 @@ Ext.define("TareasApp.view.NuevaTarea", {
 			placeHolder: 'Titulo de la tarea',
 			autoCapitalize: false,
             required: true,
-			useClearIcon: true
+			useClearIcon: true,
+			style: 'height:30px;font-size:25px;'
         };
 		
 		 var descripcionTarea = {
@@ -78,7 +86,8 @@ Ext.define("TareasApp.view.NuevaTarea", {
             label: 'Descripci&oacute;n',
 			maxLength: 80,
 			placeHolder: 'Descripcion de la tarea',
-			useClearIcon: true
+			useClearIcon: true,
+			style: 'height:30px;font-size:25px;'
         };
 		
 		var fechaTarea = {
@@ -87,13 +96,15 @@ Ext.define("TareasApp.view.NuevaTarea", {
             label: 'Fecha Creaci&oacute;n',
 			disabled:true,
 			readOnly:true,
-			useClearIcon: true
+			useClearIcon: true,
+			style: 'height:30px;font-size:25px;'
         };
 		
 		var fechaLimite = {
             xtype: 'datepickerfield',
             name: 'fechaLimite',
             label: 'Fecha L&iacute;mite',
+            style: 'height:30px;font-size:25px;',
 			required: true,
 			useClearIcon: true,
 			picker : {
@@ -109,14 +120,15 @@ Ext.define("TareasApp.view.NuevaTarea", {
 			minValue: 1,
 			maxValue: 5,
 			cycle: true,
-			useClearIcon: true
+			useClearIcon: true,
+			style: 'height:30px;font-size:25px;'
         };
 		
         this.add([
             topToolbar,
             { xtype: "fieldset",
                 items: [fechaTarea,tituloTarea,descripcionTarea,fechaLimite,prioridad],
-				instructions:'* Campos obligatorios'
+				instructions:'* Campos obligatorios',
             },
             bottomToolbar
         ]);
@@ -128,6 +140,7 @@ Ext.define("TareasApp.view.NuevaTarea", {
     onVolver: function () {
         console.log("volver");
         this.fireEvent("volver", this);
+        Ext.getStore("Tareas").load();
     }
 
 });

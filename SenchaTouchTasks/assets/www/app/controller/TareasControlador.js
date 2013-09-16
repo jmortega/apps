@@ -208,35 +208,19 @@ Ext.define("TareasApp.controller.TareasControlador", {
             return;
         }
 
-        var listaTareas = Ext.getStore("Tareas");
+        var listaTareas = Ext.getStore("Tareas").load();
 		
         if (null == listaTareas.findRecord('id', tarea.data.id)) {
             listaTareas.add(tarea);
 			Ext.Msg.alert('Se ha creado la tarea\n'+tarea.data.titulo);
         }
 
-		var listaTareas = Ext.getStore("Tareas");
-		
-		listaTareas.filter([{ property: 'completada', value: 'false'}]);
-		var countPendientes = listaTareas.getCount();
-	
-		Ext.getCmp("tareasPendientes").setBadgeText(countPendientes);
-		Ext.getCmp("tareasPendientes2").setBadgeText(countPendientes);
-		
-		listaTareas.clearFilter();
-		
-		listaTareas.filter([{ property: 'completada', value: 'true'}]);
-		var countCompletadas = listaTareas.getCount();
-	
-		Ext.getCmp("tareasCompletadas").setBadgeText(countCompletadas);
-		Ext.getCmp("tareasCompletadas2").setBadgeText(countCompletadas);
-		
-		listaTareas.clearFilter();
-		
-        listaTareas.sort([{ property: 'prioridad', direction: 'ASC'}]);
-      
+        listaTareas.sync();
+        
   		Ext.getCmp("totalTareas").setText(Ext.getStore("Tareas").getCount()); 
 
+  		Ext.getStore("Tareas").load();
+  		
   		this.tareasTodas();
     }, 
     actualizarTarea: function () {
@@ -252,7 +236,7 @@ Ext.define("TareasApp.controller.TareasControlador", {
 		
         var valores = editorTareas.getValues();
 
-		if(tarea.data.completada==true && valores.completada==false){
+		if(tarea!=null && tarea.data!=null && tarea.data.completada==true && valores.completada==false){
 			actualizadaPendiente=true;
 		}
 		
@@ -339,6 +323,8 @@ Ext.define("TareasApp.controller.TareasControlador", {
 
   		Ext.getCmp("totalTareas").setText(Ext.getStore("Tareas").getCount());
   		
+  		Ext.getStore("Tareas").load();
+  		
   		this.tareasTodas(); 			
 
     }, 
@@ -379,7 +365,7 @@ Ext.define("TareasApp.controller.TareasControlador", {
 
         }); 
         
-       
+        Ext.getStore("Tareas").load();
         this.tareasTodas();  
         
     }, 
@@ -413,6 +399,8 @@ Ext.define("TareasApp.controller.TareasControlador", {
 			}	
 		}
 		
+		Ext.getStore("Tareas").load();
+		
     },
 	onTareasPendientes: function () {
         console.log("onTareasPendientes");
@@ -430,6 +418,8 @@ Ext.define("TareasApp.controller.TareasControlador", {
 		}else{
 			Ext.Msg.alert('No tiene tareas pendientes');
 		}
+		
+		Ext.getStore("Tareas").load();
 		
         this.tareasPendientes();
 		
@@ -452,6 +442,8 @@ Ext.define("TareasApp.controller.TareasControlador", {
 		}else{
 			Ext.Msg.alert('No tiene tareas completadas');
 		}*/
+		
+		Ext.getStore("Tareas").load();
 		
         this.tareasCompletadas();
 		

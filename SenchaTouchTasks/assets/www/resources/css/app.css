@@ -2,7 +2,7 @@
 {
     float:right;
     width:100%;
-    font-size:20px;
+    font-size:30px;
     white-space: nowrap;  
     overflow: hidden;  
     text-overflow: ellipsis;  
@@ -12,16 +12,13 @@
 .list-item-prioridad
 {
 	color:red;
-	background-image:url('../images/alert.png');
-	background-position:right;
+	background-position:center;
 	background-repeat:no-repeat;
-    float:left;
+	background-image:url('../images/alert.png');
     width:95%;
-    font-size:20px;
-    white-space: nowrap;  
+    font-size:30px;
+    height:80px;
     overflow: hidden;
-    text-overflow: ellipsis;    
-    padding-right:25px;
 }
 
 .completada
@@ -30,7 +27,7 @@
 	background-image:url('../images/ok.png');
 	background-position:right;
 	background-repeat:no-repeat;
-    font-size:20px;
+    font-size:30px;
     margin:  auto 0px;
 	padding: 10px;
 }
@@ -38,10 +35,9 @@
 .alert
 {
     color:red;
-	background-image:url('../images/alert.png');
 	background-position:right;
 	background-repeat:no-repeat;
-    font-size:20px;
+    font-size:30px;
     margin:  auto 0px;
 	padding: 10px;
 }
@@ -57,6 +53,7 @@
 .list-empty-text 
 {
     padding:10px;
+    font:bold 35px "Trebuchet MS"; 
 }
 
 .x-badge-aux

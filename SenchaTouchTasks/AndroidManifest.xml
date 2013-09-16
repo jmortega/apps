@@ -35,7 +35,7 @@
         android:debuggable="true">
         <activity android:name="SenchaTouchTasks" android:label="@string/app_name"
                 android:theme="@android:style/Theme.Black.NoTitleBar"
-                android:configChanges="orientation|keyboardHidden|keyboard|locale">
+                android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

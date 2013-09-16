@@ -3,7 +3,10 @@ Ext.define("TareasApp.view.EditorTareas", {
     requires: "Ext.form.FieldSet",
     alias: "widget.EditorTareas",
     config: {
-        scrollable: 'vertical'
+        scrollable: 'vertical',
+        defaults:{
+            styleHtmlContent: true
+        },
     },
     initialize: function () {
 
@@ -15,7 +18,8 @@ Ext.define("TareasApp.view.EditorTareas", {
             text: "Home",
 			iconMask: true,
             handler: this.onVolver,
-            scope: this
+            scope: this,
+            style: 'width:100px;height:30px;font-size:25px;'
         };
 
         var guardarTarea = {
@@ -24,7 +28,8 @@ Ext.define("TareasApp.view.EditorTareas", {
             text: "Actualizar",
 			iconMask: true,
             handler: this.onGuardarTarea,
-            scope: this
+            scope: this,
+            style: 'width:180px;height:30px;font-size:25px;'
         };
 
         var topToolbar = {
@@ -44,7 +49,8 @@ Ext.define("TareasApp.view.EditorTareas", {
 			text:"Borrar tarea",
             iconMask: true,
             handler: this.onBorrarTarea,
-            scope: this
+            scope: this,
+            style: 'width:180px;height:30px;font-size:25px;'
         };
 
         var bottomToolbar = {
@@ -62,7 +68,8 @@ Ext.define("TareasApp.view.EditorTareas", {
             name: 'titulo',
             label: 'T&iacute;tulo',
 			placeHolder: 'Titulo de la tarea',
-            required: true
+            required: true,
+            style: 'height:30px;font-size:25px;'
         };
 		
 		 var descripcionTarea = {
@@ -71,19 +78,22 @@ Ext.define("TareasApp.view.EditorTareas", {
             label: 'Descripci&oacute;n',
 			maxLength: 80,
 			placeHolder: 'Descripcion de la tarea',
+			style: 'height:30px;font-size:25px;'
         };
 		
 		var fechaTarea = {
             xtype: 'textfield',
             name: 'fecha',
             label: 'Fecha Creaci&oacute;n',
-			disabled:true
+			disabled:true,
+			style: 'height:30px;font-size:25px;'
         };
 		
 		var fechaLimite = {
             xtype: 'datepickerfield',
             name: 'fechaLimite',
             label: 'Fecha L&iacute;mite',
+            style: 'height:30px;font-size:25px;',
 			required: true,
 			picker : {
                         yearFrom : 2013,
@@ -98,12 +108,14 @@ Ext.define("TareasApp.view.EditorTareas", {
 			minValue: 1,
 			maxValue: 5,
 			cycle: true,
+			style: 'height:30px;font-size:25px;'
         };
 		
 		var completada = {
             xtype: 'togglefield',
             name: 'completada',
             label: 'Completada?',
+            style: 'height:30px;font-size:25px;'
         };
 		
         this.add([
@@ -118,6 +130,7 @@ Ext.define("TareasApp.view.EditorTareas", {
     onGuardarTarea: function () {
         console.log("guardar Tarea");
         this.fireEvent("guardarTarea", this);
+        Ext.getStore("Tareas").load();
     },
     onBorrarTarea: function () {
         console.log("borrar tarea");
@@ -126,6 +139,7 @@ Ext.define("TareasApp.view.EditorTareas", {
     onVolver: function () {
         console.log("volver");
         this.fireEvent("volver", this);
+        Ext.getStore("Tareas").load();
     }
 
 });

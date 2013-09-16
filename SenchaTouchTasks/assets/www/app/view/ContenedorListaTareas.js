@@ -26,7 +26,9 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
             text: 'Nueva tarea',
             ui: 'action',
             handler: this.onNuevaTarea,
-            scope: this
+            scope: this,
+            iconMask: true,
+            style: 'width:140px;height:30px;font-size:25px;'
         };
 		
 		var tareasPendientes = {
@@ -39,7 +41,8 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
 			iconMask: true,
 			iconAlign: 'top',
             handler: this.onTareasPendientes,
-            scope: this
+            scope: this,
+            style: 'width:200px;height:60px;font-size:20px;'
         };
 		
 		var tareasCompletadas = {
@@ -53,7 +56,8 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
 			iconMask: true,
 			iconAlign: 'top',
             handler: this.onTareasCompletadas,
-            scope: this
+            scope: this,
+            style: 'width:200px;height:60px;font-size:20px;'
         };
 		
 		var searchField = {
@@ -61,7 +65,8 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
 			id:"task_search",
 			itemId:'task_search',  
             placeHolder: 'Busqueda de tareas',
-            scope: this
+            scope: this,
+            style: 'width:70%;height:40px;font-size:25px;'
         };
 		
 		var info = {
@@ -69,7 +74,8 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
             text: 'Info',
             ui: 'forward',
             handler: this.onAppInfo,
-            scope: this
+            scope: this,
+            style: 'width:100px;height:30px;font-size:25px;'
         };
         
         var totalTareas = {
@@ -77,7 +83,8 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
             id:"totalTareas",
             text: '',
             ui: 'forward',
-            scope: this
+            scope: this,
+            style: 'width:100px;height:30px;font-size:25px;'
         };
 		
         var topToolbar = {
@@ -86,7 +93,15 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
             items: [
 				
                 nuevaTarea,
-                searchField
+                searchField,
+                {
+                    ui: 'action',
+                    iconCls: 'refresh',
+                    iconMask: true,
+                    handler: function(event, btn) {
+                        Ext.getStore("Tareas").load();
+                    }           
+                },
             ]
         };
         
@@ -113,7 +128,8 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
             xtype: "ListaTareas",
             store: Ext.getStore("Tareas"),
             listeners: {
-                disclose: { fn: this.onEditarTarea, scope: this }
+                itemtap: { fn: this.onEditarTareaItemTap, scope: this },
+                disclose: { fn: this.onEditarTareaItemDisclosure, scope: this }
             }
         };
 
@@ -125,7 +141,11 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
         console.log("nueva tarea");
         this.fireEvent("nuevaTarea", this);
     },
-    onEditarTarea: function (list, record, target, index, evt, options) {
+    onEditarTareaItemTap: function (list, index, target, record, evt, options) {
+        console.log("editar tarea");
+        this.fireEvent('editarTareaAux', this, record);
+    },
+    onEditarTareaItemDisclosure: function (list, record, target, index, evt, options) {
         console.log("editar tarea");
         this.fireEvent('editarTareaAux', this, record);
     },

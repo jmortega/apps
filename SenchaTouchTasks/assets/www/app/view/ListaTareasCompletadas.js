@@ -4,6 +4,7 @@ Ext.define("TareasApp.view.ListaTareasCompletadas", {
     config: {
         loadingText: "Cargando tareas completadas...",
         emptyText: "<div class=\"list-empty-text\">No se han encontrado tareas completadas.</div>",
+        onItemTap: true,
         onItemDisclosure: true,
         grouped: true,
         itemTpl: "<div class=\"list-item-titulo\">{titulo} <p class=\"completada\">Completada</p></div>"

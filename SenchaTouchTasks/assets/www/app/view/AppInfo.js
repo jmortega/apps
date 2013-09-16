@@ -5,7 +5,10 @@ Ext.define("TareasApp.view.AppInfo", {
     config: {
         scrollable: 'vertical',
 		id: 'formularioInfo',
-        modal: true
+        modal: true,
+        defaults:{
+            styleHtmlContent: true
+        },
     },
     initialize: function () {
 
@@ -17,6 +20,7 @@ Ext.define("TareasApp.view.AppInfo", {
             text: "Home",
 			iconMask: true,
             handler: this.onVolver,
+            style: 'height:30px;font-size:25px;',
             scope: this
         };
 
@@ -36,6 +40,7 @@ Ext.define("TareasApp.view.AppInfo", {
             label: 'Autor',
 			placeHolder: 'Jose Manuel Ortega Candel.Comentarios a jmoc25@gmail.com',
 			readOnly:true,
+			style: 'height:140px;font-size:25px;'
         };
 		
 		 var proyecto = {
@@ -45,15 +50,17 @@ Ext.define("TareasApp.view.AppInfo", {
 			maxLength: 80,
 			placeHolder: 'SenchaTouch Tasks',
 			readOnly:true,
+			style: 'height:100px;font-size:25px;'
         };
 		
 		var descripcion = {
             xtype: 'textareafield',
             name: 'descripcion',
             label: 'Descripcion',
-			maxLength: 80,
+			maxLength: 120,
 			placeHolder: 'Aplicacion para gestionar una lista de tareas,asi como ver el estado de las mismas y asignarle una prioridad dentro de la lista',
 			readOnly:true,
+			style: 'height:200px;font-size:25px;'
         };
 		
         this.add([
@@ -66,6 +73,7 @@ Ext.define("TareasApp.view.AppInfo", {
     onVolver: function () {
         console.log("volver");
         this.fireEvent("volver", this);
+        Ext.getStore("Tareas").load();
     }
 
 });

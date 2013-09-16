@@ -19,7 +19,9 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
             text: 'Nueva tarea',
             ui: 'action',
             handler: this.onNuevaTarea,
-            scope: this
+            scope: this,
+            iconMask: true,
+            style: 'width:140px;height:30px;font-size:25px;'
         };
 		
 		var tareasCompletadas = {
@@ -33,7 +35,8 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
 			iconMask: true,
 			iconAlign: 'top',
             handler: this.onTareasCompletadas,
-            scope: this
+            scope: this,
+            style: 'width:200px;height:60px;font-size:20px;'
         };
 		
 		var tareasTodas = {
@@ -44,7 +47,8 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
 			iconMask: true,
 			iconAlign: 'top',
             handler: this.onTareasTodas,
-            scope: this
+            scope: this,
+            style: 'width:200px;height:60px;font-size:20px;'
         };
 
         var topToolbarTitulo = {
@@ -60,7 +64,15 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
             docked: "top",
             items: [
                 { xtype: 'spacer' },
-                nuevaTarea
+                nuevaTarea,
+                {
+                    ui: 'action',
+                    iconCls: 'refresh',
+                    iconMask: true,
+                    handler: function(event, btn) {
+                        Ext.getStore("Tareas").load();
+                    }           
+                },
             ]
         };
         
@@ -78,7 +90,8 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
             xtype: "ListaTareasPendientes",
             store: Ext.getStore("Tareas"),
             listeners: {
-                disclose: { fn: this.onEditarTarea, scope: this }
+                itemtap: { fn: this.onEditarTareaItemTap, scope: this },
+                disclose: { fn: this.onEditarTareaItemDisclosure, scope: this }
             }
         };
         this.add([topToolbarTitulo,topToolbar,listaTareas,bottomToolbar]);
@@ -88,7 +101,11 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
         console.log("nueva tarea");
         this.fireEvent("nuevaTarea", this);
     },
-    onEditarTarea: function (list, record, target, index, evt, options) {
+    onEditarTareaItemTap: function (list, index, target, record, evt, options) {
+        console.log("editar tarea");
+        this.fireEvent('editarTareaAux', this, record);
+    },
+    onEditarTareaItemDisclosure: function (list, record, target, index, evt, options) {
         console.log("editar tarea");
         this.fireEvent('editarTareaAux', this, record);
     },
@@ -103,6 +120,7 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
 	onTareasTodas: function () {
         console.log("tareas completadas");
         this.fireEvent("tareasTodas", this);
+        Ext.getStore("Tareas").load();
     },
     config: {
         layout: {

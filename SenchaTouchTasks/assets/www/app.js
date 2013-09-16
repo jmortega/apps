@@ -30,5 +30,10 @@ Ext.application({
 
         Ext.Viewport.add([ContenedorListaTareas,EditorTareas,NuevaTarea,ContenedorListaTareasPendientes,ContenedorListaTareasCompletadas,AppInfo]);
 
+        Ext.Viewport.on('orientationchange', function() {
+            if (Ext.os.is.Android) {
+                Ext.Viewport.setSize(window.innerWidth,window.innerHeight);
+            }
+        });
     }
 });
