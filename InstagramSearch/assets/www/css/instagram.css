@@ -1,0 +1,13 @@
+x-list{background-color:#eee}
+
+.username{color:#2E64FE;-webkit-text-stroke: 2px #0431B4;font-size: 60px;font-family: helvetica, arial;  }
+
+.instagram{min-height:144px;font-family:'Gruppo', arial, serif;padding:12px 40px;border-bottom:1px solid #41352c;border-top:1px solid #41352c;background:white url("images/texture.jpg") repeat-x scroll top left;margin:0 auto}
+
+.instagram .item-wrap{text-align:center}
+
+.instagram img.instagram-image{display:inline-block;float:left;padding:8px;margin:0px auto;border:1px solid #666;-webkit-box-shadow:0 0 4px rgba(51, 51, 51, 0.5);background:#eee}
+
+.instagram .copy-wrap{display:inline-block;margin:0 10px;float:right;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5)}
+
+.instagram .copy-wrap h2{margin-top:40px;font-size:2.2em;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
