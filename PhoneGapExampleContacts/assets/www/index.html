@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="jquery.mobile.min.css" />
+<script src="jquery.js"></script>
+<script src="jquery.mobile.min.js"></script>
+<script src="phonegap-1.4.1.js"></script>
+<script>
+document.addEventListener("deviceready", onDeviceReady, false);	
+
+function onDeviceReady(){
+
+	$("#searchButton").bind("touchend", function() {
+		var search = $.trim($("#search").val());
+		if(search == ""){
+		
+			navigator.contacts.find(["displayName","emails"], foundContacts, errorContacts);
+		}
+		
+		else{
+			var opt = new ContactFindOptions();
+			opt.filter = search;
+			opt.multiple = true;
+			navigator.contacts.find(["displayName","emails"], foundContacts, errorContacts, opt);
+		}
+	});
+
+	foundContacts = function(matches){
+		//create results in our list
+		var s = "";
+		for (var i = 0; i < matches.length; i++) {
+		if(matches[i].displayName!=null)
+			s += "<li>"+matches[i].displayName+"/"+matches[i].emails[i]+"</li>";
+		}
+		$("#results").html(s);
+		$("#results").listview("refresh");
+	}
+
+	errorContacts = function(err){
+		navigator.notification.alert("Sorry, we had a problem and gave up.", function() {});
+	}	
+}
+
+</script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+		<div data-role="header">
+			<h1>Contact Search</h1>
+		</div>
+		
+		<div data-role="content">
+			<input type="text" id="search" value=""  />            
+			<button id="searchButton">Search</button>
+
+			<ul id="results" data-role="listview" data-inset="true"></ul>
+
+		</div>	
+
+		
+	</div>
+
+</div>
+
+</body>
+</html>
