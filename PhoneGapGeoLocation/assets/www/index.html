@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<title>Geolocation Data</title>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyCami1I8wWyM5-VePBi7Dj6in7W-coqGkU"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript">
+
+		// The watch id variable is set as a reference to the current 'watchPosition'
+		var watchID = null;
+
+		// Set the event listener to run when the device is ready
+		document.addEventListener("deviceready", onDeviceReady, false);
+
+		// The device is ready so let's start watching the position
+		function onDeviceReady() {  
+			startWatch();
+		}
+
+		function startWatch() {
+			// Create the options to send through
+			var options = { enableHighAccuracy: true };
+			// Watch the position and update when a change has been detected
+			watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+		}
+
+		// Run after successful transaction. Let's display the position data
+		function onSuccess(position) {
+        
+			var timestamp, latitude, longitude, accuracy;
+			var element = document.getElementById('geolocationData');
+		
+			timestamp	=	new Date(position.timestamp);
+			latitude 	= 	position.coords.latitude;
+			longitude	=	position.coords.longitude;
+			accuracy		=	position.coords.accuracy;
+		
+			element.innerHTML +=
+					'<hr />' +
+					'Timestamp: ' 	+ timestamp + '<br />' +
+					'Latitude: ' 	+ latitude 	+ '<br />' +
+					'Longitude: ' 	+ longitude + '<br />' +
+					'Accuracy: ' 	+ accuracy 	+ '<br />';
+					
+			var latLng	= 
+				new google.maps.LatLng(
+						position.coords.latitude,
+	 					position.coords.longitude);	
+				
+			var mapOptions = {
+					center: latLng,
+					panControl: true,
+					zoomControl: true,
+					zoom: 16,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				
+		var map = new google.maps.Map(
+								document.getElementById('map_holder'),
+								mapOptions	
+							);
+						
+		var marker = new google.maps.Marker({
+					position: latLng,
+					map: map
+				});
+				
+				var mapOutput = '<img src="http://maps.googleapis.com/maps/api/staticmap?markers='+position.coords.latitude+','+position.coords.longitude+'&zoom=12&size=300x300&scale=2&sensor=true">';
+                var element = document.getElementById('map_holder');
+                element.innerHTML = mapOutput;
+		}
+
+		// Run if we face an error obtaining the position data
+		function onError(error) {
+		        
+			var errString	=	'';
+						
+			// Check to see if we have received an error code	  
+			if(error.code) {
+				// If we have, handle it by case
+				switch(error.code)
+				{
+					case 1: // PERMISSION_DENIED
+						errString	=	
+							'Unable to obtain the location information ' + 
+							'because the device does not have permission '+
+							'to the use that service.';
+					break;
+					case 2: // POSITION_UNAVAILABLE
+						errString	=	
+							'Unable to obtain the location information ' +
+							'because the device location could not be ' +
+							'determined.';
+					break;
+					case 3: // TIMEOUT
+						errString	=	
+							'Unable to obtain the location within the ' +
+							'specified time allocation.';
+					break;
+					default: // UNKOWN_ERROR
+						errString	=	
+							'Unable to obtain the location of the ' +
+							'device to an unknown error.';
+					break;
+				}
+					  
+			}
+					  
+			// Handle any errors we may face
+			var element = document.getElementById('geolocationData');
+		   element.innerHTML = errString;
+		
+		}
+	</script>
+</head>
+<body>
+
+	<h1>Geolocation Data</h1>
+	<div id="geolocationData">Obtaining data...</div>
+
+	<div id="map_holder" width="800px" height="800px"></div>
+
+</body>
+</html>
