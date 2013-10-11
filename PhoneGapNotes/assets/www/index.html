@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width">
+	<title>Notes plus 2.0</title>
+	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.0.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.2.0.js"></script>
+	<script src="cordova.js"></script>
+	<script src="js/mustache.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCami1I8wWyM5-VePBi7Dj6in7W-coqGkU"></script>
+
+	<script>
+		var db, dbresults, itemindex, lat, lon;
+		var geocoder,marker,map;
+    	var infowindow = new google.maps.InfoWindow();
+		var notedata = {noteid:"", notetitle:"", notedetail:"", imagesource:"", notelat:"", notelon:""};
+		var notetemplate = ' <div id="savenote" data-role="button" data-theme="b" data-icon="plus">Guardar nota</div> T&iacute;tulo <br/><input type="text" name="notetitle" id="notetitle" value="" placeholder="Introduzca t&iacute;tulo"/>Descripci&oacute;n <br/><textarea cols="40" rows="15" name="notedetail" id="notedetail" placeholder="Introduzca descripci&oacute;n"></textarea><input id="addphoto" type="button" data-icon="plus" value="Seleccione imagen" /><div align="center"><img id="noteimage" src="" width="400px" height="400px" align="center" /></div><p>Posici&oacute;n actual</p><input type="button" value="Actualizar localizaci&oacute;n" data-icon="refresh" onclick="getLocation();" data-theme="b"><div id="geopos"></div><div id="map" width="100%" height="300px"></div><div id="savenote2" data-role="button" data-theme="b" data-icon="plus">Guardar nota</div>';
+		var notetemplateUpdate = ' <a data-role="button" href="#delete_note" id="borrarNota" data-inline="true" data-theme="b" data-icon="delete">Borrar nota</a><div id="updatenote" data-role="button" data-icon="refresh" data-theme="e">Actualizar nota</div><br/> <input type="hidden" name="noteid" id="noteid" value="{{noteid}}" placeholder="Note Id"/>T&iacute;tulo <br/> <input type="text" name="notetitleUpdate" id="notetitleUpdate" value="{{notetitle}}" placeholder="Introduzca t&iacute;tulo"/>Descripci&oacute;n <br/><textarea cols="40" rows="15" name="notedetailUpdate" id="notedetailUpdate" placeholder="Introduzca descripci&oacute;n">{{notedetail}}</textarea><input id="addphotoUpdate" type="button" data-icon="plus" value="Actualiza imagen" /><div align="center"><img id="noteimageUpdate" src="" align="center" width="400px" height="400px" /></div><input type="button" value="Actualizar localizaci&oacute;n" data-icon="refresh" onclick="getLocation();" data-theme="b"><div id="geopos"></div><div id="map" width="100%" height="300px"></div>';
+        
+		
+		function getLocation() {
+
+	    	if (navigator.geolocation) {
+	          		navigator.geolocation.getCurrentPosition(onGeoSuccess,onGeoError);
+	          		$("#geopos").html("Obteniendo localizaci&oacute;n");
+	      	} else {
+	       	 		$("#geopos").html("No es posible obtener su posici&oacute;n!");
+	      	}
+	  	}
+	  
+		$(document).on("pageinit", function(){
+		    
+			$('#newnote').live('pagecreate', function(event){
+				if(itemindex >= 0) {
+					item = dbresults.rows.item(itemindex);
+					notedata = {noteid:item.noteid, notetitle:item.notetitle, notedetail:item.notedetail, imagesource:item.imagesource, notelat:item.notelat, notelon:item.notelon};
+			}  
+			var html = Mustache.to_html(notetemplate, notedata);
+			$("#notedetailcontent").html(html);
+			}); 
+			
+			$("#newnote").live("pageshow", function(){
+			
+			 	if (navigator.geolocation) {
+	          		navigator.geolocation.getCurrentPosition(onGeoSuccess,onGeoError);
+	          		$("#geopos").html("Obteniendo localizaci&oacute;n");
+	      		} else {
+	       	 		$("#geopos").html("No es posible obtener su posici&oacute;n!");
+	      		}
+	      		
+				if(itemindex >= 0) {
+					$("#noteimage").css("display","block");
+					$("#notetitle").val("");
+					$("#notedetail").val("");
+				}
+			});
+			
+			$('#updatenoteAux').live('pagecreate', function(event){
+                if(itemindex >= 0) {
+                    item = dbresults.rows.item(itemindex);
+                    notedata = {noteid:item.noteid, notetitle:item.notetitle, notedetail:item.notedetail, imagesource:item.imagesource, notelat:item.notelat, notelon:item.notelon};
+            }
+            var html = Mustache.to_html(notetemplateUpdate, notedata);
+            $("#notedetailcontent2").html(html);
+            }); 
+            
+            $("#updatenoteAux").live("pageshow", function(){
+            	
+            	$("#noteimageUpdate").attr('src', "");
+            	$("#notetitleUpdate").val("");
+             	$("#notedetailUpdate").val("");
+            	  
+                item = dbresults.rows.item(itemindex);
+                notedata = {noteid:item.noteid, notetitle:item.notetitle, notedetail:item.notedetail, imagesource:item.imagesource, notelat:item.notelat, notelon:item.notelon};
+                
+            	$("#noteid").val(notedata.noteid);
+            	$("#notetitleUpdate").val(notedata.notetitle);
+                $("#notedetailUpdate").val(notedata.notedetail);
+                if(notedata.imagesource==''){
+
+                    $("#noteimageUpdate").attr('src', "");
+                }else{
+
+                    $("#noteimageUpdate").attr('src', notedata.imagesource);
+                }
+                
+                $("#nombre_nota").html(notedata.notetitle);
+
+                if (navigator.geolocation) {
+
+              		$("#geopos").html("Obteniendo localizaci&oacute;n");
+              		
+               		onGeoSuccessUpdate(notedata.notelat,notedata.notelon);	
+	          		
+	      		} else {
+	       	 		$("#geopos").html("No es posible obtener su posici&oacute;n!");
+	      		}
+	      		
+                if(itemindex >= 0) {
+                    //$("#noteimageUpdate").css("display","block");
+                }
+            });
+            
+			$("#addphoto").bind("tap", function(){
+				
+				
+				$( "#addphoto" ).replaceWith( '<fieldset data-role="controlgroup"><input type="radio" name="anyadeImagen" id="gallery1" value="gallery" /><label for="gallery1" data-theme="c">Gallery</label><input type="radio" name="anyadeImagen" id="camera1" value="camera"  /><label for="camera1" data-theme="c">Camera</label></fieldset>' );
+				$.mobile.pageContainer.trigger( "create" );
+			
+			
+				$("[name=anyadeImagen]").change(function() {
+    				//alert('Selected: '+$('input[name=anyadeImagen]:checked').val());
+    				
+    				if($('input[name=anyadeImagen]:checked').val()=="gallery"){
+    				
+    					var options = {quality:100,targetWidth: 350, targetHeight: 300,sourceType:Camera.PictureSourceType.PHOTOLIBRARY, destinationType: Camera.DestinationType.FILE_URI};
+                		navigator.camera.getPicture(onCameraSuccess, onCameraError, options);
+    				}
+    				
+    				if($('input[name=anyadeImagen]:checked').val()=="camera"){
+    				
+    					var options = {quality:100,targetWidth: 350, targetHeight: 300};
+                		navigator.camera.getPicture(onCameraSuccess, onCameraError, options);
+    				}
+    				
+				});
+				
+			});
+			
+			$("#addphotoUpdate").bind("tap", function(){
+			
+			$( "#addphotoUpdate" ).replaceWith( '<fieldset data-role="controlgroup"><input type="radio" name="seleccione" id="gallery" value="gallery" /><label for="gallery" data-theme="c">Gallery</label><input type="radio" name="seleccione" id="camera" value="camera"  /><label for="camera" data-theme="c">Camera</label></fieldset>' );
+				$.mobile.pageContainer.trigger( "create" );
+			
+			
+				$("[name=seleccione]").change(function() {
+    				//alert('Selected: '+$('input[name=seleccione]:checked').val());
+    				
+    				if($('input[name=seleccione]:checked').val()=="gallery"){
+    				
+    					var options = {quality:100,targetWidth: 350, targetHeight: 300,sourceType:Camera.PictureSourceType.PHOTOLIBRARY, destinationType: Camera.DestinationType.FILE_URI};
+                		navigator.camera.getPicture(onCameraSuccessUpdate, onCameraError, options);
+    				}
+    				
+    				if($('input[name=seleccione]:checked').val()=="camera"){
+    				
+    					var options = {quality:100,targetWidth: 350, targetHeight: 300};
+                		navigator.camera.getPicture(onCameraSuccessUpdate, onCameraError, options);
+    				}
+    				
+				});
+			
+			
+                
+            });
+			
+
+
+			$("#savenote").bind("tap", function(){
+			    if($("#notetitle").val()==''){
+			        
+			        navigator.notification.alert('Introduzca al menos el titulo de la nota',null,'Guardar nota','Aceptar');
+			        
+			    }else{
+			        
+			        notedata.notetitle = $("#notetitle").val();
+			        notedata.notedetail = $("#notedetail").val();
+			        notedata.imagesource =  $("#noteimage").attr("src");
+			        notedata.notelat = lat;
+			        notedata.notelon = lon;
+			        notedata.noteid = (Math.floor((Math.random()*10000)+1)).toString();;
+			        db.transaction(saveNote, onDbError, onDbSuccess);
+			        db = window.openDatabase("Notes", "1.0", "Saved Notes", 200000);
+			        db.transaction(getDbNotes, onDbError, onDbSuccess);
+			        $.mobile.changePage("#main")
+			    }
+			});
+			
+			$("#savenote2").bind("tap", function(){
+			    if($("#notetitle").val()==''){
+			        
+			        navigator.notification.alert('Introduzca al menos el titulo de la nota',null,'Guardar nota','Aceptar');
+			        
+			    }else{
+			        
+			        notedata.notetitle = $("#notetitle").val();
+			        notedata.notedetail = $("#notedetail").val();
+			        notedata.imagesource =  $("#noteimage").attr("src");
+			        notedata.notelat = lat;
+			        notedata.notelon = lon;
+			        notedata.noteid = (Math.floor((Math.random()*10000)+1)).toString();;
+			        db.transaction(saveNote, onDbError, onDbSuccess);
+			        db = window.openDatabase("Notes", "1.0", "Saved Notes", 200000);
+			        db.transaction(getDbNotes, onDbError, onDbSuccess);
+			        $.mobile.changePage("#main")
+			    }
+			});
+			
+			$("#updatenote").bind("tap", function(){
+			    
+			    if($("#notetitleUpdate").val()==''){
+                    
+                    navigator.notification.alert('Introduzca al menos el titulo de la nota',null,'Actualizar nota','Aceptar');
+                    
+                }
+			    else{
+			        notedata.notetitle = $("#notetitleUpdate").val();
+			        notedata.notedetail = $("#notedetailUpdate").val();
+			        notedata.noteid = $("#noteid").val();
+			        notedata.imagesource =  $("#noteimageUpdate").attr("src");
+			        notedata.notelat = lat;
+			        notedata.notelon = lon;
+			        db.transaction(updateNote, onDbError, onDbSuccess);
+			        db = window.openDatabase("Notes", "1.0", "Saved Notes", 200000);
+			        db.transaction(getDbNotes, onDbError, onDbSuccess);
+			        $.mobile.changePage("#main")
+                
+                }
+            });
+            
+			
+			$("#deletenote").bind("tap", function(){
+                
+
+                    notedata.notetitle = $("#notetitleUpdate").val();
+                    notedata.notedetail = $("#notedetailUpdate").val();
+                    notedata.noteid = $("#noteid").val();
+                    notedata.imagesource =  $("#noteimageUpdate").attr("src");
+                    notedata.notelat = lat;
+                    notedata.notelon = lon;
+                    db.transaction(deleteNote, onDbError, onDbSuccess);
+                    db = window.openDatabase("Notes", "1.0", "Saved Notes", 200000);
+                    db.transaction(getDbNotes, onDbError, onDbSuccess);
+                    $.mobile.changePage("#main")
+                
+                
+            });
+		});
+
+		function init() {
+			document.addEventListener("deviceready", onDeviceReady, false);
+		}
+
+		function onDeviceReady() {
+			var networkstate = navigator.connection.type;
+			if(networkstate == "none")
+			{
+				$(".offline").css("visibility","visible");
+			}
+			db = window.openDatabase("Notes", "1.0", "Saved Notes", 200000);
+			db.transaction(getDbNotes, onDbError, onDbSuccess);
+			
+			$('#exit_btn').click(function() {
+				navigator.app.exitApp();
+			});	
+		}
+
+		function getDbNotes(tx) {
+			tx.executeSql("CREATE TABLE IF NOT EXISTS NOTES (noteid, notetitle, notedetail, imagesource, notelat, notelon)");
+			tx.executeSql("SELECT * FROM NOTES", [], onSelectNotesSuccess, onDbError);
+		}
+
+		function onSelectNotesSuccess(tx, results) {
+			dbresults = results;
+			var len = results.rows.length;
+			$("#notelist").html('');
+			for(var i = 0; i<len; i++) {
+				$("#notelist").append("<li><a href=#updatenoteAux onclick='itemindex=" + i + ";'>" +results.rows.item(i).notetitle + "</a></li>");
+			}
+			
+			if(len==0){
+				$("#notelist").append("<li align='center'>No hay notas registradas</li>");
+			}
+			
+			$("#notelist").listview("refresh");
+		}
+
+		function saveNote(tx) {
+			tx.executeSql("INSERT INTO NOTES (noteid, notetitle, notedetail, imagesource, notelat, notelon) VALUES (?, ?, ?, ?, ?, ?)",[notedata.noteid,notedata.notetitle, notedata.notedetail, notedata.imagesource, notedata.notelat, notedata.notelon]);
+		}
+		
+		function updateNote(tx) {
+
+            tx.executeSql("UPDATE NOTES SET notetitle=?, notedetail=?, imagesource=?, notelat=?, notelon=? WHERE noteid=?",[notedata.notetitle, notedata.notedetail, notedata.imagesource, notedata.notelat, notedata.notelon, notedata.noteid]);
+        }
+		
+		function deleteNote(tx) {
+            
+            tx.executeSql("DELETE FROM NOTES WHERE noteid=?",[notedata.noteid]);
+        }
+
+		//Posicion en el mapa
+		function onGeoSuccess(position) {
+			lat = position.coords.latitude;
+			lon = position.coords.longitude;
+			var currentposition = new google.maps.LatLng(lat,lon);
+			
+			var geostr = "<p>Latitud (deg): " + position.coords.latitude+ "</p><p>Longitud (deg): " + position.coords.longitude
+          
+          	$("#geopos").html(geostr);
+
+			var mapOptions = {
+				zoom: 12,
+				panControl: true,
+          		zoomControl: true,
+				center: currentposition,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			
+			//si hay conexion obtener la descripcion de la localizacion
+			if(navigator.onLine){
+				codeLatLng(currentposition);
+			}
+			
+			marker = new google.maps.Marker({
+					position: currentposition,
+					map: map,
+					title: 'My Location'
+			});
+		}
+		
+		//Actualizar posicion en el mapa
+		function onGeoSuccessUpdate(latitude,longitude) {
+
+			var currentposition = new google.maps.LatLng(latitude,longitude);
+			
+			var geostr = "<p>Latitud (deg): " + latitude+ "</p><p>Longitud (deg): " +longitude
+          
+          	$("#geopos").html(geostr);
+          
+			var mapOptions = {
+				zoom: 12,
+				panControl: true,
+          		zoomControl: true,
+				center: currentposition,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			
+			//si hay conexion
+			if(navigator.onLine){
+				codeLatLng(currentposition);
+			}
+			
+			marker = new google.maps.Marker({
+					position: currentposition,
+					map: map,
+					title: 'My Location'
+			});
+		}
+
+		function codeLatLng(currentposition) {
+        
+        	geocoder = new google.maps.Geocoder();
+        
+       		geocoder.geocode({'latLng': currentposition}, function(results, status) {
+       		
+          		if (status == google.maps.GeocoderStatus.OK) {
+             
+            	 var geostr = "<p>"+results[0].formatted_address+"<br/>"+
+             	 results[1].formatted_address+"</p>";
+
+             	 $("#geopos").html(geostr);
+             
+            	if (results[1]) {
+              		infowindow.setContent(results[1].formatted_address);
+              		infowindow.open(map, marker);
+            	} else {
+              		//alert('No results found');
+            	}
+          	} else {
+            	//alert('Geocoder failed due to: ' + status);
+          	}
+        	});
+      	}
+      	
+		function onCameraSuccess(imageURI) {
+			$("#noteimage").attr("src", imageURI);
+			$("#noteimage").css("display","block");
+		}
+
+		function onCameraSuccessUpdate(imageURI) {
+            $("#noteimageUpdate").attr("src", imageURI);
+            $("#noteimageUpdate").css("display","block");
+        }
+		
+		function onDbSuccess(tx, results) {
+			console.log('Database call successful');
+		}
+
+		function onGeoError(error) {
+			if( error == 1) {
+				navigator.notification.alert('Debe habilitar el servicio de geolocalizaci&oacute;n de su dispositivo para acceder a la funcionalidad',null,'Geolocation','Aceptar');
+			}
+		}
+
+		function onCameraError(message) {
+			
+		var msgText;
+
+        //Now build a message string based upon the error returned
+        // by the API
+        switch(e.code) {
+          case CaptureError.CAPTURE_INTERNAL_ERR:
+            msgText = "Internal error, the camera or microphone failed to capture image or sound.";
+            break;
+          case CaptureError.CAPTURE_APPLICATION_BUSY:
+            msgText = "The camera application or audio capture application is currently serving other capture request.";
+            break;
+          case CaptureError.CAPTURE_INVALID_ARGUMENT:
+            msgText = "Invalid parameter passed to the API.";
+            break;
+          case CaptureError.CAPTURE_NO_MEDIA_FILES:
+            msgText = "User likely cancelled the capture process.";
+            break;
+          case CaptureError.CAPTURE_NOT_SUPPORTED:
+            msgText = "The requested operation is not supported on this device.";
+            break;
+          default:
+            //Create a generic response, just in case the
+            // following switch fails
+            msgText = "Unknown Error (" + e.code + ")";
+        }
+        //Now tell the user what happened
+        navigator.notification.alert(msgText, null, "Capture Error");
+        
+		}
+
+		function onDbError(error) {
+			//alert("Database error " + error.message);
+		}
+	</script>
+	
+	<style>
+	
+	.offline {
+	    visibility: hidden;
+	    color: #f00;
+	    font-style: italic;
+	    font-size:30px;
+	}
+	
+	.java {
+        visibility: hidden;
+    }
+	
+	.lista {
+        font-size:40px;
+    }
+    .detalles {
+    	font-style: italic;
+    	font-size:25px;
+	}
+	
+	#geopos {
+    	font-style: italic;
+    	font-size:25px;
+    	-webkit-border-radius:15px 55px;
+    	-border-radius:15px 55px;
+    	border: 1px solid #000000;
+	}
+	
+	</style>
+	
+</head>
+<body onload="init()">
+
+<!--Principal-->
+<div data-role="page" id="main" class="detalles">
+	<header data-role="header" class="logo" data-position="inline" data-position="fixed">
+		<a id="exit_btn" data-inline="true" data-theme="b" data-icon="home">Exit</a>
+		<img src="img/icon.png" />
+	</header>
+	
+	<div data-role="content" class="lista">
+		<ul id="notelist" data-role="listview" class="lista">
+
+		</ul>
+
+		<a href="#newnote" data-role="button" data-icon="plus">Nueva nota</a>
+
+	</div>
+
+	<footer data-role="footer" data-theme="c" data-position="fixed">
+		<h2 class="offline">Offline Mode</h2>
+		<div align="center"><img align="center" src="img/icon2.png" /> with JQuery Mobile</div>
+	</footer>
+
+</div>
+
+<!--Nueva nota-->
+<div data-role="page" id="newnote" class="detalles">
+	<header data-role="header" class="logo" data-add-back-btn="true" data-position="inline" data-position="fixed">
+		<a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
+		<img src="img/icon.png" />
+	</header>
+	
+	<div id="notedetailcontent" data-role="content" class="detalles">
+	
+	</div>
+	
+	<footer data-role="footer" class="logo" data-theme="c"  data-position="inline" data-position="fixed">
+		<a href="#" data-icon="back" data-rel="back" data-theme="b" title="Go back">Back</a>
+		<div align="center"><img align="center" src="img/icon2.png" /> with JQuery Mobile</div>
+	</footer>
+</div>
+
+<!--Actualizar nota-->
+<div data-role="page" id="updatenoteAux" class="detalles">
+	<header data-role="header" class="logo" data-add-back-btn="true" data-position="inline" data-position="fixed">
+		<a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
+    	<img src="img/icon.png" />
+	</header>
+     
+	<div id="notedetailcontent2" data-role="content" class="lista">
+
+	</div>
+
+	<footer data-role="footer"  class="logo" data-theme="c" data-position="inline" data-position="fixed">
+		<a href="#" data-icon="back" data-rel="back" data-theme="b" title="Go back">Back</a>
+    	<div align="center"><img align="center" src="img/icon2.png" /> with JQuery Mobile</div>
+	</footer>
+</div>
+
+<!--Eliminar nota confirm-->
+<div data-role="dialog" id="delete_note" data-title="Delete note" class="detalles">
+	<div data-role="content">
+   		<h3>Confirma eliminar la nota?</h3>
+ 		<div align="center" id="nombre_nota"></div>
+  		<a  id="deletenote" data-role="button" data-theme="b" data-rel="back" data-icon="delete">Yes</a>
+  		<a href="#" data-role="button" data-theme="c" data-rel="back">No</a>
+	</div>
+</div>
+
+
+</div>
+</body>
+</html>
