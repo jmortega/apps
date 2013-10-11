@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BackBone Computing University</title>
+  
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
+  
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  
+  	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<!--<script type="text/javascript" charset="utf-8" src="jquery.js"></script>-->
+	<script type="text/javascript" src="jquery.mobile/jquery-1.5.2.min.jsX"></script>
+	<script type="text/javascript" charset="utf-8" src="underscore.js"></script>
+	<script type="text/javascript" charset="utf-8" src="backbone.js"></script>
+	<script type="text/javascript" charset="utf-8" src="university.json"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	
+	<link rel="stylesheet" href="gmapdemo.css" type="text/css" />
+	
+	<link rel="stylesheet" href="jquery.mobile/jquery.mobile.min.20110527.css" type="text/css" />
+	
+
+	<script type="text/javascript" charset="utf-8" src="jquery-mobile.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ui/jquery.ui.map.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="application.js"></script>
+
+ 	<script type="text/javascript" charset="utf-8">
+
+  	function onBodyLoad(){
+  		document.addEventListener("deviceready",onDeviceReady,false);
+  		
+  	}
+	
+  	function onDeviceReady(){
+  	}
+  	
+  </script>
+<style>
+
+.offline {
+    visibility: hidden;
+    color: #f00;
+    font-style: italic;
+    font-size:30px;
+    text-align:center;
+}
+
+.detalles {
+    font-style: italic;
+    font-size:25px;
+}
+
+</style>
+
+
+</head>
+  <body onload="onBodyLoad()">
+
+    <div data-role="page" id="home" class="detalles">
+
+      <header data-role="header" data-position="fixed" >
+        <h1>Spain Computing University</h1>
+      </header>
+
+	  <div>
+	  <a data-role="button" rel="external" href="gmapdemo1.html">GeoLocation</a>
+	  </div>
+	  
+      <div data-role="content" class="detalles">	
+      </div>
+      
+      <footer data-role="footer" data-position="fixed" class="detalles" >
+        <h4><a rel="external" href="#">Spain Computing University.BackBone & JqueryMobile</a></h4>
+        
+      </footer>
+    </div>
+
+  </body>
+</html>
