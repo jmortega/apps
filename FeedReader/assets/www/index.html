@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FeedBurner Reader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no;">
+<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.1.0.min.css" />
+<script src="jquery.mobile/jquery-1.6.4.min.js"></script>
+<script src="jquery.mobile/jquery.mobile-1.1.0.min.js"></script>
+<script src="cordova.js"></script>
+<script src="main.js"></script>
+
+<style>
+
+.offline {
+    visibility: hidden;
+    color: #f00;
+    font-style: italic;
+    font-size:30px;
+    text-align:center;
+}
+
+.detalles {
+    font-style: italic;
+    font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body onload="init();">
+
+<div data-role="page" id="intropage" class="detalles">
+
+	<header data-role="header" data-position="fixed">
+		<h1>FeedBurner Reader</h1>
+		<a id="exit_btn" data-inline="true" data-theme="b" data-icon="home">Exit</a>
+	</header>
+	
+	<div data-role="content" id="introContent">
+	
+		<ul id="feedList" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
+
+		<a href="addfeed.html" data-role="button" data-icon="plus" data-theme="b">Nuevo Feed</a>
+		
+		<a href="#about" data-role="button" data-icon="info" data-rel="dialog" data-theme="b">Info</a>
+		
+		<a href="#botonConnection" data-role="button" data-icon="info" data-rel="dialog" data-theme="a">Comprobar conexi&oacute;n</a>
+		
+		<a href="#loadFeeds" data-role="button" data-icon="plus" data-rel="dialog" data-theme="b">
+		Cargar feeds<br/>
+		*Java Hispano http://feeds2.feedburner.com/JHPodcasts <br/>
+		*HtmlCssJavascript http://feeds2.feedburner.com/HtmlCssJavascript <br/>
+		*Web Professional Minute http://feeds2.feedburner.com/WebProfessionalMinute <br/>
+		</a>
+		
+		<div align="center"><img align="center" src="img/icon.png" width="200px" height="200px"/></div>
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<h6>FeedBurner Reader with jQuery Mobile</h6>
+		<div class="offline">No connection found</div>
+	</footer>
+		
+</div>
+
+
+<!-- About Dialog -->
+<div id="about" data-role="page" class="detalles">
+    <header data-role="header" >
+        <h1>About FeedBurner Reader</h1>
+    </header>
+    <div data-role="content">
+        Aplicaci&oacute;n que permite registrar fuentes RSS y consultarlas online.<br/>
+        Se requiere de una conexi&oacute;n para consultar el rss.
+     </div>
+ </div>
+
+<!-- Load feeds -->
+<div data-role="page" id="loadFeeds" class="detalles">
+
+    <header data-role="header">
+        <h1>Carga de feeds</h1>
+    </header>
+
+    <div data-role="content">
+    	
+    	Se han cargado correctamente los feeds
+
+    
+    <a href="#" data-rel="back" data-role="button">Close</a>
+    </div>
+
+</div>
+
+
+<!-- Connection -->
+<div data-role="page" id="botonConnection" class="detalles">
+
+    <header data-role="header">
+        <h1>Connection</h1>
+    </header>
+
+    <div id="conexionContent" data-role="content">
+    <p></p>
+    <a href="#" data-rel="back" data-role="button">Close</a>
+    </div>
+
+</div>
+
+</body>
+</html>

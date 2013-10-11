@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Feed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no;">
+
+<style>
+
+.detalles {
+    font-style: italic;
+    font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div data-role="page" id="addfeedpage" data-add-back-btn="true" class="detalles">
+
+	<header data-role="header" data-position="fixed">
+		<h1>Nuevo Feed</h1>
+	</header>
+	
+	<div data-role="content">
+		<form id="addFeedForm">
+		<div data-role="fieldcontain">        
+            <label for="feedname">Feed Name:</label>        
+            <input type="text" id="feedname" value=""  />        
+        </div>	
+		<div data-role="fieldcontain">        
+            <label for="feedurl">Feed URL:</label>        
+            <input type="text" id="feedurl" value=""  />        
+        </div>	
+		<input type="submit" value="Guardar Feed" data-theme="b">
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<h4>FeedBurner Reader with jQuery Mobile</h4>
+	</footer>
+		
+</div>
+
+</body>
+</html>
