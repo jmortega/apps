@@ -1,0 +1,527 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Flickr Search</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.0.min.css"/>
+
+    <!-- jQuery y jQuery mobile -->
+    <script src="js/jquery-1.7.min.js"></script>
+    <script src="js/jquery.mobile-1.0.min.js"></script>
+    
+	  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	  <script type="text/javascript" charset="utf-8">
+      
+        var onDeviceReady = function() {
+	
+            $('#exit_btn').click(function() {
+                   navigator.app.exitApp();
+            });
+               
+            var networkstate = navigator.connection.type;
+            if(networkstate == "none"){
+              	$(".offline").css("visibility","visible");
+                       
+            }
+        };
+
+        function init() {
+            document.addEventListener("deviceready", onDeviceReady, true);
+            
+            
+        }   
+    </script>  
+
+	<style>
+	
+	.offline {
+	    visibility: hidden;
+	    color: #f00;
+	    font-style: italic;
+	    font-size:30px;
+	}
+	
+	.jqm-page {
+	    	font-style: italic;
+	    	font-size:18px;
+		}
+	
+	</style>
+	
+  </head>
+  <body onload="init();" id="stage">
+  <!-- página inicial, con el formulario de búsqueda -->
+  
+  
+  <div id="pagBusqueda" data-role="page" class="jqm-page"  data-theme="a">
+      <header data-role="header" data-position="fixed">
+          <h1>Flickr Search</h1>
+		<a id="exit_btn" data-inline="true" data-theme="b" data-icon="home">Exit</a>
+      </header>
+      <div data-role="content" id="first-contentt">
+          <input type="search" id="tags" placeholder="Palabras clave a buscar...   " required="true" data-theme="a">
+          <label for="numResults" class="select"></label>
+          <a data-role="button" href="#resultados" data-rel="dialog" datatransition="pop">N&uacute;mero de resultados: </a>
+          <select id="numResults" data-native-menu="true" data-theme="a">
+          <option><b>N&uacute;mero de resultados</b></option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="60">60</option>
+          <option value="70">70</option>
+          <option value="80">80</option>
+          <option value="90">90</option>
+          <option value="100">100</option>
+      </select>
+          <input type="button" id="botonBuscar" value="Buscar im&aacute;genes" data-theme="a">
+          <a href="#botonConnection" data-role="button" data-icon="info" data-rel="dialog" data-theme="a">Comprobar conexi&oacute;n</a>
+          <a data-role="button" href="#info" data-rel="dialog" data-icon="info" datatransition="pop" data-theme="a">Info </a>
+
+          
+          <p><a data-role="button" theme="a">Theme a</a></p>
+          <p><a data-role="button" theme="b">Theme b</a></p>
+          <p><a data-role="button" theme="c">Theme c</a></p>
+          <p><a data-role="button" theme="d">Theme d</a></p>
+          <p><a data-role="button" theme="e">Theme e</a></p>
+              	  
+      </div>
+      
+      
+      
+      <div data-role="dialog" id="dialog"></div>
+      <footer data-role="footer" data-position="fixed">
+          <h1>Flickr Search with JQuery Mobile</h1>
+          <h4 class="offline">No connection found</h4>
+      </footer>
+      
+  </div>
+  
+  <!-- página con la lista de resultados de la búsqueda -->
+  <div id="pagResultados" data-role="page" data-add-back-btn="true" class="jqm-page" data-theme="a">
+      <header data-role="header" data-position="fixed">
+          <h1>Resultados de la b&uacute;squeda</h1>
+          <div  align="center" id="criterioBusqueda"></div>
+      </header>
+      
+      <input type="button" id="botonGallery" value="Galeria de im&aacute;genes" data-theme="a">
+      
+      <div data-role="content" data-theme="a" id="first-contenttt"> 
+          <ul id="listaResultados" data-role="listview" data-filter="true"
+              data-filter-reveal="true" data-split-button="true" data-filter-placeholder="Filtrar resultados...">
+          </ul>
+      </div>
+      <div align="center" id="aux">
+
+      </div>
+      <footer data-role="footer" data-position="fixed">
+          <h1>Flickr Search with JQuery Mobile</h1>
+      </footer>
+  </div>
+
+  <!-- página donde se muestra la foto a "pantalla completa"-->
+  <div id="pagFoto" data-role="page" data-add-back-btn="true" class="jqm-page" data-theme="a" data-fullscreen="true">
+      <header data-role="header" data-position="fixed">
+      	  <h1>Flickr Search</h1>
+          <h1>Imagen</h1>
+      </header>
+
+      <div data-role="content" align="center">
+          <img id="fotoActual" src="cargando.gif" width="100%" height="100%">
+      </div>
+      
+      <footer data-role="footer" data-position="fixed">
+          <a href="#pagDatosFoto" data-transition="flip">Datos de la imagen</a>
+          <h1>Flickr Search with JQuery Mobile</h1>
+      </footer>
+  </div>
+
+  <!-- página con los datos de la foto -->
+  <div id="pagDatosFoto" data-role="page" class="jqm-page" data-theme="a" data-add-back-btn="true">
+      <header data-role="header" data-position="fixed">
+      	  <h1>Flickr Search</h1>
+          <h1>Datos de la imagen</h1>
+      </header>
+      <div id="datosFoto" data-role="content">
+
+      </div>
+      <footer data-role="footer" data-position="fixed">
+         <h1>Flickr Search with JQuery Mobile</h1>
+      </footer>
+  </div>
+  
+  <!-- Second Page/Dialog -->
+  <div data-role="dialog" id="info" class="jqm-page">
+      <header data-role="header" data-position="fixed">
+          <h1>Connection Required</h1>
+      </header>
+      
+      <div data-role="content" data-theme="a">    
+          A network connection is required to search images.
+          <br><br>
+
+          <a href="#home" data-role="button" data-theme="a" data-rel="back">OK</a>
+      </div>
+  </div>
+          
+
+  <div data-role="page" id="gallery" class="jqm-page" data-theme="a" data-add-back-btn="true">
+
+  <div data-role="header" data-position="fixed">  
+		  <h1>Flickr Search Gallery</h1>
+          <div  align="center" id="criterioBusquedaGallery"></div>
+          <a href="#home" data-role="button" data-theme="a" data-icon="back" data-rel="back">Back</a>  
+   </div>
+   
+   <div data-role="content" align="center">
+     <img id="fotoActual2" src="cargando.gif" width="100%" height="100%">
+   </div>
+          
+   <footer data-role="footer" data-position="fixed">
+       <h1>Flickr Search with JQuery Mobile</h1>
+   </footer>   
+
+  </div>
+  
+       
+   <!-- Connection -->
+   <div data-role="page" id="botonConnection">
+
+       <div data-role="header">
+           <h1>Connection</h1>
+       </div>
+
+       <div id="conexionContent" data-role="content">
+           <p></p>
+           <a href="#" data-rel="back" data-role="button">Close</a>
+       </div>
+
+   </div>
+
+  <script>
+  
+  function checkConnection() {
+      var networkState = navigator.network.connection.type;
+      var states = {};
+      states[Connection.UNKNOWN]  = 'Unknown connection';
+      states[Connection.ETHERNET] = 'Ethernet connection';
+      states[Connection.WIFI]     = 'WiFi connection';
+      states[Connection.CELL_2G]  = 'Cell 2G connection';
+      states[Connection.CELL_3G]  = 'Cell 3G connection';
+      states[Connection.CELL_4G]  = 'Cell 4G connection';
+      states[Connection.NONE]     = 'No network connection';
+  }
+   
+  function buscar() {
+  
+  
+  	  if (localStorage.getItem('tagValue')){
+   	
+   			value=localStorage.getItem('tagValue');
+   		
+   	  }else{
+   	
+   	  		value=$('#tags').val()
+   	
+   	  }
+   		
+      if(value==""){
+
+    	  navigator.notification.alert('Introduzca criterio de busqueda',null,'Buscar','Aceptar');
+
+      }else{
+          
+      if(navigator.onLine){    
+      //mostrar la animación de "cargando datos AJAX"
+      $.mobile.showPageLoadingMsg()
+     
+      //Buscar fotos con el API de Flickr (funciona con JSONP)
+      //La documentación de esta llamada está en http://www.flickr.com/services/api/flickr.photos.search.html
+      $.getJSON(
+              'http://api.flickr.com/services/rest/?jsoncallback=?',
+              {method: 'flickr.photos.search',
+                  //clave del API, se puede solicitar una a Flickr
+                  api_key: '8bd6dfb55bc750946f80606ef5aefaca',
+                  //formato en el que queremos ver los datos. Si no ponemos esto por defecto es XML
+                  format: 'json',
+                  //palabra(s) clave de búsqueda
+                  tags: value,
+                  //número de resultados
+                  per_page: $('#numResults').val()
+              },
+              procesarResultados
+      )
+     }
+      else{
+          navigator.notification.alert('Searching is not possible without connection',null,'Search','Aceptar');
+      } 
+     }
+      
+  }
+  
+  function buscarGallery() {
+  
+  	var value="";
+  	
+   	if (localStorage.getItem('tagValue')){
+   	
+   		value=localStorage.getItem('tagValue');
+   		
+   	}else{
+   	
+   		value=$('#tags').val()
+   	
+   	}
+          
+      if(navigator.onLine){    
+    	  
+      $("#gallery img").remove();
+      
+      //query the Flickr API
+      $.getJSON("https://secure.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+      {
+          tags: value, 
+          format: "json",
+          per_page: $('#numResults').val()
+      },
+      function(data) {
+          $.each(data.items, function(i,item){
+              //append image to the grid, wrap with a link tag so it's clickable
+              $("<img/>").attr("src", item.media.m).appendTo("#gallery").wrap("<a target='_blank' href=" + item.link + "></a>");
+
+          });
+      });
+      
+      localStorage.setItem('tagValue',value);
+      
+      //switch to the gallery page after search
+      $.mobile.changePage("#gallery", { transition: "slideup" });
+      
+      return false;
+      
+     }
+      else{
+    	  navigator.notification.alert('Searching is not possible without connection',null,'Search','Aceptar');
+      } 
+     
+      
+  }
+  
+
+
+  function procesarResultados(obj) {
+      $('#listaResultados').empty()
+      $('#aux').empty()
+      numFotos = obj.photos.photo.length
+      if(numFotos>0){
+      for (i = 0; i < numFotos; i++) {
+          foto = obj.photos.photo[i]
+          //URL para el tamaño "s" de foto (75x75). Se obtiene a partir de los campos del objeto "foto"
+          //Mirar doc. en http://www.flickr.com/services/api/misc.urls.html
+          url = "http://farm" + foto.farm + ".staticflickr.com/"
+                  + foto.server + "/" + foto.id + "_" + foto.secret + "_s.jpg"
+          $('<li id="show">')
+                  .append('<a href="#pagFoto">' + obj.photos.photo[i].title + '</a>')
+                  .children()
+                  .append('<img src="' + url + '">')
+                  .data("foto", foto)
+                  .click(function() {
+                    //mostrar la animación de "cargando datos AJAX"
+        	  	  $.mobile.showPageLoadingMsg();
+                  $('#pagFoto').data("foto", $(this).data("foto"))
+                  })
+                  .parent()
+                  .appendTo('#listaResultados')
+      }
+      //saltar a la página de resultados
+      $.mobile.changePage("#pagResultados")
+      $('#criterioBusqueda').html($('#tags').val());
+      $('#criterioBusquedaGallery').html($('#tags').val());
+      }else{
+          $('#aux').append("<h1> No hay resultados</h1>")
+           
+          //saltar a la página de resultados
+          $.mobile.changePage("#pagResultados")
+      }
+      
+      $.mobile.hidePageLoadingMsg();
+  }
+
+
+  $('#pagResultados').bind('pagebeforeshow', function() {
+      //para decirle a jQuery Mobile que hemos añadido elementos dinámicamente a la lista
+      //y que la ajuste correctamente
+      
+      $('#listaResultados').listview('refresh')
+  })
+
+  //aquí especificamos la función buscar como "listener" del evento click sobre el botón buscar
+  $('#pagBusqueda').bind('pageinit', function() {
+  
+      $('#botonBuscar').click(buscar);
+      
+      localStorage.removeItem('tagValue');
+  })
+  
+  
+  //aquí especificamos la función buscar como "listener" del evento click sobre el botón buscar
+  $('#pagResultados').bind('pageinit', function() {
+  
+      $('#botonGallery').click(buscarGallery);
+      
+  })
+  
+  $('#pagBusqueda').bind('pageinit', function() {
+  
+      $('#botonConnection').click(checkConnection);
+      
+  })
+
+  $('#pagFoto').bind('pagebeforeshow', function() {
+      $('#fotoActual').attr('src',"cargando.gif")
+      $.mobile.fixedToolbars.show(true)
+  })
+  
+  $('#pagFoto').bind('pageshow', function() {
+        var foto = $(this).data("foto")
+        //URL para el tamaño pequeño de foto (240 en el lado más grande)
+        var url = "http://farm" + foto.farm + ".staticflickr.com/"
+                + foto.server + "/" + foto.id + "_" + foto.secret + ".jpg"
+        $('#fotoActual').attr('src', url)
+        $.mobile.fixedToolbars.show(true)
+    })
+    
+
+    $('#gallery').bind('pageshow', function() {
+    	
+		buscarGallery();
+    })
+    
+    
+  $('#pagDatosFoto').bind('pagebeforeshow', function() {
+      var foto = $('#pagFoto').data("foto")
+	  $.mobile.showPageLoadingMsg();
+      
+      var url = "http://farm" + foto.farm + ".staticflickr.com/"
+                      + foto.server + "/" + foto.id + "_" + foto.secret + ".jpg"
+                      
+      $.ajax({
+          url:'http://api.flickr.com/services/rest/?jsoncallback=?',
+          data: {
+              method: 'flickr.photos.getInfo',
+              //clave del API, se puede solicitar una a Flickr
+              api_key: '8bd6dfb55bc750946f80606ef5aefaca',
+              //formato en el que queremos ver los datos. Si no ponemos esto por defecto es XML
+              format: 'json',
+              photo_id: foto.id,
+              secret: foto.secret
+          },
+          dataType: "jsonp",
+          success: function(f) {
+              $('#datosFoto')
+                      .empty()
+                      .append("<h1>" + f.photo.title._content + "</h1>")
+                      .append("<p>" + f.photo.description._content + "</p>")
+                      .append("<p>" + url + "</p>")
+          },
+          error: function(xhr) {
+              alert("Error: " + xhr.status)
+          }
+      })
+  })
+  
+  $("#botonConnection").bind("pagebeforeshow", function(e) {
+      
+      var networkState = navigator.network.connection.type;
+      var states = {};
+      states[Connection.UNKNOWN]  = 'Unknown connection';
+      states[Connection.ETHERNET] = 'Ethernet connection';
+      states[Connection.WIFI]     = 'WiFi connection';
+      states[Connection.CELL_2G]  = 'Cell 2G connection';
+      states[Connection.CELL_3G]  = 'Cell 3G connection';
+      states[Connection.CELL_4G]  = 'Cell 4G connection';
+      states[Connection.NONE]     = 'No network connection';
+
+      $('#conexionContent p:first').html('Connection type: ' + states[networkState]);
+  });
+
+
+  //inicializa parámetros globales de la aplicación
+  $(document).ready(function() {
+      //personalizar el mensaje que sale cuando se esperan datos AJAX
+      $.mobile.loadingMessage = "Cargando datos"
+      //personalizar el texto del botón para ir a la página anterior
+      $.mobile.page.prototype.options.backBtnText = "Atr&aacute;s"
+   
+  })
+  
+</script>
+  
+  <script type="text/javascript">
+  (function() {
+      function element_theme_refresh( element, oldTheme, newTheme ) {
+      
+      
+          /* Update the page's new data theme. */
+          if( $(element).attr('data-theme') ) {
+              $(element).attr('data-theme', newTheme);
+          }
+
+          if( $(element).attr('class') ) {
+              /* Theme classes end in "-[a-z]$", so match that */
+              var classPattern = new RegExp('-' + oldTheme + '$');
+              newTheme = '-' + newTheme;
+
+              var classes =  $(element).attr('class').split(' ');
+
+              for( var key in classes ) {
+                  if( classPattern.test( classes[key] ) ) {
+                      classes[key] = classes[key].replace( classPattern, newTheme );
+                  }
+              }
+
+              $(element).attr('class', classes.join(' '));
+          }
+      }
+      
+      $('.jqm-page').bind('refresh', function(e, newTheme) {
+          /* Default to the "a" theme. */
+          var oldTheme = $(this).attr('data-theme') || 'a';
+          newTheme = newTheme || 'a';
+          
+          element_theme_refresh( $(this), oldTheme, newTheme );
+
+          $(this).find('*').each(function() {
+              element_theme_refresh( $(this), oldTheme, newTheme );
+          });
+      });
+
+      $('#first-contentt a').live('tap', function() {
+          var newTheme = $(this).attr('theme');
+
+          $('#pagBusqueda').trigger('refresh', newTheme);
+          
+          $('#pagResultados').trigger('refresh', newTheme);
+          
+          $('#pagFoto').trigger('refresh', newTheme);
+          
+          $('#pagDatosFoto').trigger('refresh', newTheme);
+          
+          $('#info').trigger('refresh', newTheme);
+          
+          $('#gallery').trigger('refresh', newTheme);
+          
+          
+          
+      });
+
+  })();
+</script>
+
+  
+  </body>
+</html>
