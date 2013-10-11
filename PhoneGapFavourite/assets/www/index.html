@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Lugares 3.0</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-cappable" content="yes" />
+        <link rel="stylesheet" type="text/css" href="app.css"/>
+        <link rel="stylesheet" type="text/css" href="jquery.mobile-1.0a4.1.min.css"/>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyCami1I8wWyM5-VePBi7Dj6in7W-coqGkU">
+        <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+        </script>
+        <script type="text/javascript" src="jquery-1.6.1.min.js">
+        </script>
+        <script type="text/javascript" src="jquery.mobile-1.0a4.1.min.js">
+        </script>
+        <script type="text/javascript" src="jquery.ui.map.min.js">
+        </script>
+        <script type="text/javascript" src="cordova.js">
+        </script>
+        <script type="text/javascript" src="app.js">
+        </script>
+        
+        <style>
+	
+		.offline {
+	    	visibility: hidden;
+	    	color: #f00;
+	    	font-style: italic;
+	    	font-size:30px;
+		}
+		
+		.detalles {
+	    	font-style: italic;
+	    	font-size:25px;
+		}
+		
+		.detalles2 {
+            font-size:15px;
+        }
+        
+        .detallesli {
+            font-size:15px;
+        }
+		
+		.detalles3 {
+            font-size:30px;
+        }
+        
+        .detalles4 {
+            font-size:25px;
+            background-color:#58ACFA;
+        }
+		
+		#geopos {
+	        font-style: italic;
+	        font-size:25px;
+	        -webkit-border-radius:15px 55px;
+	        -border-radius:15px 55px;
+	        border: 1px solid #000000;
+	    }
+
+		</style>
+    </head>
+    <body>
+        <!-- Main Search Page -->
+        <div data-role="page" id="auxMainPage" class="detalles">
+            
+            <header data-role="header" data-position="inline" data-position="fixed">
+                <h1>Places Mobile</h1>
+                
+                <a id="exit_btn" data-inline="true" data-theme="b" class="detalles" data-icon="home">Exit</a>
+                
+            </header>
+            
+
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <label for="search">
+                       Criterio de b&uacute;squeda
+                    </label>
+                    <input type="search" name="searchbox" id="searchbox" value=""/>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="slider">
+                        Rango de b&uacute;squeda(kms):
+                    </label>
+                    <input type="range" name="range" id="range" value="5" min="1" max="25" />
+                </div>
+                <div data-role="fieldcontain">
+                    <button name="search" data-icon="search" id="search">
+                        Buscar lugares
+                    </button>
+                </div>
+
+                <a href="#fav" data-role="button" data-icon="star" data-theme="c">Favoritos</a>
+                <a href="#about" data-role="button" data-rel="dialog" datatransition="popup" data-icon="info" data-theme="b">Info</a>
+                <a href="#botonConnection" data-role="button" data-icon="info" data-rel="dialog" data-theme="a">Comprobar conexi&oacute;n</a>
+                <input type="button" value="Actualizar localizaci&oacute;n" onclick="getLocation();" data-theme="e">
+            </div>
+            
+			<div id="geopos"></div>
+			
+			<div align="center" id="map_holder" width="100%" height="200px"></div>
+			
+            <footer data-role="footer" data-theme="c" data-position="fixed">
+                <h6 class="offline">No connection found</h6>
+                <div align="center"><img align="center" src="icono.png" /> with JQuery Mobile</div>
+            </footer>
+
+        </div>
+
+        
+        <!-- Search Result List Page -->
+        <div data-role="page" id="list" class="detalles">
+            
+            <!-- header -->
+            <header  data-role="header" data-add-back-btn="true" data-inline="true"  data-position="fixed">
+            
+                <h1>Resultados de b&uacute;squeda</h1>
+                
+                <a id="homepage1" data-role="button" data-icon="home" data-theme="b">Home</a>
+                
+            </header>
+            
+            
+            
+            <!-- content-->
+            <div data-role="content">
+                <div id="cadenaBusqueda"></div>
+                <ul id="result-list" data-role="listview" data-theme="d">
+                </ul>
+            </div>
+            
+            <!-- /content -->
+            <footer data-role="footer" data-id="result-footer" data-position="fixed" class="ui-bar-a ui-footer ui-footer-fixed fade" role="contentinfo">
+                <div data-role="navbar" class="ui-navbar ui-navbar-noicons" role="navigation">
+                    <ul class="ui-grid-a">
+                        <li class="ui-block-a">
+                            <a href="#list" data-theme="a" class="ui-btn-active ui-state-persist ui-btn ui-btn-up-a"><span class="ui-btn-inner"><span class="ui-btn-text">Resultados</span></span></a>
+                        </li>
+                        <li class="ui-block-b">
+                            <a href="#map" data-theme="a" class="ui-state-persist ui-btn ui-btn-up-a"><span class="ui-btn-inner"><span class="ui-btn-text">Mapa</span></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /navbar -->
+            </footer>
+            <!-- /footer -->
+        </div>
+        
+
+        
+        <!-- Maps Page -->
+        <div data-role="page" id="map" class="detalles">
+            <header  data-role="header" data-add-back-btn="true" data-inline="true" data-position="fixed">
+                
+                <h1>Mapa</h1>
+                
+            </header>
+            <!-- /header -->
+            <div data-role="content" class="map-content">
+                <div id="map_canvas">
+                </div>
+            </div>
+            <!-- /content -->
+            <footer data-role="footer" data-id="result-footer" data-position="fixed" class="ui-bar-a ui-footer ui-footer-fixed fade ui-fixed-overlay" role="contentinfo">
+                <div data-role="navbar" class="ui-navbar ui-navbar-noicons" role="navigation">
+                    <ul class="ui-grid-a">
+                        <li class="ui-block-a">
+                            <a href="#list" data-theme="a" class="ui-state-persist ui-btn ui-btn-up-a"><span class="ui-btn-inner"><span class="ui-btn-text">Resultados</span></span></a>
+                        </li>
+                        <li class="ui-block-b">
+                            <a href="#map" data-theme="a" class="ui-btn-active ui-state-persist ui-btn ui-btn-up-a"><span class="ui-btn-inner"><span class="ui-btn-text">Mapa</span></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /navbar -->
+            </footer>
+            <!-- /footer -->
+        </div>
+  
+        
+        <!-- Favoritos -->
+        <div data-role="page" id="fav" class="detalles">
+            <header data-role="header" data-inline="true" data-position="fixed">
+				<a id="homepageAux" data-role="button" data-icon="home" data-theme="b">Home</a>
+                <h1>Favoritos</h1>
+                
+            </header>
+            <!-- /header -->
+            <div data-role="content">
+                <ul id="fav-list" data-role="listview" data-theme="d">
+                </ul>
+            </div>
+            <!-- /content -->
+            <footer data-role="footer" data-id="result-footer" data-theme="c" data-position="fixed" class="ui-bar-a ui-footer ui-footer-fixed fade ui-fixed-overlay" role="contentinfo" style="top: -1263px; ">
+                <!-- /navbar -->
+                
+                <h6 class="offline">No connection found</h6>
+                <div align="center"><img align="center" src="icono.png" /> with JQuery Mobile</div>
+                
+            </footer>
+            <!-- /footer -->
+        </div>
+
+        
+        <!-- About Dialog -->
+    	<div id="about" data-role="page" class="detalles">
+      		<header data-role="header" >
+        		<h1>Places Mobile</h1>
+      		</header>
+      		<div data-role="content">
+       		 	Aplicación que permite la b&uacute;squeda de lugares en un rango de hasta 25 km a partir del criterio de b&uacute;squeda
+     		 </div>
+   		 </div>
+    
+     	<!-- Connection -->
+   		<div data-role="page" id="botonConnection" class="detalles">
+
+       		<header data-role="header">
+           		<h1>Conexi&oacute;n</h1>
+       		</header>
+
+       		<div id="conexionContent" data-role="content">
+           	<p></p>
+           	
+           	<a href="#" data-rel="back" data-role="button">Cerrar</a>
+       		</div>
+
+   		</div>
+   		
+        <!-- Detales -->
+        <div data-role="page" id="details" data-theme="a" data-add-back-btn="true" class="detalles">
+            <header data-role="header">
+                <h1>Detalles</h1>
+            </header>
+            <!-- /header -->
+            <div data-role="content">
+                <table>
+                    
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                Nombre
+                            </th>
+                            <td id="name">
+                                ...
+                            </td>
+                            <td id="favorite" rowspan="4">
+                               <div id="favstar"><img src="favorito.png" width="40" height="40" alt="favorito" /></a>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                &nbsp;Direcci&oacute;n
+                            </th>
+                            <td id="address">
+                                ...
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Tel&eacute;fono
+                            </th>
+                            <td id="phone">
+                                ...
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Rating
+                            </th>
+                            <td id="rating">
+                                ...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+               
+                
+                
+              <div>
+                  <a id="addfav" data-role="button" data-icon="plus" data-theme="a">Agregar a favoritos</a>
+              </div>
+              
+              <div>
+                  <a id="removefav" data-role="button" data-icon="delete" data-theme="a">Eliminar de favoritos</a>
+              </div>
+              
+              <div>
+              
+                  <button id="homepage" data-role="button" data-icon="home" data-theme="b">Home</button>
+              </div>
+              
+              <div>
+                  <a href="#fav" data-role="button" data-icon="star" data-theme="c">Favoritos</a>
+              </div>
+               
+              
+              <div align="center" id="map_canvas_detalle" width="100%" height="250px"></div>
+              
+              
+            </div>
+            <!-- /content -->
+            
+            <footer data-role="footer" data-theme="c" data-position="fixed">
+                <h6 class="offline">No connection found</h6>
+                <div align="center"><img align="center" src="icono.png" /> with JQuery Mobile</div>
+            </footer>
+        
+        </div>
+        <!-- /page -->
+    </body>
+</html>
