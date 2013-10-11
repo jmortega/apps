@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no;">
+	<title>Java Hispano Podcasts</title>	
+	<link href="jquery/jquery.mobile-1.1.1.min.css" rel="stylesheet" type="text/css" />
+	<script src="jquery/jquery-1.8.0.min.js" type="text/javascript"></script>
+	<script src="jquery/jquery.mobile-1.1.1.min.js" type="text/javascript"></script>
+	<script src="cordova.js" type="text/javascript"></script>
+	<style>
+	
+	.offline {
+	    visibility: hidden;
+	    color: #f00;
+	    font-style: italic;
+	    font-size:30px;
+	}
+	
+	.java {
+        visibility: hidden;
+    }
+	
+	.lista {
+        font-size:40px;
+    }
+    .detalles {
+    	font-style: italic;
+    	font-size:20px;
+	}
+	
+	</style>
+  </head>
+<body>
+
+<div data-role="page" id="home" class="detalles">
+
+  <header data-role="header" data-position="inline">
+     <a href="#about" data-role="button" data-icon="info">About</a>
+       <h1>JavaHispano Podcasts</h1>
+       <a id="exit_btn" data-inline="true" data-theme="b" data-icon="home">Exit</a>
+  </header>
+
+  <div data-role="content" class="lista">
+    <a data-role="button" href="#info" data-rel="dialog" datatransition="pop" data-icon="info" data-theme="b">Info </a>
+    <a href="#botonConnection" data-role="button" data-icon="info" data-rel="dialog" data-theme="a">Comprobar conexi&oacute;n</a>
+    <ul id="showList" data-role="listview" data-theme="e" data-inset="true">
+    <li class="java" data-role="list-divider">JavaHispano Podcasts</li>
+    </ul>
+  </div>
+  
+  <footer data-role="footer" data-position="fixed">
+    <h4>JavaHispano Podcasts wth JQuery Mobile</h4>
+    <h2 class="offline">No connection found</h2>
+  </footer>
+
+</div>
+
+
+<div data-role="page" id="about" data-add-back-btn="true" class="detalles">
+
+  <header data-role="header" data-position="fixed">
+    <h1>JavaHispano Podcasts</h1>
+  </header>
+
+  <div data-role="content">
+    <p>
+  	<a href="http://www.javahispano.org" data-role="button">www.javahispano.org</a>
+  	</p>
+  </div>
+  
+  <footer data-role="footer" data-position="fixed">
+    <h4>JavaHispano Podcasts wth JQuery Mobile</h4>
+  </footer>
+
+</div>
+
+
+<div data-role="page" id="itemdetail" data-add-back-btn="true" class="detalles">
+
+  <header data-role="header" data-position="fixed" data-position="inline">
+		<h1>JavaHispano Podcasts</h1>
+  </header>
+
+  <div data-role="content">
+  	
+	<h2 id="showTitle"></h2>
+  	
+	<a href="#showDescription" data-role="button" data-icon="info" data-rel="dialog" data-theme="b">Descripci&oacute;n</a>
+	
+	<a href="#showURL" data-role="button" data-icon="info" data-rel="dialog" data-theme="b">URL</a>
+	
+	<div data-role="button" id="playaudio" data-theme="b">Reproducir</div>
+    <div data-role="button" id="pauseaudio" data-theme="b">Pausa</div>
+    <div data-role="button" id="stopaudio" data-theme="b">Parar</div>
+
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style=" font-weight: bold;"> Actual: <span id="audio_position">0</span></div>
+        <div class="ui-block-b" style=" font-weight: bold;">Total: <span id="audio_duration">0</span></div>
+    </div>
+    
+	<br/>
+	
+	<div data-role="button" style=" font-weight: bold;text-align:center" id="estado" data-theme="e">Parado</div>
+	
+  </div>
+  
+  <footer data-role="footer" data-position="fixed">
+    <h4>JavaHispano Podcasts wth JQuery Mobile</h4>
+  </footer>
+
+</div>
+
+<!-- Description -->
+<div data-role="page" id="showDescription" class="detalles">
+
+  	<header data-role="header">
+    	<h1>Description</h1>
+  	</header>
+
+	<div id="descriptionContent" data-role="content">
+		<p></p>
+		<a href="#" data-rel="back" data-role="button">Close</a>
+	</div>
+
+</div>
+
+<!-- URL -->
+<div data-role="page" id="showURL" class="detalles">
+
+  	<header data-role="header">
+    	<h1>URL</h1>
+  	</header>
+
+	<div id="URLContent" data-role="content">
+		<p></p>
+		<a href="#" data-rel="back" data-role="button">Close</a>
+	</div>
+
+</div>
+
+<!-- Connection -->
+<div data-role="page" id="botonConnection" class="detalles">
+
+<div data-role="header">
+    <h1>Conexi&oacute;n</h1>
+</div>
+
+<div id="conexionContent" data-role="content">
+    <p></p>
+    <a href="#" data-rel="back" data-role="button">Close</a>
+</div>
+
+</div>
+
+<!-- Info -->
+<div data-role="dialog" id="info" class="detalles">
+    <header data-role="header" data-position="fixed">
+        <h1>Conexi&oacuten requerida</h1>
+    </header>
+    
+    <div data-role="content" data-theme="b">    
+        Se requiere de una conexi&oacute;n para obtener los podcasts de JavaHispano
+        <br><br>
+
+        <a href="#home" data-role="button" data-theme="b" data-rel="back">OK</a>
+    </div>
+</div>
+        
+
+</body>
+</html>
+<script type="text/javascript">
+var localStorage = window.localStorage;
+
+document.addEventListener("deviceready", onDeviceReady);
+
+function onDeviceReady() {
+    
+    $('#exit_btn').click(function() {
+        navigator.app.exitApp();
+    });
+    
+    var networkstate = navigator.connection.type;
+    if(networkstate == "none")
+    {
+            $(".offline").css("visibility","visible");
+            
+    }else{
+        
+            $(".java").css("visibility","visible");
+    }
+}
+
+function checkConnection() {
+    var networkState = navigator.network.connection.type;
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.NONE]     = 'No network connection';
+    alert('Connection type: ' + states[networkState]);
+}
+
+$("#home").bind("pagecreate", function(e) {
+	
+    var networkstate = navigator.connection.type;
+    if(networkstate != "none")
+    {
+        getRemoteFeed();
+    }
+	
+	
+	$('#showList').on('tap', 'li', function(){
+		localStorage.clear();
+		localStorage.setItem("enclosureURL", $(this).attr('data-enclosure'));
+		localStorage.setItem("showTitle", $(this).attr('data-show-title'));
+		localStorage.setItem("showDescription", $(this).attr('data-show-description'));
+			 
+		$.mobile.changePage('#itemdetail'); 
+    });
+	
+
+})
+
+  
+var getRemoteFeed = function() {
+	
+	$.get("http://feeds2.feedburner.com/JHPodcasts", 
+		{},
+		function(data) {
+			
+			var listItem = '';
+						
+			$(data).find('item').each(function(){
+
+				var strXML = XMLtoString($(this));				
+				var showDescription = 
+					strXML.substring(strXML.indexOf('<itunes:subtitle>') + 17,
+							strXML.indexOf('</itunes:subtitle>'));
+				
+				listItem += '<li data-show-description="' 
+					+ showDescription + '" data-show-title="' 
+					+ $(this).find('title').text() + '" data-enclosure="'
+					+ $(this).find("enclosure").attr("url") +'" id="'
+					+ $(this).find("guid") +'"><a href="#">' 
+					+ $(this).find('title').text() + '<p>Released: '
+					+ $(this).find('pubDate').text() +'</a></p></li>';
+			});
+			
+			$('#showList').append(listItem);
+			$("#showList").listview("refresh");
+		}
+	);
+};
+
+function XMLtoString(xmlNode) {
+    var rstr = "";
+    var node = $(xmlNode).get(0);
+
+    rstr = "<" + node.nodeName;
+
+    if (node.attributes.length > 0) {
+        for (var i = 0; i < node.attributes.length; i++) {
+            rstr += " " + node.attributes[i].name + "=\"" + node.attributes[i].value + "\"";
+        }
+    }
+
+    rstr += ">";
+
+    if ($(node).children().length > 0) {
+        $(node).children().each(function () {
+            rstr += XMLtoString($(this));
+        });
+    } else { // assume reached the end childnode, then only write the value (not attribute)
+        rstr += $(node).text();
+    }
+
+    return rstr += "</" + node.nodeName + ">";
+}
+
+$("#showDescription").bind("pagebeforeshow", function(e) {
+	var description = localStorage.getItem("showDescription");
+	$('#descriptionContent p:first').html(description);
+});
+
+$("#showURL").bind("pagebeforeshow", function(e) {
+	var URL = localStorage.getItem("enclosureURL");
+	$('#URLContent p:first').html(URL);
+});
+
+$("#botonConnection").bind("pagebeforeshow", function(e) {
+    
+    var networkState = navigator.network.connection.type;
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.NONE]     = 'No network connection';
+
+    $('#conexionContent p:first').html('Tipo de conexi&oacute;n: ' + states[networkState]);
+});
+
+$("#itemdetail").bind("pagebeforeshow", function(e) {
+	var mp3URL = localStorage.getItem("enclosureURL");
+	var showTitle = localStorage.getItem("showTitle");
+	
+	var audioMedia = null,
+		audioTimer = null,
+		duration = -1,
+		is_paused = false;
+		
+	$('#showTitle').html(showTitle);
+
+	$("#playaudio").live('tap', function() {    
+        
+		if (audioMedia === null) {
+	        $("#audio_duration").html("0");
+	        $("#audio_position").html("Cargando podcast....");
+	        audioMedia = new Media(mp3URL, onSuccess, onError); 
+	        audioMedia.play();
+	        $("#estado").html("Reproduciendo...");
+	    } else {
+	        if (is_paused) {
+	            is_paused = false;
+	            audioMedia.play();
+	            $("#estado").html("Reproduciendo...");
+	        }
+	    }
+		
+		if (audioTimer === null) {
+		
+			// Update media position every second
+			
+	        audioTimer = setInterval(function() {
+	        
+	            audioMedia.getCurrentPosition(
+	            
+	            		// success callback
+	            		
+	                    function(position) {
+	                        if (position > -1) {
+	                            setAudioPosition(Math.round(position));
+	                            if (duration <= 0) {
+	                                duration = audioMedia.getDuration();                             
+	                                if (duration > 0) {
+	                                    duration = Math.round(duration);
+	                                    $("#audio_duration").html(conversor_segundos(duration));
+	                                }
+	                            }                                                      
+	                        }
+	                    },
+	                     // error callback
+	                    function(error) {
+	                        console.log("Error getting position=" + error);
+	                        setAudioPosition("Error: " + error);
+	                    }
+	            );
+	        }, 1000);
+	        
+	         // SeekTo to 10 seconds after 5 seconds
+            setTimeout(function() {
+                audioMedia.seekTo(10000);
+            }, 5000);
+	    }
+		
+    });
+	
+	function setAudioPosition(position) {
+	    $("#audio_position").html(conversor_segundos(position));
+	}
+	
+	function onSuccess() {
+	    setAudioPosition(duration);
+	    clearInterval(audioTimer);
+	    audioTimer = null;
+	    audioMedia = null;
+	    is_paused = false;
+	    duration = -1;
+	}
+	
+	function onError(error) {
+	    //alert('code: '    + error.code    + '\n' + 
+	    //        'message: ' + error.message + '\n');
+	    clearInterval(audioTimer);
+	    audioTimer = null;
+	    audioMedia = null;
+	    is_paused = false;
+	    setAudioPosition("0");
+	}
+	
+	function pauseAudio() {
+	    if (is_paused) return;
+	    if (audioMedia) {
+	        is_paused = true;
+	        audioMedia.pause();
+	       
+	    }
+	}
+	
+	function stopAudio() {
+	    if (audioMedia) {
+	        audioMedia.stop();
+	        audioMedia.release();
+	        audioMedia = null;
+	    }
+	    if (audioTimer) {
+	        clearInterval(audioTimer);
+	        audioTimer = null;
+	    }
+	    
+	    is_paused = false;
+	    duration = 0;
+	}
+
+    $("#pauseaudio").live('tap', function() {
+		pauseAudio();
+		 $("#estado").html("Pausado...");
+    });
+    
+    $("#stopaudio").live('tap', function() { 
+		stopAudio();
+		$("#estado").html("Parado...");
+    });
+    
+    function conversor_segundos(seg_ini) {
+ 		var horas = Math.floor(seg_ini/3600);
+ 		var minutos = Math.floor((seg_ini-(horas*3600))/60);
+ 		var segundos = Math.round(seg_ini-(horas*3600)-(minutos*60));
+
+ 		if (horas > 0){
+  			return horas+ 'horas '+ minutos+ 'min ';
+ 		} else {
+  			return minutos+ 'min '+ segundos+ 'seg';
+ 	}
+}
+
+});
+</script>
