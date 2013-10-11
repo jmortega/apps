@@ -1,0 +1,24 @@
+$base_color: #546346;
+
+
+@import 'sencha-touch/default/all';
+@include sencha-toolbar-ui('subnav', #625546, 'matte');
+@include pictos-iconmask('bolt');
+$button-height: 2em;
+
+@include sencha-panel;
+@include sencha-buttons;
+@include sencha-sheet;
+@include sencha-picker;
+@include sencha-tabs;
+@include sencha-toolbar;
+@include sencha-toolbar-forms;
+@include sencha-carousel;
+@include sencha-indexbar;
+@include sencha-list;
+@include sencha-list-paging;
+@include sencha-list-pullrefresh;
+@include sencha-layout;
+@include sencha-form;
+@include sencha-msgbox;
+@include sencha-loading-spinner;

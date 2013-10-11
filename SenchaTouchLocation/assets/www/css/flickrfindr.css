@@ -1,0 +1,21 @@
+.blueBox {
+  background-color: #7FADCF;
+}
+
+.redBox {
+  background-color: #CE7E83;
+}
+
+.greenBox {
+  background-color: #7ECEA0;
+}
+
+.searchresult {
+	vertical-align: middle;
+	line-height: 75px;
+}
+
+.searchresult img {
+	float: left;
+	margin-right: 15px;
+}

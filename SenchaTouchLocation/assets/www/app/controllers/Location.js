@@ -1,0 +1,4 @@
+Ext.regController('location', {
+  
+
+});

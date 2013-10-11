@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flickr SenchaTouch</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <link rel="stylesheet" href="lib/resources/css/apple.css" type="text/css">
+    <link rel="stylesheet" href="css/flickrfindr.css" type="text/css">
+    <link rel="stylesheet" href="master.css" type="text/css">
+</head>
+<body>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="lib/sencha-touch.js"></script>
+    <div id="sencha-app">
+     	<script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="app/app.js"></script>
+
+        <!-- Place your view files here -->
+        <div id="sencha-views">
+            <script type="text/javascript" src="app/views/Viewport.js"></script>
+            <script type="text/javascript" src="app/views/SearchPhotos.js"></script>
+            <script type="text/javascript" src="app/views/PhotoDetails.js"></script>
+            <script type="text/javascript" src="app/views/SavedPhotos.js"></script>
+            <script type="text/javascript" src="app/views/SavedPhotoDetails.js"></script>
+            <script type="text/javascript" src="app/views/Location.js"></script>
+        </div>
+
+        <!-- Place your model files here -->
+        <div id="sencha-models">
+            <script type="text/javascript" src="app/models/SearchPhoto.js"></script>
+            <script type="text/javascript" src="app/models/SavedPhoto.js"></script>
+        </div>
+
+        <!-- Place your controller files here -->
+        <div id="sencha-controllers">
+            <script type="text/javascript" src="app/controllers/SearchPhotos.js"></script>
+            <script type="text/javascript" src="app/controllers/SavedPhotos.js"></script>
+        </div>
+    </div>
+</body>
+</html>
