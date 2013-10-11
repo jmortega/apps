@@ -6,6 +6,8 @@ Ext.define("TareasApp.view.AppInfo", {
         scrollable: 'vertical',
 		id: 'formularioInfo',
         modal: true,
+        fullscreen: true,
+        scrollable: 'vertical',
         defaults:{
             styleHtmlContent: true
         },
@@ -38,9 +40,12 @@ Ext.define("TareasApp.view.AppInfo", {
             xtype: 'textareafield',
             name: 'autor',
             label: 'Autor',
-			placeHolder: 'Jose Manuel Ortega Candel.Comentarios a jmoc25@gmail.com',
+			placeHolder: 'Jose Manuel Ortega Candel.\n Comentarios a jmoc25@gmail.com',
 			readOnly:true,
-			style: 'height:140px;font-size:25px;'
+			clearIcon: false,
+			maxRows: 4,
+			styleHtmlContent: true,
+			style: 'background: #eeeeee;height:50px;font-size:25px;'
         };
 		
 		 var proyecto = {
@@ -50,7 +55,10 @@ Ext.define("TareasApp.view.AppInfo", {
 			maxLength: 80,
 			placeHolder: 'SenchaTouch Tasks',
 			readOnly:true,
-			style: 'height:100px;font-size:25px;'
+			clearIcon: true,
+			maxRows: 4,
+			styleHtmlContent: true,
+			style: 'background: #eeeeee;height:50px;font-size:25px;'
         };
 		
 		var descripcion = {
@@ -58,9 +66,12 @@ Ext.define("TareasApp.view.AppInfo", {
             name: 'descripcion',
             label: 'Descripcion',
 			maxLength: 120,
-			placeHolder: 'Aplicacion para gestionar una lista de tareas,asi como ver el estado de las mismas y asignarle una prioridad dentro de la lista',
+			maxRows: 4,
+			placeHolder: 'Aplicacion para gestionar una lista de tareas,\n asi como ver el estado de las mismas y asignarle una prioridad dentro de la lista',
 			readOnly:true,
-			style: 'height:200px;font-size:25px;'
+			clearIcon: false,
+			styleHtmlContent: true,
+			style: 'width:100%;background: #eeeeee;height:50px;font-size:25px;'
         };
 		
         this.add([

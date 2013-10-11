@@ -74,12 +74,39 @@
   width: auto;
   min-width: 2em;
   line-height: 1.2em;
-  font-size: .6em;
+  font-size: 1em;
   right: 0px;
   top: -0.2em;
   max-width: 95%;
   background-image: none;
   background-color: green;
+  display: inline-block;
+}
+
+.x-badge-aux2
+{
+ -webkit-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 0.2em;
+  border-radius: 0.2em;
+  padding: .1em .3em;
+  z-index: 2;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0.1em 0.1em;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0.1em 0.1em;
+  overflow: hidden;
+  color: #ffffff;
+  border: 1px solid red;
+  position: absolute;
+  width: auto;
+  min-width: 2em;
+  line-height: 1.2em;
+  font-size: 1em;
+  right: 0px;
+  top: -0.2em;
+  max-width: 95%;
+  background-image: none;
+  background-color: red;
   display: inline-block;
 }
 

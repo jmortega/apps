@@ -48,8 +48,6 @@ var busqueda = {
 
 			    }else{
 			    
-			        Ext.Msg.alert('Conexion OK');
-			        
 			        var task_search_value=Ext.getCmp('task_search').getValue();
 			        
 			        if(task_search_value !=null && task_search_value!=''){

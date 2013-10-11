@@ -112,10 +112,12 @@ Ext.define("TareasApp.view.ContenedorListaTareasPendientes", {
 	onTareasPendientes: function () {
         console.log("tareas pendientes");
         this.fireEvent("tareasPendientes", this);
+        Ext.getStore("Tareas").load();
     },
 	onTareasCompletadas: function () {
         console.log("tareas completadas");
         this.fireEvent("tareasCompletadas", this);
+        Ext.getStore("Tareas").load();
     },
 	onTareasTodas: function () {
         console.log("tareas completadas");

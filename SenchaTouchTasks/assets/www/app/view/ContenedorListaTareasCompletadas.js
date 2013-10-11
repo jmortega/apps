@@ -31,6 +31,7 @@ Ext.define("TareasApp.view.ContenedorListaTareasCompletadas", {
 			badgeText: countPendientes,
             ui: 'action',
 			iconCls: 'bookmarks',
+			badgeCls  : 'x-badge-aux2',
 			iconMask: true,
 			iconAlign: 'top',
             handler: this.onTareasPendientes,
@@ -112,10 +113,12 @@ Ext.define("TareasApp.view.ContenedorListaTareasCompletadas", {
 	onTareasPendientes: function () {
         console.log("tareas pendientes");
         this.fireEvent("tareasPendientes", this);
+        Ext.getStore("Tareas").load();
     },
 	onTareasCompletadas: function () {
         console.log("tareas completadas");
         this.fireEvent("tareasCompletadas", this);
+        Ext.getStore("Tareas").load();
     },
 	onTareasTodas: function () {
         console.log("tareas completadas");

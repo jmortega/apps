@@ -36,6 +36,7 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
             xtype: "button",
             text: 'Tareas pendientes',
 			badgeText: countPendientes,
+			badgeCls  : 'x-badge-aux2',
             ui: 'action',
 			iconCls: 'bookmarks',
 			iconMask: true,
@@ -66,7 +67,7 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
 			itemId:'task_search',  
             placeHolder: 'Busqueda de tareas',
             scope: this,
-            style: 'width:70%;height:40px;font-size:25px;'
+            style: 'width:60%;height:40px;font-size:25px;'
         };
 		
 		var info = {
@@ -152,10 +153,12 @@ Ext.define("TareasApp.view.ContenedorListaTareas", {
 	onTareasPendientes: function () {
         console.log("tareas pendientes");
         this.fireEvent("tareasPendientes", this);
+        Ext.getStore("Tareas").load();
     },
 	onTareasCompletadas: function () {
         console.log("tareas completadas");
         this.fireEvent("tareasCompletadas", this);
+        Ext.getStore("Tareas").load();
     },
 	onAppInfo: function () {
         console.log("info");
