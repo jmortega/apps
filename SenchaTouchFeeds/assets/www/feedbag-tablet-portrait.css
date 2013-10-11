@@ -1,0 +1,38 @@
+/* in portrait mode, we can fit 2 articles. */
+
+div.x-dataview-item {
+    width: 50%;
+    min-height: 200px;
+    max-height: 200px;
+    overflow: hidden;
+    border-right: 1px solid #ccc;
+    position: relative;
+    float: left;
+}
+
+article {
+    /* This is equivalent to setting a height, but allows us to later remove the max-height restriction. */
+    min-height: 200px;
+    max-height: 200px;
+}
+/* Display our descriptions by default. */
+
+div.description {
+    display: block;
+}
+
+article img {
+    max-width: 200px;
+    height: auto; /* This keeps the aspect ratio */
+    display: inline-block;
+    float: left;
+    clear: left;
+    margin: 10px 10px 10px 0;
+}
+
+article img:nth-of-type(2) {
+    float: right; /* Alternate left & right floats if there are multiple images in an article. Doesn't work if the images are in different <p> tags. */
+    clear: right;
+
+    margin: 10px 0 10px 10px;
+}

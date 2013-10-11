@@ -1,0 +1,150 @@
+/* These first styles will cover the smallest possible device. Each article will be full width, and some extra fields will be hidden */
+
+div.x-dataview-item {
+    border: 1px solid #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+article {
+    width: 100%;
+    position: relative;
+    padding: 2px 0px 18px 0px;
+    margin: 0 0 2px;
+    background: #fff;
+    font: 80%/1.4 Arial, Helvetica, sans-serif;
+}
+
+article header, article div, article footer {
+    clear: both;
+    background: transparent;
+}
+
+header {
+    padding: 0 10px 50px;
+    /* The large bottom padding makes sure that the footer doesn't overlap the header. */
+}
+
+header p {
+    font-size: 90%;
+    display: inline;
+    float: left;
+    padding-left: 15px;
+}
+
+header time {
+    font-size: 80%;
+    display: inline;
+    float: right;
+    padding-right: 15px;
+}
+
+article footer {
+    width: 100%;
+    font-size: 80%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    height: 64px;
+    /* align our text more towards the bottom */
+    line-height: 70px;
+    vertical-align: bottom;
+    /* Fade out the description / content text behind the footer. */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(65%,rgba(255,255,255,0.9)), color-stop(100%,rgba(255,255,255,0.95))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.9) 65%,rgba(255,255,255,0.95) 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.9) 65%,rgba(255,255,255,0.95) 100%); /* W3C */
+}
+
+div.content, div.description {
+    /* Hide by default */
+    display: none;
+    /* Set a padding on the top to space us out from the header. */
+    padding: 10px 10px 0px;
+}
+
+div.content {
+    padding-bottom: 25px; /* leave room for the footer. */
+}
+
+div.content p, div.description p {
+    clear: both;
+}
+
+div.description {
+    line-height: 130%;
+    margin-top: -25px;
+}
+
+/* These styles only apply to the FeedItem view. This shows the full content and takes up all the space it needs. */
+.x-innerhtml > article {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.x-innerhtml > article div.content {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+/* Now we add some prettier fonts to make our app look more professional. */
+
+header h2 {
+    text-align:center;
+    padding: 0 0 0.3em 0;
+    font: 162.5% "News Gothic Small Caps Regular", 'Arial Narrow', Helvetica, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+/* And make our read more look more like a button. */
+footer a {
+border-top: 1px solid #C5E6FB;
+background: -webkit-gradient(linear, left top, left bottom, from(#305B78), to(#3C93CD));
+padding: 6px 12px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+box-shadow: rgba(0,0,0,1) 0 1px 0, rgba(0,0,0,90) 0 0 10px, rgba(0,0,0,90) 0 0 20px, rgba(0,0,0,90) 0 0 30px;
+-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+color: white;
+font-size: 14px;
+    font-weight: bold;
+text-decoration: none;
+vertical-align: middle;
+}
+
+/* Thumbnail styles */
+
+/* Hide images in the content. Just use the Thumb. */
+article.hasThumbnail div.content img, article.hasThumbnail div.description img {
+    display: none !important;
+}
+
+article.hasThumbnail header div.headline {
+    display: table-row;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+article.hasThumbnail header div * {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+article.hasThumbnail header img.thumbnail {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+article.hasThumbnail header h2 {
+    text-align: left;
+    width: 100%;
+}

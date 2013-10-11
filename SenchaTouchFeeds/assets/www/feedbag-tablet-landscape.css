@@ -1,0 +1,43 @@
+/* in Landscape mode, we can fit 3 articles. */
+
+div.x-dataview-item {
+    width: 33%;
+    float: left;
+}
+
+div.x-dataview-item:nth-of-type(12n+2), div.x-dataview-item:nth-of-type(12n+8) {
+    width: 66%;
+}
+/* here are some crazy rules now to make the end of the page clean: */
+
+/* Make the last item 100% width */
+div.x-dataview-item:last-child {
+    width: 99%;
+}
+
+/* Unless it's the last in a row of 3. */
+div.x-dataview-item:nth-of-type(12n+7), div.x-dataview-item:nth-of-type(12n) {
+    width: 33% !important;
+}
+
+/* or next to last in a row of 3 */
+div.x-dataview-item:nth-of-type(12n+6):last-child {
+    width: 66% !important;
+}
+
+
+
+div.x-dataview-item:nth-of-type(12n+1), div.x-dataview-item:nth-of-type(12n+1) article {
+    min-height: 400px;
+    max-height: 400px;
+}
+
+
+
+
+
+/* Display our descriptions by default. */
+
+div.description {
+    display: block;
+}
