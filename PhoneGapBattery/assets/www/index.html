@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Battery Plugin Example</title> 
+        
+        <link rel="stylesheet" href="style/app.css" />
+        
+        <script src="cordova.js"></script>
+        <script src="javascript/color.js"></script>
+        <script type="text/javascript" charset="utf-8">
+        
+        var statusdiv;
+
+ 		// Max pixel width of the battery's capacity
+    	var max = '270';
+    
+    	// Generate a color based on the charge percentage.
+    	var chargeColor = function(percent) {
+        // Color of a fully charged batter (green)
+        var hsv = { h: 121, s: 76, v: 69 };
+        
+        // Scale the hue based and convert HSV to Hex
+        var h = hsv.h * (percent / 100);
+        rgb   = hsvToRgb(h, hsv.s, hsv.v);
+        hex   = colorToHex(rgb[0], rgb[1], rgb[2]);
+        
+        return hex;
+   	 };
+    
+    	var drawStatus = function(info){
+        
+            var s = "<p><b>Battery Status</b><br/>";
+            s += "Level is "+info.level + "<br/>";
+            s += "Plugged in is "+info.isPlugged;
+            s += "</p>";
+            statusdiv.innerHTML = s;
+                        
+            var el = document.getElementById('capacity');
+        	el.style.width = (max * (info.level / 100)) + 'px';
+        	el.style.backgroundColor = chargeColor(info.level);
+     };
+                
+    var battCrit = function(info) {
+            navigator.notification.alert("Your battery is SUPER low!");
+            alert("Battery Level Critical " + info.level + "%\nRecharge Soon!");
+            drawStatus(info);
+    };
+
+    var battLow = function(info) {
+            navigator.notification.alert("Your battery is low!");
+            alert("Battery Level Low " + info.level + "%");
+            drawStatus(info);
+    };
+
+    var battStat = function(info) {
+            drawStatus(info);
+    };
+     
+ 	var onDeviceReady = function() {
+            //listen for battery events
+            window.addEventListener("batterycritical", battCrit, false);
+            window.addEventListener("batterylow", battLow, false);
+            window.addEventListener("batterystatus", battStat, false);
+	};
+
+ 	function init() {
+ 		document.addEventListener("deviceready", onDeviceReady, true);
+        statusdiv = document.getElementById("status");
+	} 
+     </script> 
+    </head>
+    <body onload="init();">
+      
+      <div id="status"></div>
+      
+      <div id="battery">
+        <img src="style/battery.png" />
+        <div id="capacity" class="full"></div>
+      </div>
+      
+    </body> 
+</html>
