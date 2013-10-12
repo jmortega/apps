@@ -103,7 +103,7 @@
                 function makeMap (curLatLng, accuracy) { 
                 	$('#map_canvas_2').gmap( { 'center': curLatLng,  'zoom': 11, 'callback': function (map) { 
                     	$('#map_canvas_2').gmap('displayStreetView', 'map_canvas_2', { 'position' : curLatLng, 'visible' : false, pov: { heading: 15, pitch: 10, zoom: 1 } });
-                       	$('#map_canvas_2').gmap('addMarker', { 'title': 'You are here!', 'bound': true, 
+                       	$('#map_canvas_2').gmap('addMarker', { 'title': 'Your position!', 'bound': true, 
                            'animation': google.maps.Animation.DROP, 'position': curLatLng }, function(map, marker) {
                                $('#map_canvas_2').gmap('addInfoWindow', { 'position': marker.getPosition() },
                                        function(iw) {
@@ -115,7 +115,11 @@
                                                });                                                
                                            });
                         	   });  // end addInfoWindow
-                      	}); 
+                      	});
+                       	
+                       	
+                
+                	
                   	}
                	});
           	} // end makeMap

@@ -1,0 +1,36 @@
+<div class="anyconf-view__container">
+    <div class="topcoat-navigation-bar__item left anyconf-label-time anyconf-view--bordered">
+        <%- times %>
+        <!--9:00<small>am</small>&nbsp;–&nbsp;9:30<small>am</small>-->
+    </div>
+    <div class="anyconf-view anyconf-view--bordered">
+        <h2 class="anyconf-label-title"><%- title %></h2>
+        <p><%- details %></p>
+    </div>
+    <% if( speakers.length ) { %>
+        <div class="anyconf-view anyconf-view--bordered anyconf-view--bordered-last">
+            <h4 class="anyconf-label-title anyconf-condensed">Speaker</h4>
+            <% _.each(speakers, function(data) { %> 
+                <div>
+                    <img src="./assets/images/headshot1.png" width="80px">
+                    <ul class="anyconf-link-list">
+                        <b><a class="anyconf-link js-speaker-link" href="speakerDetails/<%- data.id %>"><%= data.attributes.full_name %></a></b>
+                        
+                        <% if( data.attributes.twitter !='' ) { %>
+                        	<li><a class="anyconf-link anyconf-link--twitter js-speaker-link" href="http://twitter.com/twitter"><%= data.attributes.twitter %></a></li>
+                        <% } %>
+                        
+                        <% if( data.attributes.linkedin !='' ) { %>
+                        	<li><a class="anyconf-link anyconf-link--linkedin js-speaker-link" href="https://www.linkedin.com/in/<%= data.attributes.linkedin %>">https://www.linkedin.com/in/<%= data.attributes.linkedin %></a></li>
+    					<% } %>
+    					
+    					<% if( data.attributes.blog !='' ) { %>
+                        	<li><a class="anyconf-link anyconf-link--url js-speaker-link" href="<%= data.attributes.blog %>"><%= data.attributes.blog %></a></li>
+                        <% } %>
+                        
+                    </ul>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+</div>

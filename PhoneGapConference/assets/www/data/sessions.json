@@ -1,0 +1,1794 @@
+[{
+    "public": true,
+    "id": "1",
+    "name": "REGISTRO",
+    "code": null,
+    "description": "REGISTRO",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "1",
+        "room_id": "1",
+        "duration": 30,
+        "date": "2013-10-18",
+        "time": "08:00",
+        "capacity": 1000,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "11",
+    "name": "BIENVENIDA",
+    "code": null,
+    "description": "BIENVENIDA",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "11",
+        "room_id": "11",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "08:30",
+        "capacity": 1000,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "111",
+    "name": "KEYNOTE PAYPAL",
+    "code": null,
+    "description": "KEYNOTE PAYPAL",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "111",
+        "room_id": "111",
+        "duration": 30,
+        "date": "2013-10-18",
+        "time": "09:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "1111",
+    "name": "Building content solutions [Track Principal] / [Alfresco]",
+    "code": null,
+    "description": "When your development project requires you to deal with content such as office documents, PDF files, images, and media, you will want to use a repository to get the task done right. An enterprise content repository provides services for dealing with opaque content. This presentation will help you avoid common headaches and mistakes by introducing you to patterns for managing content. Our examples will use industry standards as implemented by Alfresco, an open source content repository, and will give you enough information to start building solutions.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["1111"],
+    "attachments": [],
+    "instances": [{
+        "id": "1111",
+        "room_id": "1111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "11111",
+    "name": "Media APIs for the multi-platform Web [Track 1] / [Web / HTML5]",
+    "code": null,
+    "description": "A host of new Web technologies are transforming the way we create, distribute and consume media.- WebRTC: what's new and what's next\n- EME: what is it and how can I use it?\n- Media Source Extensions: for adaptive streaming, time shifting and more - Web Audio: sophisticated audio - <video> and <audio> update - Transcripts, captions and the track element: deep linking and deep search - Working with Web Components - State of the codecs - Best practice for mobile platforms",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["11111"],
+    "attachments": [],
+    "instances": [{
+        "id": "11111",
+        "room_id": "11111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "111111",
+    "name": "Desarrollo de apps moviles multiplataforma [Track 2] / [Mobile]",
+    "code": null,
+    "description": "En los ultimos años han aumentado las herramientas para desarrollar en dispositivos móviles como alternativa a hacerlo de forma nativa.FrameWorks como Phonegap,Appcelerator Titanium,SenchaTouch,Jquery mobile permiten desarrollar aplicaciones híbridas y ofrecen nuevas posibilidades a los desarrolladores que conozcan HTML,CSS y JavaScript.En la charla se hará una breve introducción a cada uno de ellos y comentaré código y ejemplos de aplicaciones realizadas con los frameworks mencionados.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["111111"],
+    "attachments": [],
+    "instances": [{
+        "id": "111111",
+        "room_id": "111111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "1111111",
+    "name": "Graph Search: The Power of Connected Data [Bloque X] / [Graph Search: The Power of Connected Data]",
+    "code": null,
+    "description": "Today's complex data is big, variably-structured and densely connected. In this session we'll look at how size, structure and connectedness have converged to change the way we work with data. We'll then go on to look at some of the new opportunities for creating end-user value that have emerged in a world of connected data, illustrated with graph search examples implemented using Neo4j, the world's leading graph database.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["1111111"],
+    "attachments": [],
+    "instances": [{
+        "id": "1111111",
+        "room_id": "1111111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "11111111",
+    "name": "BREAK COFFEE",
+    "code": null,
+    "description": "BREAK COFFEE",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "11111111",
+        "room_id": "",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "10:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "111111111",
+    "name": "Windows Azure Websites: PaaS for node.js, PHP, Python and .NET [Track Principal] / [Cloud]",
+    "code": null,
+    "description": "Windows Azure Web Sites is a simple and powerful hosting platform that allows developers to easily build and rapidly deploy web applications on Windows Azure using their favorite languages, frameworks, and tools. In this session, well walk through building a modern web application that uses a statically delivered client MVC framework working against a node.js REST backend using MongoDB. Youll walk away with everything you need to know to build and deploy your own application..",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["111111111"],
+    "attachments": [],
+    "instances": [{
+        "id": "111111111",
+        "room_id": "111111111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "1111111111",
+    "name": "Las APIs [SaaS] abren la puerta a nuevos desarrolladores [Track 1] / [API SaaS Web 3.0]",
+    "code": null,
+    "description": "La aparición de las APIs y el que están estén disponibles como SaaS está haciendo que cada vez sea más sencillo para los no programadores acceder a realizar sus propias Apps o sitios web.\n\nEl desafío es conseguir que el uso de las mismas sea suficientemente sencillo como para que cada vez más usuarios se conviertan en desarrolladores, Alan key, el creador del Alto en el XPARC, el ordenador más disruptor de la historia ya pensó en el usuario/programador cuando inventó Smalltalk.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["1111111111"],
+    "attachments": [],
+    "instances": [{
+        "id": "1111111111",
+        "room_id": "1111111111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "11:30",
+        "capacity": 139,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "11111111111",
+    "name": "Engineering Design for Facebook [Track Principal] / [Methodologies / Good Habits]",
+    "code": null,
+    "description": "Facebook is known for moving fast, making bold changes, and producing the most-used site and apps in the world. Part of Facebook's secret sauce is our amazing design team and the close relationship product designers and managers have with the engineering. This talk will cover the fuzzy boundaries between engineer, designer, and product visionary at Facebook.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["11111111111"],
+    "attachments": [],
+    "instances": [{
+        "id": "11111111111",
+        "room_id": "11111111111",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "200",
+    "name": "Understanding and Supporting Bitcoin/Cryptocurrencies in Your Java Application [Track 1] / [JVM / Trendy]",
+    "code": null,
+    "description": "This presentation covers the basics of cryptocurrencies and shows how they affect your enterprise application's architecture and behavior. The technical implications of supporting cryptocurrencies include asynchronous processing (e.g., using asynchronous queues), new modes of failure/recovery, fault tolerance, and integrating new clients and processing systems into the architecture. The presentation will present options, considerations, and gotchas regarding these topics.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["200"],
+    "attachments": [],
+    "instances": [{
+        "id": "200",
+        "room_id": "200",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "201",
+    "name": "Desarrollo de backends para el desarrollo de aplicaciones móviles [Track 2] / [Mobile]",
+    "code": null,
+    "description": "Aplicaciones para Android, Windows Phone, iPhone, iPad, Windows 8 casi todas tienen en común que generalmente necesitan de servicios de backend para ciertas funcionalidades; almacenamiento, notificaciones push, envíos de SMS, seguridad con diferentes proveedores de identidad etc\n\n Durante esta sesión hablaremos de Mobile Services, una tecnología que permite disponer de forma rápida y sencilla de servicios de backend que pueden ser utilizados desde cualquier dispositivo.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["1","2"],
+    "attachments": [],
+    "instances": [{
+        "id": "201",
+        "room_id": "201",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "202",
+    "name": "Competencias y perfiles profesionales del sector TIC a nivel nacional [Bloque X] / [Recruiting]",
+    "code": null,
+    "description": "Presentaremos el mercado TIC en España analizando los subsectores que crecen y las tendencias de oferta y demanda de profesionales tic.\n\nDemostraremos cuáles son las tecnologías en las cuáles existen escasez de talentos en España y los principales desajustes entre oferta y demanda en función del nivel de educación, experiencia, especialización y movilidad georrafica.\n\n Analizaremos las principales fuentes de reclutamiento mediante los resultados de una encuesta realizada a profesionales ti.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["3"],
+    "attachments": [],
+    "instances": [{
+        "id": "202",
+        "room_id": "202",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "203",
+    "name": "COMIDA",
+    "code": null,
+    "description": "COMIDA",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "203",
+        "room_id": "203",
+        "duration": 120,
+        "date": "2013-10-18",
+        "time": "13:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "204",
+    "name": "Desarrollo de videojuegos dirigido por pruebas [Track 1] / [Agile Gaming]",
+    "code": null,	
+    "description": "Esta charla presenta los puntos clave de TDD, los principales escollos e ideas sobre cómo superarlas. Algunos de los escollos son: simular el comportamiento de usuario, verificar escenarios sin que una persona humana tenga que ver el juego en la pantalla, lidiar con las dependencias del reloj interno, sacarle el máximo partido a mocks y doubles, crear pruebas más visuales, etc. No es muy distinto aplicar TDD en videojuegos y que estas ideas también pueden estar en otros desarrollos.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["4"],
+    "attachments": [],
+    "instances": [{
+        "id": "204",
+        "room_id": "204",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "205",
+    "name": "Testing Android Application [Track 2] / [Mobile / TDD]",
+    "code": null,
+    "description": "Most of Android applications have bugs. Why not discover them in pre-release? Unit and Functional testing permit finding some of the bugs and correcting them before publishing the application.We analize step-by-step how to test Android Applications to provide bug discovery thus releasing stable applications.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["5"],
+    "attachments": [],
+    "instances": [{
+        "id": "205",
+        "room_id": "205",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "206",
+    "name": "Así que pusiste MongoDB. Dime ¿cómo lo administras? [Track 3] / [DevOps / Cloud / Scalability]",
+    "code": null,
+    "description": "Hablar sobre MongoDB, orientado en los aspectos operativos de esta base de datos NoSQL, por ejemplo detalles como la durabilidad. También comentar sobre las mejores prácticas: Uso de replica sets, sharding y respaldos. Si hay oportunidad poder incluir un demo corriendo en AWS (o poner un video, para protegerse del demo effect)",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["6"],
+    "attachments": [],
+    "instances": [{
+        "id": "206",
+        "room_id": "206",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "207",
+    "name": "C/C++ y Python: The fast and the furious [Track 4] / [Python / programming Languages]",
+    "code": null,
+    "description": "Hay circunstancias en las que un lenguaje dinámico (en este caso, python) no da el rendimiento requerido y tenemos que buscar soluciones con lenguajes de mas bajo nivel. La idea de esta charla es mostrar varias opciones entre las que mas conozco de como extender python con lenguajes tipo C/C++ pero no usando la api C estandar de Python. Concretamente, tocare un poco ctypes, cffi y boost.python",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["7"],
+    "attachments": [],
+    "instances": [{
+        "id": "207",
+        "room_id": "207",
+        "duration": 30,
+        "date": "2013-10-18",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "208",
+    "name": "Necesitades hardware y software en la impresión 3D open source [Bloque X] / [New challenges]",
+    "code": null,
+    "description": "Se habla de la impresión 3D en los medios. La impresión 3D se populariza. La impresión 3D open source ha entrado en nuestras vidas es aún más fácil conseguir una. Te la puedes construir con tus propias manos... ¿En qué estado se encuentra la impresión 3D open source? ¿Cuáles son sus tendencias? ¿Qué software existe? ¿Qué hardware? En esta charla intentaremos dar respuesta a estas preguntas e ir más allá respondiendo a: ¿Qué necesidades software y hardware hay?",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["8"],
+    "attachments": [],
+    "instances": [{
+        "id": "8",
+        "room_id": "208",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "2099",
+    "name": "PayPal APIs : From SOAP/NVP to REST [Track Principal]",
+    "code": null,
+    "description": "PayPal is the faster, safer and easier way to pay and to be paid. Developers are using PayPal solutions thanks to PayPal APIs for a long time. This discussion will present different payments and monetization models and PayPal APIs evolution. Developers will have the chance to see how easily they can integrate new PayPal RESTful APIs and mobile SDK.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["99"],
+    "attachments": [],
+    "instances": [{
+        "id": "2099",
+        "room_id": "2099",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "209",
+    "name": "Agile anti-patterns. Yes your agile projects can and will fail too! [Track 1] / [Agile / Methodologies / Good Habits]",
+    "code": null,
+    "description": "Many organizations turn towards agile to escape failing traditional software development. Due to this increase in popularity, many newcomers enter the field. Without the necessary real-life experience but proudly waving certificates from two days of training. During this challenging talk Sander shows what happens to projects that are coached by ill-experienced coaches, and how to move around anti-patterns as Scrumdamentalism, Dogmatic Agile, Bob-the-Builder or Scrumman.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["9"],
+    "attachments": [],
+    "instances": [{
+        "id": "209",
+        "room_id": "209",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}, 
+{
+    "public": true,
+    "id": "210",
+    "name": "MBaaS para IOS:El grande, el guapo y el hazlo tú mismo [Track 2] / [Mobile / iOS]",
+    "code": null,
+    "description": "La charla está orientada a mostrar 3 opciones de Mobile Backeend as a Service para desarrolladores de apps en IOS. Cualquier MBaaS ofrece unos servicios reutilizables en todas las Apps: Notificaciones, Almacenamiento, integración con redes sociales, gestión de usuarios, geoquerys, etc... La idea es olvidarnos de la infraestructura (adios a tareas de mantenimiento)",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["10"],
+    "attachments": [],
+    "instances": [{
+        "id": "210",
+        "room_id": "210",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "211",
+    "name": "Sitios web SPI céntricos en el servidor SEO compatibles sin estado ... [Track 3] / [Java / Programming Languages] ",
+    "code": null,
+    "description": "Hoy día estamos acostumbrados a utilizar aplicaciones Single Page Interface (SPI), es decir, sin recargas, cualquier usuario de GMail está usando este tipo de aplicaciones. Sin embargo el uso de SPI en sitios web es extremadamente raro por dos razones la necesidad de la compatibilidad SEO y la necesidad de escalabilidad implica servidores replicados (prácticamente) sin estado, ambos aspectos muy enemigos del enfoque SPI. ItsNat v1.3 rompe estas dos aparentemente insalvables limitaciones.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["11"],
+    "attachments": [],
+    "instances": [{
+        "id": "211",
+        "room_id": "211",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "212",
+    "name": "PHP Content Repository: Porting a Java Standard to PHP [Track 4] / [Programming Languages / PHP] ",
+    "code": null,
+    "description": "PHPCR is an API for hierarchical data, handling both structured and unstructured content. It provides APIs for permission management, versioning, locking, search with an SQL-like syntax and so on. Several major frameworks and CMS (Typo3, Drupal, Symfony2, Midgard, Nooku und eZ publish) support PHPCR or are in discussion whether to use it as common standard for storing their data.PHPCR is a port of the Java standard JCR. PHCPR will be an official part of the upcoming JCR 2.1 standard. There are implementations that store content in relational databases based on doctrine DBAL, with the midgard2 content repository and with the JCR reference implementation jackrabbit.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["12"],
+    "attachments": [],
+    "instances": [{
+        "id": "212",
+        "room_id": "212",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "13",
+    "name": "Modern OOP embedded development with .NET Micro Framework [Bloque X] / [Net / Programming Languages] ",
+    "code": null,
+    "description": "We'll see how .NET Micro Framework is going to change drastically the way we write embedded applications, by mean of a true-virtualized core management, high level OOP/OOD coding techniques and tremendous inclination to IoT applications development.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["13"],
+    "attachments": [],
+    "instances": [{
+        "id": "13",
+        "room_id": "13",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "1545",
+    "name": "BREAK COFFEE",
+    "code": null,
+    "description": "BREAK COFFEE",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "15545",
+        "room_id": "15545",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "17:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "14",
+    "name": "Easy Realtime Collaboration with the Google Drive Realtime API [Track 1] / [Web / Cloud] ",
+    "code": null,
+    "description": "We will discuss the latest features of the Drive SDK that have been developed as part of Googles commitment to allow 3rd parties to write Drive applications with the richness and responsiveness of Google Docs, Sheets and Presentations. We will focus on the latest addition to the Google Dive SDK The Google Drive Realtime API which allows you to easilly write realtime-collaboration enabled web apps with a few lines of Javascript.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["14"],
+    "attachments": [],
+    "instances": [{
+        "id": "14",
+        "room_id": "14",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "15",
+    "name": "Optimizando apps de Windows Phone con .NET y XAML [Track 2] / [Mobile / Windows Phone 8] ",
+    "code": null,
+    "description": "¿Desarrollas o tienes pensado desarrollar apps para Windows Phone con .NET y XAML? Entonces necesitarás saber qué puede afectar al rendimiento de tu app, cómo mejorarlo para que su comportamiento sea el más óptimo posible, y qué herramientas tienes a tu disposición. Y en esta sesión te lo contamos con ejemplos prácticos.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["15"],
+    "attachments": [],
+    "instances": [{
+        "id": "15",
+        "room_id": "15",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "16",
+    "name": "NOSQL: Primeros pasos con MongoDB [Track 3] / [NoSQL / Cloud / Scalability] ",
+    "code": null,
+    "description": "La charla versará sobre una presentación de lo que son las bases de datos NOSQL. Una introducción a MongoDB, instalación y primeros pasos. Luego presentará como realizar las operaciones básicas sobre la base de datos: consulta, actualizaciones, borrado,... Veremos como se definen los índices. Revisaremos el framework de agregación para operaciones más avanzadas y por último veremos como integrar MongoDB con diferentes lenguajes de programación: php, java, python,.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["16"],
+    "attachments": [],
+    "instances": [{
+        "id": "16",
+        "room_id": "16",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "17",
+    "name": "Resistance is futile mocks will be assimilated [Track 4] / [Java / TFF] ",
+    "code": null,
+    "description": "Everybody is unit testing, everybody is mocking. Everybody mocks database access, software dependencies, external systems, container services, ... to test what? You end up testing a bit of business logic and writing a lot of test code, when in production this code will run within a container under different circumstances. In this talk we are going to see how some tools like Arquillian, Byteman, NoSQLUnit and other programs, may help us writing real tests in a Java EE environment.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["17"],
+    "attachments": [],
+    "instances": [{
+        "id": "17",
+        "room_id": "17",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "18",
+    "name": "¡Feliz 15 aniversario SQL Injection! [Track Principal] / [Seguridad /Buenas prácticas] ",
+    "code": null,
+    "description": "O como deberías dejar de programar si aún te comes vulnerabilidades SQL Injection.... Así que, como todavía siguen apareciendo día tras día, vamos a repasar lo que hemos aprendido durante estos 15 de años de bugs de inyección de comandos SQL para que no los cometas nunca más... ¿ok?.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["18"],
+    "attachments": [],
+    "instances": [{
+        "id": "18",
+        "room_id": "18",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "18:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "19",
+    "name": "Build the Android OS [Track 1] / [Mobile / Android] ",
+    "code": null,
+    "description": "This talk gets you started at how to actually compile and build the AndroidOS for rom customizations, kernel patches and all the nitty gritty cool stuff you've always wanted to do, but never knew how to! Learn from the guy with several consumer Android tablets in the marketplace, and the tricks he uses to survive and excel in the technical jungle. 900 million Android devices can't be wrong. Welcome your Android overlords!",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["19"],
+    "attachments": [],
+    "instances": [{
+        "id": "19",
+        "room_id": "19",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "18:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "20",
+    "name": "Nuevos escenarios de interacción con NFC en Windows Phone 8 [Track 2] / [Windows Phone / Mobile] ",
+    "code": null,
+    "description": "NFC, Near Field Communications, es una tecnología que puede revolucionar la forma en la que interactuamos desde nuestro Smartphone con otros dispositivos. Intercambio de información, pagos, emparejamiento de dispositivos con un toque... estos escenarios son unos pocos de los que podemos realizar.Windows Phone 8 incluye soporte para esta tecnología y la integra en casi todos los terminales disponibles. En esta charla veremos de forma práctica y concisa como aprovecharnos de NFC en nuestra app.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["20"],
+    "attachments": [],
+    "instances": [{
+        "id": "20",
+        "room_id": "20",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "18:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "21",
+    "name": "Programación funcional: ¡La usabas y no lo sabías! [Track 3] / [JVM / Scala] ",
+    "code": null,
+    "description": "La programación funcional está influenciando frameworks y lenguajes. En esta charla se explicará programación funcional, usando Haskell y Scala, y sus conceptos como transparencia referencial, inmutabilidad, ausencia de estado, recursión, list comprehension, monads y lazy evaluation. Finalmente se verá como estos conceptos ya los estáis utilizando como Javascript, promesas, actores, STM, LINQ, excepciones, Java 8 o Map/Reduce. Verás nuevos patrones donde antes solo había código espagueti.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["21"],
+    "attachments": [],
+    "instances": [{
+        "id": "21",
+        "room_id": "21",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "18:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "22",
+    "name": "Grails vs XSS [Track 4] / [Web Development / Security] ",
+    "code": null,
+    "description": "Mostraremos diferentes vectores de ataque que, aprovechando una simple vulnerabilidad XSS, nos permitirán acceder a la webcam del visitante, controlar su equipo o incluirlo en una botnet.Posteriormente describiremos las soluciones existentes para protegernos de este problema en Grails, y discutiremos en general, cómo integrar la seguridad como un elemento más en el ciclo de desarrollo de aplicaciones web.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["220","221"],
+    "attachments": [],
+    "instances": [{
+        "id": "22",
+        "room_id": "22",
+        "duration": 45,
+        "date": "2013-10-18",
+        "time": "18:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "23",
+    "name": "Building for Success: Cloud backends for your mobile apps [Track Principal] / [Cloud / Mobile] ",
+    "code": null,
+    "description": "Today, building the next generation of mobile apps and scaling them to manage success requires leading edge platforms and infrastructure. In this session we look at how you can use the Google Cloud Platform to build highly scalable mobile backends. Using a sample application and live demos, we'll show how applications built on Google App Engine and Compute Engine can make use of Google Cloud Endpoints to provide all that's needed to allow backend services to be accessed by mobile devices.",
+    "filters": [],
+    "locked": true,
+    "speaker_ids": ["23"],
+    "attachments": [],
+    "instances": [{
+        "id": "23",
+        "room_id": "23",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "24",
+    "name": "ASP.NET MVC & SPA Web Applications [Track 1] / [ASP .Net / Web] ",
+    "code": null,
+    "description": "Cada vez más las aplicaciones web se encaminan a tener más control en la interfaz y se intenta tener todo en la página Html y cada día surgen infinidad de librerías scripts que junto a los estándares HTML y CSS, hacen nuestras webs más dinámicas y usables ante el usuario, proporcionándonos una potencia a nuestras web que hasta ahora no se había visto.Pero no hay que perder el norte entre tanta moda y tener muy claro que los extremos siempre son malos, porque tener todo en el servidor o tener.",
+    "filters": [],
+    "locked": true,
+    "speaker_ids": ["24"],
+    "attachments": [],
+    "instances": [{
+        "id": "23",
+        "room_id": "23",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "33",
+    "name": "Estrategia para desarrollo móvil: Web o aplicación nativa [Track 2] / [Mobile] ",
+    "code": null,
+    "description": "Elegir la tecnología adecuada para tu proyecto es la decisión más importante dentro de un proyecto de movilidad.Repasaremos las diferentes tecnologías y tendencias que dominan el panorama actual de los desarrollos móviles (Android, iOS, Titanium, PhoneGap, html5, responsive design, Web específicas para móvil, detección en servidor, etc.). Y explicaremos cuando conviene utilizar cada una de ellas, apoyándonos en ejemplos reales de empresas que han optado con éxito por cada una de las opciones.",
+    "filters": [],
+    "locked": true,
+    "speaker_ids": ["33"],
+    "attachments": [],
+    "instances": [{
+        "id": "33",
+        "room_id": "33",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "40",
+    "name": "ARQUITECTURAS DISTRIBUIDAS con Windows AZURE [Track 3] / [Azure / Scalability]",
+    "code": null,
+    "description": "Crear aplicaciones distribuidas e interactivas puede convertirse en una tarea difícil y compleja si no se dispone de una plataforma que resuelva los problemas por nosotros.En esta sesión veremos los obstáculos que nos podemos encontrar y cómo Service Bus está creado para superarlos, proporcionando las herramientas que podemos usar para crear, implementar y administrar aplicaciones que pueden ayudar a que la promesa de “software + servicios” sea real.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["40","401"],
+    "attachments": [],
+    "instances": [{
+        "id": "40",
+        "room_id": "40",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "46",
+    "name": "Construyendo aplicaciones concurrentes y distribuidas con Akka [Track 4] / [Programming Languages / JVM]",
+    "code": null,
+    "description": "El hardware cada vez ofrece una mayor nivel de paralelismo de modo que los nuevos lenguajes deben soportar mecanismos de concurrencia si desean tener éxito. Las abstracciones utilizadas habitualmente (hilos, semáforos, locks, ...) suelen ser propensos a errores y razonar sobre los mismos es complicado. A lo largo de esta charla analizaremos las oportunidades que Akka nos brinda para construir aplicaciones concurrentes, distribuidas, escalables y tolerantes a fallos de manera sumamente sencilla.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["46"],
+    "attachments": [],
+    "instances": [{
+        "id": "46",
+        "room_id": "46",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "47",
+    "name": "Testeas o k ase?? [Track 5] / [Good practices / Android / Testing]",
+    "code": null,
+    "description": "En la sesión se pretende explicar la importancia del testing en dispositivos móviles, así como animar a los desarrolladores a que implementen tests unitarios en sus aplicaciones, concretamente usando el framework Robolectric para Android. Se explicará el funcionamiento de la herramienta, mostrando por qué es tan potente junto con las posibilidades que nos ofrece y, finalmente, se enseñará un ejemplo práctico detallando lo fácil que es tanto configurarlo como empezar a escribir tests.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["52"],
+    "attachments": [],
+    "instances": [{
+        "id": "47",
+        "room_id": "47",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "58",
+    "name": "Introducción a Django Rest Framework [Track 6] / [Python]",
+    "code": null,
+    "description": "El desarrollo de APIs RESTful se está convirtiendo en una tarea muy habitual por la existencia de cada vez más y más aplicaciones y frameworks javascript, además se está posicionando como una fuerte alternativa a tecnologías como SOAP.Mi objetivo es explicar cómo de fácil es hacer una API RESTful simple con Django Rest Framework, y hacer un recorrido por la estructura de clases con las que podemos construir APIs muy complejas y extender el comportamiento.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["58"],
+    "attachments": [],
+    "instances": [{
+        "id": "58",
+        "room_id": "58",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "580",
+    "name": "Introducción a AngularJS [Track 7] / [Web/JavaScript]",
+    "code": null,
+    "description": "La charla empezará con un breve repaso a algunos frameworoks JavaScript MVC (backbone, knockout, EmberJS). Después empezaremos contando lo básico de AngularJS como $scope, controladores, directivas, filtros y validaciones. Seguiremos con rutas (routes) , módulos, inyección de dependencias y servicios. Seguiremos con aspectos avanzados de creación de directivas , creación de servicios y creación de filtros. Acabaremos con test y RequireJS en AngularJS.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["65"],
+    "attachments": [],
+    "instances": [{
+        "id": "580",
+        "room_id": "580",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "09:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "581",
+    "name": "Bitcoin una moneda digital [Track 1] / [New Challenges / Cryptography] ",
+    "code": null,
+    "description": "Bitcoin es una moneda virtual que no está respaldada por ningún estado. Está respaldada por una red P2P de usuarios en Internet. Y tanto la posesión de Bitcoins como las transacciones en esta moneda pueden realizarse de un modo completamente anónimo.En esta charla se explicarán las distintas motivaciones que han llevado a la creación de esta moneda virtual, los fundamentos criptográficos en los que se basa, y las implicaciones legales, éticas y económicas que puede llegar a tener.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["27"],
+    "attachments": [],
+    "instances": [{
+        "id": "581",
+        "room_id": "581",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "582",
+    "name": "They live! [Track 2] / [Mobile / iOS] ",
+    "code": null,
+    "description": "Ellos viven, tú duermes: vee por primera vez el mundo como realmente es. Una introducción a la realidad aumentada y procesamiento de video con GPUImage, OpenCV y iOS.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["34"],
+    "attachments": [],
+    "instances": [{
+        "id": "582",
+        "room_id": "582",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "583",
+    "name": "Cracking exploiting and fixing your Windows 8 App [Track 4] / [Windows 8]",
+    "code": null,
+    "description": "In this session we will examine and exploit different examples to learn what the common mistakes are, how bad they are and we will learn how to fix them.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["47"],
+    "attachments": [],
+    "instances": [{
+        "id": "583",
+        "room_id": "583",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "584",
+    "name": "El proceso de release de Tuenti [Track 5] / [DevOps]",
+    "code": null,
+    "description": "Cuando una empresa crece rápidamente como es el caso de Tuenti, el proceso de desarrollo y release necesita adaptarse. De un proceso manual, inestable, costoso y propenso a fallos a uno totalmente automatizado, rápido, fiable y que requiere la atención de muy poca gente, pudiendo hacer un deploy o una integración de código haciendo sólamente click en un botón.Qué pasa en Tuenti desde que se empieza a programar, hasta que el código llega a producción..",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["53"],
+    "attachments": [],
+    "instances": [{
+        "id": "584",
+        "room_id": "584",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "585",
+    "name": "Javascript meets hardware [Track 6] / [Javascript / programing languages / New Challenges]",
+    "code": null,
+    "description": "¿Alguna vez te has planteado poder interactuar con dispositivos hardware mediante el uso de Javascript? Descubre qué frameworks, APIs, plataformas hardware puedes emplear para alcanzar dicho fin.Durante la charla se mostraran distintos ejemplos de interacción haciendo uso de las nuevas APIs de HTML5 como Text to Speech, Joystick, WebGL, Web socket,... a través de NodeJS, Raspberry Pi y plataformas de prototipado rápido como Arduino, Vinciduino,.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["59"],
+    "attachments": [],
+    "instances": [{
+        "id": "585",
+        "room_id": "585",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "586",
+    "name": "Motion & Gesture interaction patterns in modern web design [Track 7] / [Web / Good Habits]",
+    "code": null,
+    "description": "Technological advances have allowed, in the last few years, a big step forward in the dynamic behaviors and interactions patterns that we used to do on the web, in the past. Starting from understanding the rules of motion design and how people interact with it during the processes of interaction we'll discover through practical insights and examples what is 'under the hood' and how to prototype and develop all this design patterns with a more integrated and efficient design to code workflow.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["75","750"],
+    "attachments": [],
+    "instances": [{
+        "id": "586",
+        "room_id": "586",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "71",
+    "name": "Creating Games With Three.js [Track 8] / [Web / Gaming]",
+    "code": null,
+    "description": "There was once a time where gaming in the browser meant Flash. That time is no more. Based on OpenGL ES, WebGL brings the 3D world to the browser without any plugins. Three.js, a scenegraph library for WebGL, allows us to make creating 3D web apps easier by abstracting away many of the low-level API calls.In this session, you’ll learn the basics of game programming, WebGL, and how to use Three.js to create WebGL applications.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["71"],
+    "attachments": [],
+    "instances": [{
+        "id": "71",
+        "room_id": "71",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "10:00",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "587",
+    "name": "7 técnicas para conseguir que un buen equipo llegue a ser brillante [Track Principal] / [Agile] ",
+    "code": null,
+    "description": "Vale, nos hemos tatuado el Manifiesto Ágil en la espalda y hemos modificado nuestra forma de trabajar, adaptando nuestra metodología a nosotros, no a la inversa. Somos más productivos que nunca y, sin embargo, nos preguntamos ¿De verdad no podemos mejorar aún más como equipo? En esta charla hablaremos sobre 7 acciones que la compañía australiana Atlassian lleva aplicando desde que decidió abrazar las metodologías ágiles en 2002 y que cualquiera puede aplicar en su propio equipo.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["26"],
+    "attachments": [],
+    "instances": [{
+        "id": "587",
+        "room_id": "587",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "588",
+    "name": "Data Driven Development [Track 1] / [UX / A/B Testing] ",
+    "code": null,
+    "description": "Domain Driven Development, Test Driven Development, Behaviour Driven Development give us best practices to create good products, tell us how to develop new features, but not what features to develop, what is important for the user. We must find a way to let users drive us to create a better product for them using all the data we can gather through Tracking and A/B Testing.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["28"],
+    "attachments": [],
+    "instances": [{
+        "id": "588",
+        "room_id": "588",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "589",
+    "name": "Software Design Patterns for Android [Track 2] / [Mobile / Android] ",
+    "code": null,
+    "description": "La construcción de software extensible, estructurado y desacoplado es uno de los mayores retos que un desarrollador debe afrontar. Día a día nos enfrentamos con problemas cuya base es muy similar y que intentamos modelar para obtener la solución. Aplicando patrones de diseño software podremos construir una solución extensible, reutilizable y bien estructurada a todos esos problemas. A lo largo de la charla se comentarán alguno de los patrones más importantes y su uso en el desarrollo de apps.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["35"],
+    "attachments": [],
+    "instances": [{
+        "id": "589",
+        "room_id": "589",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "590",
+    "name": "Sensor networks and data pipelines: Handling data at massive scale [Track 3] / [Scalability / New Challenges]",
+    "code": null,
+    "description": "At Google I/O this year, attendees were greeted by the sight of 500 environmental sensor motes placed all around the conference center. The sensors spent 3 days gathering data and providing us with the ability to ask questions about how the environment changed throughout the conference. This talk takes a deep dive into that experiment and shows how to ingest, process, query and analyze massive amounts of data produced by large scale sensor networks using the Google Cloud Platform.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["23"],
+    "attachments": [],
+    "instances": [{
+        "id": "590",
+        "room_id": "590",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "591",
+    "name": "Developing SPI applications using Grails and AngularJS [Track 4] / [Grails / Programming Languages]",
+    "code": null,
+    "description": "Client-side MVC frameworks like AngularJS are getting more popular over time. They represent a big architectural change to what web developers are used to: moving from server-side MVC to a browser based one. In this talk I will speak about how Grails can fit with a single-page architecture and discuss the pros and cons of developing that kind of applications.I will also do a live demo of a sample web application using AngularJS, Grails, the events-push plugin and MongoDB.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["48"],
+    "attachments": [],
+    "instances": [{
+        "id": "591",
+        "room_id": "591",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "592",
+    "name": "Cuando haces Pods ya no hay stop [Track 6]",
+    "code": null,
+    "description": "Con plataformas como GitHub, cada vez es más sencillo encontrar librerías para reutilizar en nuestros proyectos de XCode. Pero... ¿qué pasa cuando se introduce una mejora en ésta y la queremos actualizar? Anteriormente existían los submodulos en Git, pero entonces apareció Cocoa Pods, el 'apt-get' para Obj-C. En esta sesión veremos su potencial para manejar librerías de terceros así como a crear y compartir las nuestras incluso de manera interna privada en nuestra compañía.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["60"],
+    "attachments": [],
+    "instances": [{
+        "id": "592",
+        "room_id": "592",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "593",
+    "name": "Push notifications for the [mobile] open web [Track 7] / [Web/Mobile]",
+    "code": null,
+    "description": "Push notifications are awesome. You can send notifications from your servers to your app, and it will do something spectacular. But push notifications are not widely available on the [mobile] web. We aim to create a protocol and a specification for webs, webapps, based on open standards (like WebSockets), so anyone could implement it. Focused on battery usage and data transmission, using easy techniques on cellular networks. We will talk about NodeJS, MongoDB and RabbitMQ, focusing on High Availability and performance.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["66"],
+    "attachments": [],
+    "instances": [{
+        "id": "593",
+        "room_id": "593",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "594",
+    "name": "Cloud Gaming usando el protocolo Q4S [Track 8] / [Gaming / Q4S]",
+    "code": null,
+    "description": "El creciente desarrollo de los juegos online multijugador exige necesidades a la red mas allá del simple incremento del ancho de banda. Estas necesidades se ven incrementadas en los juegos virtualizados en la nube (cloud gaming) donde además de enfrentarse al problema de varios jugadores con diferentes latencias, la pérdida de paquetes y las variaciones en los retardos afectan dramáticamente a la jugabilidad. Q4S es un protocolo libre desarrollado por la Universidad Politécnica de Madrid y Alcatel-lucent y presentado en el IETF-80 que nace con el objetivo de resolver el problema de la degradación de la jugabilidad debida a las diferencias de calidades de conexión de cada participante. Durante una partida, Q4S informa al game server de las condiciones de red en cada momento para cada usuario, permitiendo que la resolución de los gráficos y la velocidad del juego se adapte a las condiciones de los jugadores.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["72"],
+    "attachments": [],
+    "instances": [{
+        "id": "594",
+        "room_id": "594",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "11:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "595",
+    "name": "What’s wrong with php? [Track 1] / [Programming Languages / PHP] ",
+    "code": null,
+    "description": "These days, it often feels like php is an old, creepy piece of code - it seems that all the cool code kids are using ruby or node.But is this true? I believe we are on the right way to take our tools, frameworks, and the community itself to a new level. Composer, Symfony, and PSR are just a first step in the right direction. Each of us can do their part - you could, and you should also be a part of it. So lets unite into an awesome, open-minded community, leaving the php 3 times behind us!.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["29"],
+    "attachments": [],
+    "instances": [{
+        "id": "595",
+        "room_id": "595",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "596",
+    "name": "Gestión de la identidad en Cloud [Track 3] / [Cloud]",
+    "code": null,
+    "description": "La gestión de la identidad es uno de los problemas habituales con los que se encuentran los desarrolladores a la hora de desarrollar una aplicación; evitar el acceso no autorizado de terceros, controlar la autorización de acceso..",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["42"],
+    "attachments": [],
+    "instances": [{
+        "id": "596",
+        "room_id": "596",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "597",
+    "name": "Creando módulos para PHP [Track 4] / [Programming Languages /PHP]",
+    "code": null,
+    "description": "El intérprete de PHP está escrito en C, así como la mayor parte de la SPL, esto lo convierte en uno de los lenguajes conocidos como 'lenguaje pegamento'.¿Qué pasa si tengo una característica nueva, que quiero implementar? Generalmente utilizamos PHP, y escribimos una librería, pero ¿por qué no implementarla en C?Luego podemos compilarla y acceder a la API de nuestra librería desde nuestras aplicaciones PHP.¿Qué ocurre si quiero incluir mi característica en PHP? Veremos cual es el proceso desde que se presenta el RFC, hasta que se acepta, y quienes son las personas que intervienen en las decisiones.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["49"],
+    "attachments": [],
+    "instances": [{
+        "id": "597",
+        "room_id": "597",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "598",
+    "name": "Specification by Example - to the point [Track 5] / [Methodologies / Good Habits / Tesgin]",
+    "code": null,
+    "description": "Specification by Example is a powerful software development technique that can maximize your productivity and minimize your frustration. Yet the multitude of names is a symptom of how scattered the community is about its main concepts.In this talk, I introduce Specification by Example and how it can be implemented both management- and technology-wise in green- as well as brown-field projects so you can start taking full advantage of its benefits in your work, with your tools, right now.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["54"],
+    "attachments": [],
+    "instances": [{
+        "id": "598",
+        "room_id": "598",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "599",
+    "name": "El diablo está en los detalles [Track 6] / [Programming Languages & Ruby]",
+    "code": null,
+    "description": "En la charla se describirán 'desatinos' de distintos lenguajes e implementaciones. Estos errores nos permitirán adentrarnos en temas como optimizaciones de lenguajes interpretados diseño de APIs en lenguajes funcionales o simplemente nos harán echarnos unas risas.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["61"],
+    "attachments": [],
+    "instances": [{
+        "id": "599",
+        "room_id": "599",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "600",
+    "name": "Contenido dinámico accesible: Yes we can! [Track 7] / [Accesibilidad / Web]",
+    "code": null,
+    "description": "Desde simples menús desplegables, pasando por carruseles, lightboxes a bloques de información actualizada mediante AJAX muchos de estos contenidos pueden provocar graves barreras de accesibilidad que deben tenerse en cuenta para no dejar fuera a nadie.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["67"],
+    "attachments": [],
+    "instances": [{
+        "id": "600",
+        "room_id": "600",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "601",
+    "name": "Gestión de App de Gaming [Track 8] / [Gaming]",
+    "code": null,
+    "description": "El tema que vamos a tratar para la charla va a tratar sobre los elementos que flotan alrededor de las aplicaciones que hacen que pueda llegar a todos los públicos. En concreto vamos a tratar el papel de las cdns como elementos de distribución de los contenidos y el formato json como formato universal de distribución.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["73"],
+    "attachments": [],
+    "instances": [{
+        "id": "601",
+        "room_id": "601",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "12:30",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "602",
+    "name": "Tips and Tricks for Tablet Optimization [Track 1] / [UX / Mobile] ",
+    "code": null,
+    "description": "Not sure how to optimize your site for the diverse and ever-changing world of Tablet devices? Learn about best practices, useful frameworks, and browser idiosyncrasies for touch-based 'in-between' screen sizes from somebody who spends every day rapidly iterating on web-based Tablet experiences.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["30"],
+    "attachments": [],
+    "instances": [{
+        "id": "602",
+        "room_id": "602",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "603",
+    "name": "De perdidos a Titanium [Track 2] / [Mobile / Aplicaciones Hibridas]",
+    "code": null,
+    "description": "Titanium es una herramienta para desarrollo de aplicaciones móviles de forma rápida y sencilla utilizando JavaScript como lenguaje de programación base.Porque todo el mundo puede hacer aplicaciones móviles nativas y de calidad.Si eres front-developer o back-developer, ya no tienes que preocuparte cuando te piden una aplicación móvil. En la charla te explicaremos como hacer tu aplicación con Titanium con un caso práctico de desarrollo, sin necesidad de saber Java ni Objective-C.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["37"],
+    "attachments": [],
+    "instances": [{
+        "id": "603",
+        "room_id": "603",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "604",
+    "name": "DON´T PANIC: Large scale web development [Track 3] / [Scalability]",
+    "code": null,
+    "description": "En Tuenti, todas las funcionalidades que desarrollamos han de estar preparadas para escalar a millones de usuarios en el momento en el que el código salga a producción. Mediante el uso de patrones de cacheo, borrado en diferido, primado de caches, dark launches y otras estrategias podemos estar seguros que la infraestructura aguantara . En esta charla queremos poner ejemplos reales (y no triviales) de código escrito para escalar... y en general cosas que molan sobre escalabilidad.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["43","431"],
+    "attachments": [],
+    "instances": [{
+        "id": "604",
+        "room_id": "604",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "605",
+    "name": "Erlang Un Mundo Concurrente [Track 4] / [Scalability]",
+    "code": null,
+    "description": "La idea de esta charla es mostrar las ventajas de la plataforma Erlang, el cómo ha contribuido a grandes empresas y cómo cada vez más está presente en desarrollos y elementos cotidianos de Internet como Facebook, Twitter, Whatsapp, ... Damos un recorrido sobre los hitos que favorecen que Erlang cada vez sea más visible y ejemplos en el propio lenguaje de Erlang para mostrar su facilidad.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["50"],
+    "attachments": [],
+    "instances": [{
+        "id": "605",
+        "room_id": "605",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "606",
+    "name": "When eZ Publish 5 meets Symfony  [Track 5] / [PHP / Programming Languages]",
+    "code": null,
+    "description": "HMVC model for the front controller, Twig for the template engine, the new version of the CMS eZ Publish is entirely based on the Symfony2 components. Sometimes forgotten when talking about CMS's, eZ Publish is a huge competitor to the well-known Drupal.In this conference, we will dive into the architecture of the CMS, the new REST API, and we’ll see how the choice to adopt the Symfony2 Components is a breakthrough for the PHP community.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["55"],
+    "attachments": [],
+    "instances": [{
+        "id": "606",
+        "room_id": "606",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "607",
+    "name": "Mybatis como alternativa a Hibernate [Track 6] / [Java]",
+    "code": null,
+    "description": "Mybatis como alternativa a Hibernate.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["62"],
+    "attachments": [],
+    "instances": [{
+        "id": "607",
+        "room_id": "607",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "608",
+    "name": "People don't give a f**k of JavaScript [Track 7] / [Web / Javascript]",
+    "code": null,
+    "description": "People don't give a f**k of JavaScript. You shouldnt either. We are here to do stuffs, whether you call them websites, web applications, web services or hybrid apps. People want to perform tasks, not listen you talking about your favourite programming language. So, use the one you feel more comfortable with and just release the next big thing. But, if your favourite language is JavaScript, lets write better code. What does better means? Better for developers, better for devices, better for users.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["68"],
+    "attachments": [],
+    "instances": [{
+        "id": "608",
+        "room_id": "608",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "15:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "609",
+    "name": "Microsoft Data Stack Smackdown [Track Principal] / [Frameworks] ",
+    "code": null,
+    "description": "WebAPI or OData? WCF or REST? ATOM, XML or JSON? Where does LINQ fit into all this? Data is the core of why we build systems and solutions, and knowing what's possible with the latest release can save your bacon and save you time so you can focus on the business of your application. What are the options and when do you make the tradeoffs? In this session, we'll look at what's new in the data stack and explore the pros and cons of each. We'll dive into Entity Framework explain how it works with W.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["25"],
+    "attachments": [],
+    "instances": [{
+        "id": "609",
+        "room_id": "609",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "610",
+    "name": "Red-Light HAL [Track 1] / [Computer Vision] ",
+    "code": null,
+    "description": "Computer Vision is an exciting field of Computer Science with plenty of room for innovations. In this talk we will - Introduce SimpleCV  - Learn some CV concepts from a high-level perspective, proving that CV is not only made for privileged minds - Experiment combining SimpleCV, Machine Learning and a Raspberry Pi to develop a smart red-light camera that can tell us which car models run the red light more often.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["31"],
+    "attachments": [],
+    "instances": [{
+        "id": "610",
+        "room_id": "610",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "611",
+    "name": "Windows Phone: be modern, be cool [Track 2] / [Mobile / Windows Phone]",
+    "code": null,
+    "description": "Recorrido por la guía de diseño Modern UI para Windows Phone, durante el cuál se mostrarán los controles más importantes para el desarrollo de Apps, cómo sacarles el máximo rendimiento y cómo personalizarlos para poder aplicar un diseño atractivo, dinámico, usable e intuitivo a nuestras Apps para conseguir fidelizar a los usuarios por medio de una experiencia fascinante.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["38"],
+    "attachments": [],
+    "instances": [{
+        "id": "611",
+        "room_id": "611",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "612",
+    "name": "¡Quiero tiempo real y lo quiero para ayer! [Track 3] / [Scalability]",
+    "code": null,
+    "description": "En un mundo hiper-conectado el concepto Tiempo Real es cada vez más utilizado y las arquitecturas 'message driven' son la manera de conseguirlo porque permiten crear aplicaciones modulares y escalables.En esta charla veremos un tipo de arquitectura totalmente distinta a la estandar de Grails para aplicaciones web que nos permitirá servir contenido en tiempo real a muchos clientes de manera rápida y sencilla teniendo distintos módulos independientes que interactuarán entre sí.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["44"],
+    "attachments": [],
+    "instances": [{
+        "id": "612",
+        "room_id": "612",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "613",
+    "name": "Desafíos y lecciones aprendidas haciendo grandes aplicaciones con Node.js  [Track 5] / [Javascript]",
+    "code": null,
+    "description": "Desafíos y lecciones aprendidas haciendo grandes aplicaciones con Node.js.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["56"],
+    "attachments": [],
+    "instances": [{
+        "id": "613",
+        "room_id": "613",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "614",
+    "name": "Taller de GitLab [Track 6] / [Git / Ruby]",
+    "code": null,
+    "description": "Taller completamente práctico de GitLab. En una primera parte se mostrará como hacer una instalación del producto de forma sencilla utilizando una Ubuntu Server para luego hacer una introducción de como utilizarlo y administrarlo.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["63"],
+    "attachments": [],
+    "instances": [{
+        "id": "614",
+        "room_id": "614",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "615",
+    "name": "Implementing responsive web apps with HTML5 and CSS3 [Track 7] / [Web]",
+    "code": null,
+    "description": "In this talk the speaker will share with the audience what he has learned during the last year of mobile web app development.The workflows used, the errors made and the optimization techniques for creating better responsive web applications using HTML5, CSS3 and Javascript.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["69"],
+    "attachments": [],
+    "instances": [{
+        "id": "615",
+        "room_id": "615",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "16:15",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "616",
+    "name": "Designing Apps for Little Fingers [Track 1] / [Mobile] ",
+    "code": null,
+    "description": "Its amazing to watch a young child play with a touch device, they can seem to get it right away. But there are still special considerations to make when designing for young kids, to maximize their engagement and minimize their frustration.We will cover how to use characters, audio/visual indicators, and inactivity timeouts. Well discuss which gestures are the most and least intuitive for small fingers, how a child's grip of a tablet affects UI, and what to include for parents.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["32"],
+    "attachments": [],
+    "instances": [{
+        "id": "616",
+        "room_id": "616",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "617",
+    "name": "Inside Android Listview [Track 2] / [Mobile / Android]",
+    "code": null,
+    "description": "En esta charla veremos como funcionan las listas de android por dentro, veremos los problemas que tienen, compararemos código de las distintas versiones y veremos algunas cosas curiosas. Aprenderemos a optimizarlas y probaremos algunas cosas interesantes.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["39","391"],
+    "attachments": [],
+    "instances": [{
+        "id": "617",
+        "room_id": "617",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "618",
+    "name": "Bigdata: Analítica para tu API con Redis y Google Bigquery [Track 3] / [Scalability / Cloud / Bigdata]",
+    "code": null,
+    "description": "¿Quieres monitorizar una API que potencialmente va a generar muchísima información? Es el momento de empezar a pensar en bigdata.En teowaki hemos montado un sistema de analítica de nuestra API usando redis como intermediario y Bigquery como almacén de datos. ¿El resultado? Consultas inmediatas sobre todos los logs de tráfico de nuestro sistema en apenas milisegundos.Hablaré de las diferentes alternativas evaluadas, y cómo estamos usano Bigquery para resolver nuestro problema",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["45"],
+    "attachments": [],
+    "instances": [{
+        "id": "618",
+        "room_id": "618",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "619",
+    "name": "Python Idiomático [Track 4] / [Programing Languages / Python]",
+    "code": null,
+    "description": "Entre los usuarios de un lenguaje de programación se establecen con el tiempo una serie de idiomas y buenas prácticas que hacen el código más elegante, expresivo y en muchos casos más eficiente. El propósito de esta charla es mostrar un catálogo de idiomas en Python, haciendo hincapié en aquellos que no son del todo intuitivos para gente que se acerca a Python desde otros lenguajes de programación. Me gustaría que usuarios principiantes, medios y avanzados puedan llevarse algo de esta charla.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["51"],
+    "attachments": [],
+    "instances": [{
+        "id": "619",
+        "room_id": "619",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "620",
+    "name": "¿Somos los consumidores predecibles? [Track 5]",
+    "code": null,
+    "description": "Consideramos cientos de miles de transacciones con tarjetas de crédito para responder a la pregunta '¿somos los consumidores predecibles?'.Basándonos en estos datos, hemos visto que, a pesar de ser animales de costumbres y volver con regularidad a cierto número de sitios, no siempre lo hacemos en el mismo orden y por tanto, dentro de los sitios a nuestro alcance, somos muy impredecibles en cada elección individual. En la charla mostraremos cómo utilizar el algoritmo de compresión ZIP para medir si nuestros patrones son repetitivao y por tanto predecibles. Finalmente, mostramos cómo construir un modelo para predecir dónde compraremos la siguiente vez y enseñaremos que lo que ha hecho la gente de nuestro entorno, nuestra red social indirecta, ayuda a identificar estos sitios.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["57"],
+    "attachments": [],
+    "instances": [{
+        "id": "620",
+        "room_id": "620",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "621",
+    "name": "The Billion Tables Project [Track 6] / [JVM / DB / Scalability]",
+    "code": null,
+    "description": "Usually large databases are such that hold a large number of records, reaching billions. But what about creating a billion... tables? Sometime ago, this apparently crazy question was found in a database soup (http://it.toolbox.com/blogs/database-soup/one-billion-tables-or-bust-46270). It may not be your day-to-day task, but the task of creating them exposes some topics about PostgreSQL internals, performance and large databases that may be really worth for your day-to-day",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["64"],
+    "attachments": [],
+    "instances": [{
+        "id": "621",
+        "room_id": "621",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "622",
+    "name": "Experimenting with WebRCT [Track 7] / [Web]",
+    "code": null,
+    "description": "This talk aims to show how WebRTC works through a series of small well explained live demos. First we'll learn how to interact with camera and microphone and then how to stream the data acquired from these sensors over a peer to peer connection. Last but not least we'll explore some interesting scenarios of interaction between WebRTC and other HTML5 elements, such as canvas.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["70"],
+    "attachments": [],
+    "instances": [{
+        "id": "622",
+        "room_id": "622",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "633",
+    "name": "Desarrollo de juegos con tecnologías web: HTML5 y JavaScript [Track 8] / [Gaming / Javascript /HTML5]",
+    "code": null,
+    "description": "Actualmente, el desarrollo de videojuegos para tecnologías móviles ha vuelto la cara al pasado reciente de los 8 y 16 bits. Una época donde las limitaciones de las viejas máquinas obligaban a exprimir el ingenio de los desarrolladores para conseguir así llevar a cabo aquellas creaciones que hoy son consideradas clásicos.Por otro lado, el gusto por lo que hoy se denomina 'retro' y el creciente movimiento indie no han hecho sino subrayar aún más el gusto por lo clásico, impulsando más si cabe el rescate de las viejas técnicas de finales de los 80.En esta breve charla, se pondrán sobre la mesa algunas de las metodologías tradicionales junto a otras más recientes para conseguir así que los interesados dispongan de las herramientas necesarias que el desarrollador moderno de videojuegos necesita.",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": ["74","740"],
+    "attachments": [],
+    "instances": [{
+        "id": "633",
+        "room_id": "633",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "17:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+},
+{
+    "public": true,
+    "id": "634",
+    "name": "CLAUSURA",
+    "code": null,
+    "description": "CLAUSURA",
+    "filters": [],
+    "locked": false,
+    "speaker_ids": [],
+    "attachments": [],
+    "instances": [{
+        "id": "634",
+        "room_id": "634",
+        "duration": 45,
+        "date": "2013-10-19",
+        "time": "18:45",
+        "capacity": 800,
+        "attendance": 0
+    }]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

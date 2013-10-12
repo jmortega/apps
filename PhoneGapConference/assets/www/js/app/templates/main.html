@@ -1,0 +1,34 @@
+<header class="topcoat-navigation-bar fixed full">
+    <div class="topcoat-navigation-bar__item left fifth">
+        <a class="topcoat-icon-button--quiet js-menu-button">
+          <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+        </a>
+        <a class="topcoat-icon-button--quiet js-back-button">
+          <span class="topcoat-icon topcoat-icon--left-arrow"></span>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center three-fifths js-section-title">
+      <h1 class="topcoat-navigation-bar__title js-navbar-title"><%= name || "" %></h1>
+    </div>
+    <div class="topcoat-navigation-bar__item topcoat-navigation-bar__day-container center three-fifths js-day-titles">
+      <div class="anyconf-page-indicator">
+        <% _.each(dates, function(day) { %> 
+            <div class="anyconf-day-symbol js-day-symbol" data-day-id="<%- day.id %>"></div>
+        <% }); %>
+      </div>
+    </div>
+    <div class="topcoat-navigation-bar__item right anyconf-utils-right js-button-container">
+<!--
+        <a class="topcoat-icon-button--quiet">
+            <input type="checkbox" class="topcoat-checkbox"></input>
+            <label for="topcoat-checkbox" class="topcoat-icon topcoat-checkbox-label topcoat-checkbox-label--right topcoat-checkbox-label-heart"></label>
+        </a>
+        <a class="topcoat-icon-button--quiet">
+            <input type="checkbox" class="topcoat-checkbox"></input>
+            <label for="topcoat-checkbox" class="topcoat-icon topcoat-checkbox-label topcoat-checkbox-label--right topcoat-checkbox-label-star"></label>
+        </a>
+        -->
+    </div>
+</header>
+
+<div class="anyconf-app-content js-app-content"></div>
