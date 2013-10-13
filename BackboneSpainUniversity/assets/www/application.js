@@ -49,9 +49,12 @@
       
     var position = new google.maps.LatLng(this.get('geolat'),this.get('geolong'));
     
+    var addressAux=this.get('address');
+    
+    if(navigator.onLine){
+        
     var geocoder = new google.maps.Geocoder();
     
-    var addressAux=this.get('address');
     
     geocoder.geocode({'latLng': position}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -75,6 +78,8 @@
       }
     });
     
+    }
+    
     return addressAux;
 
   };
@@ -96,7 +101,11 @@
   University.prototype.getMapUrl = function(width, height) {
     width || (width = 300);
     height || (height = 220);
-    return "http://maps.google.com/maps/api/staticmap?center=" + (this.getLatitude()) + "," + (this.getLongitude()) + "&zoom=14&size=" + width + "x" + height + "&maptype=terrain&markers=color:red|" + (this.getLatitude()) + "," + (this.getLongitude()) + "&sensor=false";
+    if(navigator.onLine){
+        return "http://maps.google.com/maps/api/staticmap?center=" + (this.getLatitude()) + "," + (this.getLongitude()) + "&zoom=14&size=" + width + "x" + height + "&maptype=terrain&markers=color:red|" + (this.getLatitude()) + "," + (this.getLongitude()) + "&sensor=false";
+    }else{
+        return "alert.png";
+    }
   };
   
   //Listado Universidades JSON
@@ -123,7 +132,7 @@
       this.render = function() { return DetailsUniversityView.prototype.render.apply(_this, arguments); };
       DetailsUniversityView.__super__.constructor.apply(this, arguments);
       this.el = app.activePage();
-      this.template = _.template('<div class="ui-bar-c ui-corner-all ui-shadow" id="map_item"><div class="detalles"><form action="#University-<%= University.cid %>-update" method="post">\n\n  <div data-role="fieldcontain">\n  <p>\n    <img style="width: 50%;height: 30%;align:center" src="<%= University.get(\'imagen\') %>" />\n  </p>\n  <label>Universidad</label>\n    <input type="text" value="<%= University.getName() %>" name="name" />\n  </div>\n  \n  <div data-role="fieldcontain">\n    <label>Estudios</label>\n    <textarea rows="10" cols="70"  name="grado" ><%= University.getGrado() %> </textarea> <br/><br/>  <label>Localizacion</label>\n    <textarea rows="15" cols="70"  name="address" ><%= University.get(\'address\') %></textarea>\n  </div>\n  \n  <div data-role="fieldcontain">\n    <label>Ciudad</label>\n    <input type="text" value="<%= University.get(\'city\') %>" name="city" />\n  </div>\n  \n  <div data-role="fieldcontain">\n    <label>Provincia</label>\n    <input type="text" value="<%= University.get(\'state\') %>" name="state" />\n  </div>\n  \n  URL <input type="text" value="<%= University.get(\'url\') %>">\n</form></div>');
+      this.template = _.template('<div class="ui-bar-c ui-corner-all ui-shadow" id="map_item" class="detalles"><form action="#University-<%= University.cid %>-update" method="post">\n\n  <div data-role="fieldcontain">\n  <p>\n    <img style="width: 50%;height: 30%;align:center" src="<%= University.get(\'imagen\') %>" />\n  </p>\n  <label>Universidad</label>\n    <input class="detalles" type="text" value="<%= University.getName() %>" name="name" />\n  </div>\n  \n  <div data-role="fieldcontain">\n    <label>Estudios</label>\n    <textarea rows="20" cols="80"  name="grado" class="detalles" ><%= University.getGrado() %> </textarea> <br/><br/>  <label>Localizacion</label>\n    <textarea rows="20" cols="80"  name="address" ><%= University.get(\'address\') %></textarea>\n  </div>\n  \n  <div data-role="fieldcontain">\n    <label>Ciudad</label>\n    <input type="text" value="<%= University.get(\'city\') %>" name="city" />\n  </div>\n  \n  <div data-role="fieldcontain">\n    <label>Provincia</label>\n    <input type="text" value="<%= University.get(\'state\') %>" name="state" />\n  </div>\n  \n  URL <input type="text" value="<%= University.get(\'url\') %>">\n</form></div>');
       this.model.bind('change', this.render);
       this.render();
       return this;
@@ -240,8 +249,39 @@
   
   app.Controller = new Controller();
   $(document).ready(function() {
+      
+   $('#exit_btn').click(function() {
+          navigator.app.exitApp();
+   });
+      
+   var networkstate = navigator.connection.type;
+   if(networkstate == "none"){
+       $(".offline").css("visibility","visible");
+              
+   }
+   
+   
+   $('#botonConnection').click(function() {
+      
+       var networkState = navigator.connection.type;
+       var states = {};
+       states[Connection.UNKNOWN]  = 'Unknown connection';
+       states[Connection.ETHERNET] = 'Ethernet connection';
+       states[Connection.WIFI]     = 'WiFi connection';
+       states[Connection.CELL_2G]  = 'Cell 2G connection';
+       states[Connection.CELL_3G]  = 'Cell 3G connection';
+       states[Connection.CELL_4G]  = 'Cell 4G connection';
+       states[Connection.NONE]     = 'No network connection';
+
+       navigator.notification.alert('',null,'Connection type: ' + states[networkState],'Aceptar');
+
+   });
+   
+   
     Backbone.history.start();
+    
     return app.Controller.home();
+    
   });
   
   this.app = app;

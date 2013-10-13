@@ -23,7 +23,7 @@
 
 
 
-    <application android:icon="@drawable/splash"
+    <application android:icon="@drawable/icon"
         android:label="@string/app_name" android:allowBackup="true" >
         <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".BackboneSpainUniversityActivity"
             android:label="@string/app_name" >
