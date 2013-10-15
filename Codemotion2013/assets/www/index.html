@@ -5,7 +5,9 @@
 	<title>CodeMotion 2013</title>
 
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
-
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
     <link rel="stylesheet"  href="css/jquery.mobile-1.3.2.min.css" />
 	<link rel="stylesheet"  href="css/custom.css" />
 	<link rel="stylesheet" href="map.css" />	
@@ -163,6 +165,37 @@
         }
     }
     
+    function openFaceBook() {
+
+        var ventana = window.open('https://www.facebook.com/pages/Codemotion-Madrid/505998872792272','_blank','location=no');
+        
+        /*ventana.addEventListener('loadstart', function() { alert('start: ' + event.url); });
+        ventana.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
+        ventana.addEventListener('exit', function() { alert(event.type); });*/
+
+    }
+    
+    function openGooglePlus() {
+
+        var ventana = window.open('https://plus.google.com/104221251947950058832','_blank','location=no');
+        
+        /*ventana.addEventListener('loadstart', function() { alert('start: ' + event.url); });
+        ventana.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
+        ventana.addEventListener('exit', function() { alert(event.type); });*/
+
+    }
+    
+    function openTwitter() {
+
+        var ventana = window.open('https://twitter.com/codemotion_es','_blank','location=no');
+        
+        /*ventana.addEventListener('loadstart', function() { alert('start: ' + event.url); });
+        ventana.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
+        ventana.addEventListener('exit', function() { alert(event.type); });*/
+
+    }
+    
+    
   </script>
   	<style>
 
@@ -197,6 +230,7 @@
 			<div id="divOuterTrans">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="list-divider">CodeMotion 2013</li>
+					<li><a href="#social" data-transition="flip">Social</a></li>
 					<li><a href="#location" data-transition="flip">Location</a></li>
 					<li><a href="#speakers" data-transition="flip">Speakers</a></li>
 					<li><a href="#trackp-18" data-transition="fade">Tracks 18 Octubre</a></li>
@@ -207,6 +241,36 @@
 		</div>
 	</div>
 
+	<!--SOCIAL -->
+    <div data-role="page" id="social" class="mainBody">
+        <header data-role="header" id="headerSocial" class="detalles" data-position="fixed">
+            <h1>Social</h1>
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+        </header>
+        
+        <div data-role="content" class="detalles">
+        <div class="ui-grid-a">
+          <div class="ui-block-a"><a href="javascript:openTwitter()" data-role="button" data-theme="b" target="_blank">Twitter</a></div>
+          <div class="ui-block-b"><a href="javascript:openFaceBook()" data-role="button" data-theme="b" target="_blank">Facebook</a></div>
+          <div class="ui-block-b"><a href="javascript:openGooglePlus()" data-role="button" data-theme="b" target="_blank">Google Plus</a></div>
+        </div>
+      </div>
+      
+      <footer data-role="footer" data-position="fixed" data-id="toolbar">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#location" data-icon="star" data-transition="flip">Location</a></li>
+            <li><a href="#speakers" data-icon="grid" data-transition="flip">Speakers</a></li>
+            <li><a href="#trackp-18" data-icon="grid" data-transition="fade">Tracks 18 Octubre</a></li>
+            <li><a href="#trackp-19" data-icon="grid" data-transition="fade">Tracks 19 Octubre</a></li>
+            
+            
+          </ul>
+        </div>
+      </footer>
+      
+    </div>
+    
 	<!--LOCATION-->
 	<div data-role="page" id="location" class="ui-responsive-panel" data-add-back-btn="true" data-fullscreen="true">
 		<header data-role="header" id="headerLocation" data-position="fixed" class="detalles">
