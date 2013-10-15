@@ -1,0 +1,3338 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>CodeMotion 2013</title>
+
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
+
+    <link rel="stylesheet"  href="css/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet"  href="css/custom.css" />
+	<link rel="stylesheet" href="map.css" />	
+	<style>
+			.segmented-control { text-align:center;}
+			.segmented-control .ui-controlgroup { margin: 0.2em; }
+	</style>
+    <script src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="map.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCami1I8wWyM5-VePBi7Dj6in7W-coqGkU"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.stars.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	<script>
+	
+	var geocoder;
+    var map;
+    var infowindow = new google.maps.InfoWindow();
+    var marker;
+    
+	 var geolocationOptions = {
+	        timeout : 5000,
+	        enableHighAccuracy : true
+	 };
+	 
+	 
+	 function getLocation() {
+
+	     if (navigator.geolocation) {
+	         
+	         //get the current location
+	         navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError,geolocationOptions);
+	         
+	         $("#geopos").html("Obteniendo localizacion...");
+	     
+	     } else {
+	         $("#geopos").html("No es posible obtener su localizaciÛn!");
+	     }
+	  }
+	 
+	 var onDeviceReady = function() {
+	     
+	     if (navigator.geolocation) {
+	          navigator.geolocation.getCurrentPosition(onGeolocationSuccess,onGeolocationError,geolocationOptions);
+	      } else {
+	        $("#geopos").html("No es posible obtener su localizaciÛn!");
+	      }
+	     
+     };
+
+     function init() {
+         document.addEventListener("deviceready", onDeviceReady, true);
+
+     } 
+     
+    function onGeolocationSuccess(position) {
+
+      var geostr = "<p>Latitud (deg): " + position.coords.latitude
+          + "</p><p>Longitud (deg): " + position.coords.longitude
+          
+      $("#geopos").html(geostr);
+      
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      var currentposition = new google.maps.LatLng(lat,lon);
+      
+      
+      var mapOptions = {
+          zoom: 12,
+          panControl: true,
+          zoomControl: true,
+          center: currentposition,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      
+      var map = new google.maps.Map(document.getElementById('map_holder'), mapOptions);
+
+      var marker = new google.maps.Marker({
+              position: currentposition,
+              map: map,
+              title: 'My Location'
+      });
+      
+      codeLatLng(currentposition);
+      
+      var mapOutput = '<img src="http://maps.googleapis.com/maps/api/staticmap?markers='+position.coords.latitude+','+position.coords.longitude+'&zoom=12&size=300x300&scale=2&sensor=true">';
+      var element = document.getElementById('map_holder');
+      element.innerHTML = mapOutput;
+    }
+    
+    function codeLatLng(currentposition) {
+        
+        geocoder = new google.maps.Geocoder();
+        
+        geocoder.geocode({'latLng': currentposition}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+             
+             var geostr = "<p>"+results[0].formatted_address+"<br/>"+
+             results[1].formatted_address+"</p>";
+
+             $("#geopos").html(geostr);
+             
+            if (results[1]) {
+              marker = new google.maps.Marker({
+                  position: currentposition,
+                  map: map
+              });
+              infowindow.setContent(results[1].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              //alert('No results found');
+            }
+          } else {
+            //alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+    
+    function onGeolocationError(error) {
+        
+        //alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+        
+        var errString   =   '';
+        
+        // Check to see if we have received an error code     
+        if(error.code) {
+            // If we have, handle it by case
+            switch(error.code)
+            {
+                case 1: // PERMISSION_DENIED
+                    errString   =   
+                        'Unable to obtain the location information ' + 
+                        'because the device does not have permission '+
+                        'to the use that service.';
+                break;
+                case 2: // POSITION_UNAVAILABLE
+                    errString   =   
+                        'Unable to obtain the location information ' +
+                        'because the device location could not be ' +
+                        'determined.';
+                break;
+                case 3: // TIMEOUT
+                    errString   =   
+                        'Unable to obtain the location within the ' +
+                        'specified time allocation.';
+                break;
+                default: // UNKOWN_ERROR
+                    errString   =   
+                        'Unable to obtain the location of the ' +
+                        'device to an unknown error.';
+                break;
+            }
+            
+            alert(errString + '\n');
+        }
+    }
+    
+  </script>
+  	<style>
+
+	.offline {
+    	visibility: hidden;
+    	color: #f00;
+    	font-style: italic;
+    	font-size:30px;
+    	text-align:center;
+	}
+
+	.detalles {
+    	font-style: italic;
+    	font-size:20px;
+	}
+
+	</style>
+  
+</head>
+<body onload="init();">
+
+    <!--MAIN-->
+	<div data-role="page" id="jqm" class="mainBody" data-fullscreen="true">
+		<div data-role="header" id="header" class="detalles">
+			<h1>CodeMotion 2013</h1>
+			<a href="#about" data-rel="dialog" data-theme="a" class="ui-btn ui-shadow ui-btn-up-a">
+				<img src="css\images\image.jpeg" width="50" height="50" alt="About CodeMotion 2013" />
+			</a>
+		</div>
+		<div data-role="content" class="detalles">
+		
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">CodeMotion 2013</li>
+					<li><a href="#location" data-transition="flip">Location</a></li>
+					<li><a href="#speakers" data-transition="flip">Speakers</a></li>
+					<li><a href="#trackp-18" data-transition="fade">Tracks 18 Octubre</a></li>
+					<li><a href="#trackp-19" data-transition="fade">Tracks 19 Octubre</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<!--LOCATION-->
+	<div data-role="page" id="location" class="ui-responsive-panel" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerLocation" data-position="fixed" class="detalles">
+			<h1>Campus Sur.Universidad Polit&eacute;cnica de Madrid.</h1>
+			 <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+		</header>
+		<div data-role="content" class="detalles">
+
+			<ul id="list-results" data-role="listview">
+            	<li data-marker-info="40.38905,-3.62967">
+
+            	  <a href="#">
+            	  	<h1 class="ui-gmap-marker-title wrap">Campus Sur UPM</h1>
+					
+            	  	<div class="ui-li-count">
+            	  		<span>Carretera de Valencia, km. 7, 28031 Madrid</span>
+            	  	</div>
+            	  </a>
+            	</li>				
+			</ul>
+			<br/>
+			<a href="#map-page" data-role="button">Ver Mapa</a>
+			<a href="#mylocation" data-theme="b" data-role="button">Mi localizaci&oacute;n</a>
+			<a data-role="button" rel="external" href="gmapLocation.html">Obtener ruta desde su localizaci&oacute;n</a>
+			
+			<div id="divOuterTrans">
+	
+				<p align="center">
+					<img src="staticmap1.png">
+			
+					<img src="staticmap2.png">
+				
+					<img src="staticmap3.png">
+				
+					<img src="staticmap4.png">
+				</p>
+				
+			</div>
+			
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" data-inline="true" class="detalles">
+		    <a href="#map-page" data-role="button">View Map</a>
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--SPEAKERS-->
+	<div data-role="page" id="speakers" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerSpeakers" data-position="fixed" data-inline="true" class="detalles">
+		        <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+		        <h1>Speakers</h1>
+		</header>
+		<div data-role="content" class="detalles">
+		
+			<div id="divOuterTrans">
+				<ul id="list_speakers" data-autodividers="true" data-role="listview" data-inset="true" id="listviewspeakers" data-filter-placeholder="Search speakers..." data-filter="true">
+				
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Abraham Otero</h3>
+						<p>Bitcoin una moneda digital [Track 1]<br/>[New Challenges / Cryptography]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alejandro Brito Monedero</h3>
+						<p>AsÌ que pusiste MongoDB.<br/> Dime øcÛmo lo administras? [Track 3]<br/>[DevOps / Cloud / Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alex Casquete</h3>
+						<p>ARQUITECTURAS DISTRIBUIDAS con Windows AZURE [Track 3]<br/>[Azure / Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alejandro Campos Magencio</h3>
+						<p>Optimizando apps de Windows Phone con .NET y XAML [Track 2]<br/>[Mobile / Windows Phone 8]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Antonio De Pasquale</h3>
+						<p>Motion & Gesture interaction patterns<br/> in modern web design [Track 7]<br/>[Web / Good Habits]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+                    <a href="#track5-19" data-transition="flip">
+                    
+                        <img src="speaker.png"  alt="cloud" />
+                        <h3>Antonio Matarranz</h3>
+                        <p>No vendas tu producto, publica tus APIs. El caso de las herramientas sem·nticas. [Track 5]<br/>[API Sem·ntica]</p>
+                        <p class="ui-li-count ui-btn-up-r">Track 5</p>
+                    </a>
+                    </li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Ariel Ferrandini</h3>
+						<p>De perdidos a Titanium [Track 2]<br/>[Mobile / Aplicaciones Hibridas]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alex Soto</h3>
+						<p>Resistance is futile mocks will be assimilated [Track 4]<br/>[Java / TFF]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Aurelio De Rosa</h3>
+						<p>"People don't give a f**k of JavaScript [Track 7]<br/>[Web / Javascript]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track5-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alberto Gimeno</h3>
+						<p>"DesafÌos y lecciones aprendidas haciendo<br/> grandes aplicaciones con Node.js [Track 5]<br/>[Javascript]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 5</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alfonso Dou Oblanca</h3>
+						<p>"javaLeague: programa tu equipo y crea tus propias competiciones [Track Principal]<br/>[javaLeague]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track5-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alejandro Llorente Pinto</h3>
+						<p>"`øSomos los consumidores predecibles? [Track 5]<br/></p>
+						<p class="ui-li-count ui-btn-up-r">Track 5</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Alejandro GÛmez</h3>
+						<p>Python Idiom·tico [Track 4]<br/>[Programing Languages / Python]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Andrey BAntukh</h3>
+						<p>C/C++ y Python: The fast and the furious<br/> [Track 4]<br/>[Python / programming Languages]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>¡Ålvaro Hern·ndez</h3>
+						<p>"The Billion Tables Project [Track 6]<br/>[JVM / DB / Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>¡lvaro S·nchez-Mariscal</h3>
+						<p>Developing SPI applications using Grails and AngularJS [Track 4]<br/>[Grails / Programming Languages]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Beat Schwegler</h3>
+						<p>Windows Azure Websites: PaaS for node.js,<br/> PHP, Python and .NET in Your Java Application <br/>[Track Principal]<br/>[Cloud]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Brenda Jin</h3>
+						<p>Tips and Tricks for Tablet Optimization[Track 1]<br/>[UX / Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Brian Code</h3>
+						<p>Build the Android OS[Track 1]<br/>[Mobile / Android]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Chema Alonso</h3>
+						<p>°Feliz 15 aniversario SQL Injection! [Track Principal]<br/>[Seguridad /Buenas pr·cticas]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track8-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Carlos BenÌtez</h3>
+						<p>"Desarrollo de juegos con tecnologÌas web: HTML5 y JavaScript [Track 8]<br/>[Gaming / Javascript /HTML5]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 8</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Cesar Garcia Saez</h3>
+						<p>"Internet of Things [Track Principal]<br/>[Makers]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>David Smith</h3>
+						<p>Understanding and Supporting Bitcoin/Cryptocurrencies<br/> in Your Java Application <br/>[Track 1]<br/>[JVM / Trendy]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>David Bonilla Fuertes</h3>
+						<p>7 tÈcnicas para conseguir que un<br/> buen equipo llegue a ser brillante [Track P]<br/>[Agile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Daniel Gonz·lez</h3>
+						<p>Creando mÛdulos para PHP [Track 4]<br/>[Programming Languages /PHP]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>David Buchmann</h3>
+						<p>PHP Content Repository:<br/> Porting a Java Standard to PHP [Track 4]<br/>[Programming Languages / PHP]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Eduardo Basterrechea Molina</h3>
+						<p>Las APIs [SaaS] abren la puerta a <br/> nuevos desarrolladores [Track 1]<br/>[API SaaS Web 3.0]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Fernando Cejas</h3>
+						<p>Inside Android Listview [Track 2]<br/>[Mobile / Android]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Fernando RodrÌguez Romero</h3>
+						<p>They live!  [Track 2]<br/>[Mobile / iOS]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Guillermo LÛpez Leal</h3>
+						<p>"Push notifications for the [mobile] open web  [Track 7]<br/>[Web/Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#bloquex-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Ian Robinson</h3>
+						<p>Graph Search: The Power of Connected Data<br/>[Bloque X]<br/>[Graph Search: The Power of Connected Data]</p>
+						<p class="ui-li-count ui-btn-up-r">Bloque X</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Ibon Landa MartÌn</h3>
+						<p>GestiÛn de la identidad en Cloud [Track 3]<br/>[Cloud]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Iv·n LÛpez MartÌn</h3>
+						<p>`°Quiero tiempo real y lo quiero para ayer! [Track 3]<br/>[Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>JosÈ Manuel Ortega Candel</h3>
+						<p>Desarrollo de apps moviles <br/>multiplataforma [Track 2] <br/> [Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jackson Gabbard</h3>
+						<p>Engineering Design for Facebook <br/>[Track Principal]<br/>[Methodologies / Good Habits]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+                    <a href="#track1-18" data-transition="flip">
+                    
+                        <img src="speaker.png"  alt="cloud" />
+                        <h3>Javier GutiÈrrez RodrÌguez</h3>
+                        <p>Desarrollo de videojuegos dirigido por pruebas <br/>[Track 1]<br/>[Agile Gaming]</p>
+                        <p class="ui-li-count ui-btn-up-r">Track 1</p>
+                    </a>
+                    </li>
+                    
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track8-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jose Javier GarcÌa Aranda</h3>
+						<p>"Cloud Gaming usando el protocolo Q4S[Track 8]<br/>[Gaming / Q4S]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 8</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#bloquex-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Juan Manuel Amuedo Gonz·lez</h3>
+						<p>Necesitades hardware y software<br/> en la impresiÛn 3D open source  [Bloque X]<br/>[New challenges]</p>
+						<p class="ui-li-count ui-btn-up-r">Bloque X</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Juan Antonio MartÌn Noguera</h3>
+						<p>MBaaS para IOS:El grande, el guapo y el hazlo t˙ mismo [Track 2]<br/>[Mobile / iOS]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jorge Leria</h3>
+						<p>DON`¥T PANIC: Large scale web development [Track 3]<br/>[Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Javier Ramirez</h3>
+						<p>Bigdata: AnalÌtica para tu API<br/> con Redis y Google Bigquery [Track 3]<br/>[Scalability / Cloud / Bigdata]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jose MarÌa Arranz</h3>
+						<p>Sitios web SPI cÈntricos en el<br/> servidor SEO compatibles sin estado [Track 3]<br/>[Java / Programming Languages]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>JosuÈ Yeray Juli·n Ferreiro</h3>
+						<p>Nuevos escenarios de interacciÛn<br/> con NFC en Windows Phone 8[Track 2]<br/>[Windows Phone / Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Javier Onielfa Belenguer</h3>
+						<p>ProgramaciÛn funcional:<br/> `°La usabas y no lo sabÌas![Track 3]<br/>[JVM / Scala]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>JosÈ San Leandro</h3>
+						<p>Grails vs XSS[Track 4]<br/>[Web Development / Security]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jose Salguero</h3>
+						<p>Data Driven Development [Track 1]<br/>[UX / A/B Testing]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>JosÈ Ignacio Herranz</h3>
+						<p>Estrategia para desarrollo mÛvil:<br/> Web o aplicaciÛn nativa  [Track 2]<br/>[Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jorge del Casar</h3>
+						<p>Desarrollo de Apps Multiplataforma con<br/> Apache Cordova 3 [Track Principal]<br/>[HTML5 / MÛvil]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track5-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Julien Femia</h3>
+						<p>"When eZ Publish 5 meets Symfony [Track 5]<br/>[PHP / Programming Languages]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 5</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track8-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>James Williams</h3>
+						<p>"Creating Games With Three.js [Track 8]<br/>[Web / Gaming]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 8</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jes˙s Espino GarcÌa</h3>
+						<p>"IntroducciÛn a Django Rest Framework [Track 6]<br/>[Python]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Julio GalarÛn</h3>
+						<p>"Javascript meets hardware [Track 6]<br/>[Javascript / programing languages / New Challenges]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jorge Juan Barroso</h3>
+						<p>Inside Android Listview [Track 2]<br/>[Mobile / Android]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Jorge Maroto GarcÌa</h3>
+						<p>"Cuando haces Pods ya no hay stop [Track 6]<br/></p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Kathryn Rotondo</h3>
+						<p>Designing Apps for Little Fingers [Track 1]<br/>[Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+                    <a href="#track2-19" data-transition="flip">
+                    
+                        <img src="speaker.png"  alt="cloud" />
+                        <h3>Kamel Lajili</h3>
+                        <p>C/C++ & QML, Qt & Cascades, So what`s now BlackBerry 10 native application development [Track 2]<br/></p>
+                        <p class="ui-li-count ui-btn-up-r">Track 2</p>
+                    </a>
+                    </li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#bloquex-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Lorenzo Maiorfi</h3>
+						<p>Modern OOP embedded development<br/> with .NET Micro Framework  [Bloque X]<br/>[Net / Programming Languages]</p>
+						<p class="ui-li-count ui-btn-up-r">Bloque X</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Lorenzo Gonz·lez GascÛn</h3>
+						<p>"IntroducciÛn a AngularJS  [Track 7]<br/>[Web/JavaScript]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Mike Benkovich</h3>
+						<p>Microsoft Data Stack Smackdown [Track P]<br/>[Frameworks]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Marc RubiÒo</h3>
+						<p>ASP.NET MVC & SPA Web Applications [Track 1]<br/>[ASP .Net / Web]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Mandy Waite</h3>
+						<p>Sensor networks and data pipelines: Handling data at massive scale[Track 3]<br/>[Scalability / New Challenges]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+                    <a href="#trackp-19" data-transition="flip">
+                    
+                        <img src="speaker.png"  alt="cloud" />
+                        <h3>Mandy Waite</h3>
+                        <p>Building for Success: Cloud backends for your mobile apps[Track Principal]<br/>[Cloud / Mobile]</p>
+                        <p class="ui-li-count ui-btn-up-r">Track P</p>
+                    </a>
+                    </li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Miguel Araujo PÈrez</h3>
+						<p>Red-Light HAL [Track 1]<br/>[Computer Vision]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right" id="speaker1">
+					<a href="#bloquex-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Maximilien de coster</h3>
+						<p>Competencias y perfiles profesionales<br/> del sector TIC a nivel nacional [Bloque X]<br/>[Recruiting]</p>
+						<p class="ui-li-count ui-btn-up-r">Bloque X</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track8-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Manuel Gomez Zotano</h3>
+						<p>"GestiÛn de App de Gaming [Track 8]<br/>[Gaming]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 8</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Manuel ¡ngel Rubio JimÈnez</h3>
+						<p>Erlang Un Mundo Concurrente [Track 4]<br/>[Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Marco Casario</h3>
+						<p>"Implementing responsive web apps<br/> with HTML5 and CSS3[Track 7]<br/>[Web]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Mario Fusco</h3>
+						<p>"Functional Programming in Java: lambdas and beyond[Track Principal]<br/>[Java]</p>
+						<p class="ui-li-count ui-btn-up-r">Trac P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+                    <a href="#bloquex-18" data-transition="flip">
+                    
+                        <img src="speaker.png"  alt="cloud" />
+                        <h3>Mario Fusco</h3>
+                        <p>"If you think you can stay away from functional programming, you are wrong[Bloque X]<br/>[Programming]</p>
+                        <p class="ui-li-count ui-btn-up-r">Bloque X</p>
+                    </a>
+                    </li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Miguel ¡ngel Pastor Olivar</h3>
+						<p>Construyendo aplicaciones concurrentes y distribuidas con Akka [Track 4]<br/>[Programming Languages / JVM]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Nicolas Garnier</h3>
+						<p>Easy Realtime Collaboration with<br/> the Google Drive Realtime API [Track 1]<br/>[Web / Cloud]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track5-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Nikolas Martens</h3>
+						<p>Specification by Example - to the point [Track 5]<br/>[Methodologies / Good Habits / Tesgin]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 5</p>
+					</a>
+					</li>
+					
+					
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Ole Michaelis</h3>
+						<p>What`Äôs wrong with php?[Track 1]<br/>[Programming Languages / PHP]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Orkun Saitoglu</h3>
+						<p>"PayPal APIs : From SOAP/NVP to REST[Track Principal]<br/></p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Oscar GarcÌa Amor</h3>
+						<p>"Taller de GitLab [Track 6]<br/>[Git / Ruby]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Pedro Vicente GÛmez S·nchez</h3>
+						<p>Software Design Patterns for Android [Track 2]<br/>[Mobile / Android]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Pablo Carballude Gonz·lez</h3>
+						<p>Cracking exploiting and fixing your Windows 8 App [Track 4]<br/>[Windows 8]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track5-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Pablo Guardiola</h3>
+						<p>Testeas o k ase?? [Track 5]<br/>[Good practices / Android / Testing]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 5</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Pietro Alberto Rossi</h3>
+						<p>Testing Android Application [Track 2]<br/>[Mobile / TDD]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Quique MartÌnez</h3>
+						<p>Desarrollo de backends para el <br/>desarrollo de aplicaciones mÛviles [Track 2]<br/>[Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Quique MartÌnez AlÈn</h3>
+						<p>ARQUITECTURAS DISTRIBUIDAS con Windows AZURE [Track 3]<br/>[Azure / Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track4-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Rafael Luque Leiva</h3>
+						<p>Grails vs XSS[Track 4]<br/>[Web Development / Security]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 4</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+                    <a href="#track8-19" data-transition="flip">
+                    
+                        <img src="speaker.png"  alt="cloud" />
+                        <h3>Ra˙l Otaolea</h3>
+                        <p>The Web is the next game platform [Track 8]<br/>[Gaming]</p>
+                        <p class="ui-li-count ui-btn-up-r">Track 8</p>
+                    </a>
+                    </li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>RamÛn Corominas</h3>
+						<p>"Contenido din·mico accesible: Yes we can! [Track 7]<br/>[Accesibilidad / Web]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#trackp-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Richard Esplin</h3>
+						<p>Building content solutions <br/>[Track Principal]<br/>[Alfresco]</p>
+						<p class="ui-li-count ui-btn-up-r">Track P</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>RubÈn Aguilera DÌaz-Heredero</h3>
+						<p>"Mybatis como alternativa a Hibernate [Track 6]<br/>[Java]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Sam Dutton</h3>
+						<p>Media APIs for the multi-platform Web <br/>[Track 1]<br/>[Web / HTML5]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track1-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Sander Hoogendoorn</h3>
+						<p>Agile anti-patterns.<br/> Yes your agile projects can and will fail too!  [Track 1]<br/>[Agile / Methodologies / Good Habits]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 1</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track8-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Sergio Ruiz</h3>
+						<p>"Desarrollo de juegos con tecnologÌas web: HTML5 y JavaScript [Track 8]<br/>[Gaming / Javascript /HTML5]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 8</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Simone Lippolis</h3>
+						<p>"Motion & Gesture interaction patterns<br/> in modern web design [Track 7]<br/>[Web / Good Habits]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track6-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Sergio Arbeo</h3>
+						<p>"El diablo est· en los detalles [Track 6]<br/>[Programming Languages & Ruby]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 6</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track7-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Sandro Paganotti</h3>
+						<p>"Experimenting with WebRCT [Track 7]<br/>[Web]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 7</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Santiago Porras RodrÌguez</h3>
+						<p>Windows Phone: be modern, be cool [Track 2]<br/>[Mobile / Windows Phone]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track2-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>Toni Recio</h3>
+						<p>Desarrollo de backends para el <br/>desarrollo de aplicaciones mÛviles [Track 2]<br/>[Mobile]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 2</p>
+					</a>
+					</li>
+					
+					
+
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-18" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>VÌctor Cuervo Palencia</h3>
+						<p>NOSQL: Primeros pasos con MongoDB [Track 3]<br/>[NoSQL / Cloud / Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track5-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>VÌctor GarcÌa PÈrez</h3>
+						<p>El proceso de release de Tuenti [Track 5]<br/>[DevOps]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 5</p>
+					</a>
+					</li>
+					
+					
+					<li class="ui-btn ui-btn-icon-right">
+					<a href="#track3-19" data-transition="flip">
+					
+						<img src="speaker.png"  alt="cloud" />
+						<h3>William Viana</h3>
+						<p>DON`¥T PANIC: Large scale web development [Track 3]<br/>[Scalability]</p>
+						<p class="ui-li-count ui-btn-up-r">Track 3</p>
+					</a>
+					</li>
+					
+					
+
+					
+					
+				</ul>
+			</div>
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" class="detalles">
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 18 Octubre PRINCIPAL-->
+	<div data-role="page" id="trackp-18" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 18 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-18" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#bloquex-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Bloque X</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#trackp-18">Track Principal</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">RICHARD ESPLIN</a></h3>
+						
+						<p>Building content solutions </p><br/>
+						<p>18 Octubre, 10:00 - 10:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">When your development project requires you to deal with content such as office documents, PDF files, images, and media, you will want to use a repository to get the task done right. An enterprise content repository provides services for dealing with opaque content.This presentation will help you avoid common headaches<br/> and mistakes by introducing you to patterns for managing content. Our examples will use industry standards as implemented by Alfresco, an open source content repository, and will give you enough information to start building solutions.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">BEAT SCHWEGLER</a></h3>
+						
+						<p>Windows Azure Websites: PaaS for node.js, PHP, Python and .NET </p><br/>
+						<p>18 Octubre, 11:30 - 12:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Windows Azure Web Sites is a simple and powerful hosting platform that allows developers to easily build and rapidly deploy web applications on Windows Azure using their favorite languages, frameworks, and tools. In this session, we`Äôll walk through building a modern web application that uses a statically delivered client MVC framework working against a node.js REST backend using MongoDB. You`Äôll walk away with everything you need to know to build and deploy your own application.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JACKSON GABBARD</a></h3>
+						
+						<p>Engineering Design for Facebook </p><br/>
+						<p>18 Octubre,12:30 - 13:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Facebook is known for moving fast, making bold changes, and producing the most-used site and apps in the world. Part of Facebook's secret sauce is our amazing design team and the close relationship product designers and managers have with the engineering. This talk will cover the fuzzy boundaries between engineer, designer, and product visionary at Facebook.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">ORKUN SAITOGLU</a></h3>
+						
+						<p>PayPal APIs : From SOAP/NVP to REST</p><br/>
+						<p>18 Octubre,16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">PayPal is the faster, safer and easier way to pay and to be paid. Developers are using PayPal solutions thanks to PayPal APIs for a long time. This discussion will present different payments and monetization models and PayPal APIs evolution. Developers will have the chance to see how easily they can integrate new PayPal RESTful APIs and mobile SDK.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">CESAR GARCIA SAEZ</a></h3>
+						
+						<p>Internet of Things</p><br/>
+						<p>18 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Internet of Things (IoT) presenta un escenario futuro y cercano en el que la mayorÌa de los objetos cotidianos disponen de conectividad. En esta presentaciÛn exploraremos en primer lugar la evoluciÛn de este concepto y el marco tecnolÛgico sobre el que se sostiene, en forma de dispositivos y protocolos. A continuaciÛn describiremos algunos ejemplos de servicios IoT, explicando las posibilidades de la fabricaciÛn digital para el desarrollo r·pido de prototipos de objetos conectados como los mostrados.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">CHEMA ALONSO</a></h3>
+						
+						<p>°Feliz 15 aniversario SQL Injection!</p><br/>
+						<p>18 Octubre,18:45 - 19:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">O como deberÌas dejar de programar si a˙n te comes vulnerabilidades SQL Injection.... AsÌ que, como todavÌa siguen apareciendo dÌa tras dÌa, vamos a repasar lo que hemos aprendido durante estos 15 de a√±os de bugs de inyecciÛn de comandos SQL para que no los cometas nunca m·s... `øok?</div>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+
+	<!--TRACKS 18 Octubre TRACK 1-->
+	<div data-role="page" id="track1-18" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 18 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-18" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#bloquex-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Bloque X</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#track1-18">Track 1</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">SAM DUTTON</a></h3>
+						
+						<p>Media APIs for the multi-platform Web</p><br/>
+						<p>18 Octubre, 10:00 - 10:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">A host of new Web technologies are transforming the way we create, distribute and consume media.
+							<br/>- WebRTC: what's new and what's next
+							<br/>- EME: what is it and how can I use it?
+							<br/>- Media Source Extensions: for adaptive streaming, time shifting and more
+							<br/>- Web Audio: sophisticated audio
+							<br/>- video and audio update
+							<br/>- Transcripts, captions and the track element: deep linking and deep search
+							<br/>- Working with Web Components
+							<br/>- State of the codecs
+							<br/>- Best practice for mobile platforms
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">EDUARDO BASTERRECHEA MOLINA</a></h3>
+						
+						<p>Las APIs [SaaS] abren la puerta a nuevos desarrolladores </p><br/>
+						<p>18 Octubre, 11:30 - 12:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">La apariciÛn de las APIs y el que est·n estÈn disponibles como SaaS est· haciendo que cada vez sea m·s sencillo para los no programadores acceder a realizar sus propias Apps o sitios web.
+							<br/><br/>El desafÌo es conseguir que el uso de las mismas sea suficientemente sencillo como para que cada vez m·s usuarios se conviertan en desarrolladores, Alan key, el creador del Alto en el XPARC, el ordenador m·s disruptor de la historia ya pensÛ en el usuario/programador cuando inventÛ Smalltalk.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">DAVID SMITH</a></h3>
+						
+						<p>Understanding and Supporting Bitcoin/Cryptocurrencies in Your Java Application </p><br/>
+						<p>18 Octubre,12:30 - 13:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">This presentation covers the basics of cryptocurrencies and shows how they affect your enterprise application's architecture and behavior. The technical implications of supporting cryptocurrencies include asynchronous processing (e.g., using asynchronous queues), new modes of failure/recovery, fault tolerance, and integrating new clients and processing systems into the architecture. The presentation will present options, considerations, and "gotchas" regarding these topics.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JAVIER GUTI…RREZ RODRÕçGUEZ</a></h3>
+						
+						<p>Desarrollo de videojuegos dirigido por pruebas</p><br/>
+						<p>18 Octubre,15:15 - 16:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Esta charla presenta los puntos clave de TDD, los principales escollos e ideas sobre cÛmo superarlas. Algunos de los escollos son: simular el comportamiento de usuario, verificar escenarios sin que una persona humana tenga que ver el juego en la pantalla, lidiar con las dependencias del reloj interno, sacarle el m·ximo partido a mocks y doubles, crear pruebas m·s visuales, etc. No es muy distinto aplicar TDD en videojuegos y que estas ideas tambiÈn pueden estar en otros desarrollos.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">SANDER HOOGENDOORN</a></h3>
+						
+						<p>Agile anti-patterns. Yes your agile projects can and will fail too!</p><br/>
+						<p>18 Octubre,16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Many organizations turn towards agile to escape failing traditional software development. Due to this increase in popularity, many newcomers enter the field. Without the necessary real-life experience but proudly waving certificates from two days of training. During this challenging talk Sander shows what happens to projects that are coached by ill-experienced coaches, and how to move around anti-patterns as Scrumdamentalism, Dogmatic Agile, Bob-the-Builder or Scrumman.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">NICOLAS GARNIER</a></h3>
+						
+						<p>Easy Realtime Collaboration with the Google Drive Realtime API</p><br/>
+						<p>18 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">We will discuss the latest features of the Drive SDK that have been developed as part of Google`Äôs commitment to allow 3rd parties to write Drive applications with the richness and responsiveness of Google Docs, Sheets and Presentations. We will focus on the latest addition to the Google Dive SDK: The Google Drive Realtime API which allows you to easilly write realtime-collaboration enabled web apps with a few lines of Javascript.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">BRIAN CODE</a></h3>
+						
+						<p>Build the Android OS</p><br/>
+						<p>18 Octubre,18:45 - 19:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">This talk gets you started at how to actually compile and build the AndroidOS for rom customizations, kernel patches and all the nitty gritty cool stuff you've always wanted to do, but never knew how to! Learn from the guy with several consumer Android tablets in the marketplace, and the tricks he uses to survive and excel in the technical jungle. 900 million Android devices can't be wrong. Welcome your Android overlords!</div>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 18 Octubre TRACK 2-->
+	<div data-role="page" id="track2-18" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 18 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-18" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#bloquex-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Bloque X</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#track2-18">Track 2</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JOSE MANUEL ORTEGA CANDEL</a></h3>
+						
+						<p>Desarrollo de apps mÛviles multiplataforma</p><br/>
+						<p>18 Octubre, 10:00 - 10:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							En los ˙ltimos a√±os han aumentado las herramientas para desarrollar en dispositivos mÛviles como alternativa a hacerlo de forma nativa.FrameWorks como Phonegap,Appcelerator Titanium,SenchaTouch,Jquery mobile permiten desarrollar aplicaciones hÌbridas y ofrecen nuevas posibilidades a los desarrolladores que conozcan HTML,CSS y JavaScript.En la charla se har· una breve introducciÛn a cada uno de ellos y comentarÈ cÛdigo y ejemplos de aplicaciones realizadas con los frameworks mencionados.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">KAMEL LAJILI</a></h3>
+						
+						<p>C/C++ & QML, Qt & Cascades, So what`Äôs now BlackBerry 10 native application development? </p><br/>
+						<p>18 Octubre, 11:30 - 12:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							This session is intended to introduce you to the BlackBerry 10 Native Development Kit. We will talk about the high-level architecture of the BlackBerry 10 Software. We will explain why we decided to build the BlackBerry 10 UI Framework on top of open source C++ application framework Qt. And we will code together a simple app to demonstrate to you the capabilities of Momentics the eclipse based NDK IDE.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">Toni Recio & Quique MartÌnez</a></h3>
+						
+						<p>Desarrollo de backends para el desarrollo de aplicaciones mÛviles</p><br/>
+						<p>18 Octubre,12:30 - 13:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Aplicaciones para Android, Windows Phone, iPhone, iPad, Windows 8`Ä¶ casi todas tienen en com˙n que generalmente necesitan de servicios de backend para ciertas funcionalidades; almacenamiento, notificaciones push, envÌos de SMS, seguridad con diferentes proveedores de identidad etc`Ä¶
+							<br/><br/>Durante esta sesiÛn hablaremos de Mobile Services, una tecnologÌa que permite disponer de forma r·pida y sencilla de servicios de backend que pueden ser utilizados desde cualquier dispositivo.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">PIETRO ALBERTO ROSSI</a></h3>
+						
+						<p>Testing Android Application</p><br/>
+						<p>18 Octubre,15:15 - 16:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">Most of Android applications have bugs. Why not discover them in pre-release? Unit and Functional testing permit finding some of the bugs and correcting them before publishing the application.
+							<br/><br/>We analize step-by-step how to test Android Applications to provide bug discovery thus releasing stable applications.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JUAN ANTONIO MARTÕN NOGUERA</a></h3>
+						
+						<p>MBaaS para IOS:El grande, el guapo y el hazlo t˙ mismo :-)</p><br/>
+						<p>18 Octubre,16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">La charla est· orientada a mostrar 3 opciones de Mobile Backeend as a Service para desarrolladores de apps en IOS. Cualquier MBaaS ofrece unos servicios reutilizables en todas las Apps: Notificaciones, Almacenamiento, integraciÛn con redes sociales, gestiÛn de usuarios, geoquerys, etc... La idea es olvidarnos de la infraestructura (adios a tareas de mantenimiento)
+								<br/>1) Windows Mobile Services
+								<br/>2) Parse.com
+								<br/>3) Helios de Heroku
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">ALEJANDRO CAMPOS MAGENCIO</a></h3>
+						
+						<p>Optimizando apps de Windows Phone con .NET y XAML</p><br/>
+						<p>18 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">`øDesarrollas o tienes pensado desarrollar apps para Windows Phone con .NET y XAML? Entonces necesitar·s saber quÈ puede afectar al rendimiento de tu app, cÛmo mejorarlo para que su comportamiento sea el m·s Ûptimo posible, y quÈ herramientas tienes a tu disposiciÛn. Y en esta sesiÛn te lo contamos con ejemplos pr·cticos.</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JOSU… YERAY JULI¡N FERREIRO</a></h3>
+						
+						<p>Nuevos escenarios de interacciÛn con NFC en Windows Phone 8</p><br/>
+						<p>18 Octubre,18:45 - 19:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">NFC, Near Field Communications, es una tecnologÌa que puede revolucionar la forma en la que interactuamos desde nuestro Smartphone con otros dispositivos. Intercambio de informaciÛn, pagos, emparejamiento de dispositivos con un toque... estos escenarios son unos pocos de los que podemos realizar.
+							<br/><br/>Windows Phone 8 incluye soporte para esta tecnologÌa y la integra en casi todos los terminales disponibles. En esta charla veremos de forma pr·ctica y concisa como aprovecharnos de NFC en nuestra app.</div>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 18 Octubre TRACK 3-->
+	<div data-role="page" id="track3-18" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 18 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-18" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#bloquex-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Bloque X</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#track3-18">Track 3</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">ALEJANDRO BRITO MONEDERO</a></h3>
+						
+						<p>AsÌ que pusiste MongoDB. Dime øcÛmo lo administras?</p><br/>
+						<p>18 Octubre, 15:15 - 16:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Hablar sobre MongoDB, orientado en los aspectos operativos de esta base de datos NoSQL, por ejemplo detalles como la durabilidad. TambiÈn comentar sobre las mejores pr·cticas: Uso de replica sets, sharding y respaldos. Si hay oportunidad poder incluir un demo corriendo en AWS (o poner un video, para protegerse del demo effect)
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JOSE MARÕA ARRANZ</a></h3>
+						
+						<p>Sitios web SPI cÈntricos en el servidor SEO compatibles sin estado ... `°ALELUYA!</p><br/>
+						<p>18 Octubre, 16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Hoy dÌa estamos acostumbrados a utilizar aplicaciones Single Page Interface (SPI), es decir, sin recargas, cualquier usuario de GMail est· usando este tipo de aplicaciones. Sin embargo el uso de SPI en sitios web es extremadamente raro por dos razones: la necesidad de la compatibilidad SEO y la necesidad de escalabilidad implica servidores replicados (pr·cticamente) sin estado, ambos aspectos muy enemigos del enfoque SPI. ItsNat v1.3 rompe estas dos aparentemente insalvables limitaciones.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">VÕCTOR CUERVO PALENCIA</a></h3>
+						
+						<p>NOSQL: Primeros pasos con MongoDB</p><br/>
+						<p>18 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							La charla versar· sobre una presentaciÛn de lo que son las bases de datos NOSQL. Una introducciÛn a MongoDB, instalaciÛn y primeros pasos. Luego presentar· como realizar las operaciones b·sicas sobre la base de datos: consulta, actualizaciones, borrado,... Veremos como se definen los Ìndices. Revisaremos el framework de agregaciÛn para operaciones m·s avanzadas y por ˙ltimo veremos como integrar MongoDB con diferentes lenguajes de programaciÛn: php, java, python,...
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JAVIER ONIELFA BELENGUER</a></h3>
+						
+						<p>ProgramaciÛn funcional: `°La usabas y no lo sabÌas!</p><br/>
+						<p>18 Octubre,18:45 - 19:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							La programaciÛn funcional est· influenciando frameworks y lenguajes. En esta charla se explicar· programaciÛn funcional, usando Haskell y Scala, y sus conceptos como transparencia referencial, inmutabilidad, ausencia de estado, recursiÛn, list comprehension, monads y lazy evaluation. Finalmente se ver· como estos conceptos ya los est·is utilizando como Javascript, promesas, actores, STM, LINQ, excepciones, Java 8 o Map/Reduce. Ver·s nuevos patrones donde antes solo habÌa cÛdigo espagueti.
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 18 Octubre TRACK 4-->
+	<div data-role="page" id="track4-18" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 18 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-18" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#bloquex-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Bloque X</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#track4-18">Track 4</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">ANDREY ANTUKH</a></h3>
+						
+						<p>C/C++ y Python: The fast and the furious</p><br/>
+						<p>18 Octubre, 15:15 - 16:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Hay circunstancias en las que un lenguaje din·mico (en este caso, python) no da el rendimiento requerido y tenemos que buscar soluciones con lenguajes de mas bajo nivel. La idea de esta charla es mostrar varias opciones entre las que mas conozco de como extender python con lenguajes tipo C/C++ pero no usando la api C estandar de Python. Concretamente, tocare un poco ctypes, cffi y boost.python
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">DAVID BUCHMANN</a></h3>
+						
+						<p>PHP Content Repository: Porting a Java Standard to PHP</p><br/>
+						<p>18 Octubre, 16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							PHPCR is an API for hierarchical data, handling both structured and unstructured content. It provides APIs for permission management, versioning, locking, search with an SQL-like syntax and so on. Several major frameworks and CMS (Typo3, Drupal, Symfony2, Midgard, Nooku und eZ publish) support PHPCR or are in discussion whether to use it as common standard for storing their data.
+							<br/><br/>PHPCR is a port of the Java standard JCR. PHCPR will be an official part of the upcoming JCR 2.1 standard. There are implementations that store content in relational databases based on doctrine DBAL, with the midgard2 content repository and with the JCR reference implementation jackrabbit.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">ALEX SOTO</a></h3>
+						
+						<p>Resistance is futile mocks will be assimilated</p><br/>
+						<p>18 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Everybody is unit testing, everybody is mocking. Everybody mocks database access, software dependencies, external systems, container services, ... to test what? You end up testing a bit of business logic and writing a lot of test code, when in production this code will run within a container under different circumstances. In this talk we are going to see how some tools like Arquillian, Byteman, NoSQLUnit and other programs, may help us writing real tests in a Java EE environment.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">RAFAEL LUQUE LEIVA, JOSE SAN LEANDRO</a></h3>
+						
+						<p>Grails vs XSS</p><br/>
+						<p>18 Octubre,18:45 - 19:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Mostraremos diferentes vectores de ataque que, aprovechando una simple vulnerabilidad XSS, nos permitir·n acceder a la webcam del visitante, controlar su equipo o incluirlo en una botnet.
+							<br/><br/>Posteriormente describiremos las soluciones existentes para protegernos de este problema en Grails, y discutiremos en general, cÛmo integrar la seguridad como un elemento m·s en el ciclo de desarrollo de aplicaciones web.
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 18 Octubre BLOQUE X-->
+	<div data-role="page" id="bloquex-18" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 18 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-18" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#bloquex-18" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Bloque X</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#bloquex-18">Bloque X</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">IAN ROBINSON</a></h3>
+						
+						<p>Graph Search: The Power of Connected Data</p><br/>
+						<p>18 Octubre, 10:00 - 10:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Today's complex data is big, variably-structured and densely connected. In this session we'll look at how size, structure and connectedness have converged to change the way we work with data. We'll then go on to look at some of the new opportunities for creating end-user value that have emerged in a world of connected data, illustrated with graph search examples implemented using Neo4j, the world's leading graph database.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="#speaker1">MAXIMILIEN DE COSTER</a></h3>
+						
+						<p>Competencias y perfiles profesionales del sector TIC a nivel nacional</p><br/>
+						<p>18 Octubre, 12:30 - 13:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Presentaremos el mercado TIC en EspaÒa analizando los subsectores que crecen y las tendencias de oferta y demanda de profesionales tic.
+							<br/><br/>Demostraremos cu·les son las tecnologÌas en las cu·les existen escasez de talentos en EspaÒa y los principales desajustes entre oferta y demanda en funciÛn del nivel de educaciÛn, experiencia, especializaciÛn y movilidad georrafica.
+							<br/><br/>Analizaremos las principales fuentes de reclutamiento mediante los resultados de una encuesta realizada a profesionales ti.
+							</div>
+						</div>
+					</li>
+					
+				<li class="ui-btn">
+                    <img src="speaker.png"  alt="linux" />
+                    <h3><a href="">LORENZO MAIORFI</a></h3>
+                    
+                    <p>Modern OOP embedded development with .NET Micro Framework</p><br/>
+                    <p>18 Octubre, 16:15 - 17:00</p>
+                    
+                    <div data-role="collapsible" data-theme="b">
+                        <h3>Detalles</h3>
+                        <div style="text-align:'justify'">
+                        We'll see how .NET Micro Framework is going to change drastically the way we write embedded applications, by mean of a true-virtualized core management, high level OOP/OOD coding techniques and tremendous inclination to IoT applications development.
+                        </div>
+                    </div>
+                </li>
+                
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">MARIO FUSCO</a></h3>
+						
+						<p>If you think you can stay away from functional programming, you are wrong</p><br/>
+						<p>18 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Everybody agree that concurrency and parallelism are two of the most important aspects of today's and tomorrow's programming. However, after years of object oriented programming, we give for granted a style made of mutable data and locks synchronizing the access to them, that often proves to be not efficient and very error-prone. The purpose of the talk is to show the principles of functional programming and how their employment can make the development of concurrent applications easier and more natural helping to fully exploit the potentiality of modern multicore CPU.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JUAN MANUEL AMUEDO GONZ¡ÅLEZ</a></h3>
+						
+						<p>Necesitades hardware y software en la impresiÛn 3D open source</p><br/>
+						<p>18 Octubre,18:45 - 19:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Se habla de la impresiÛn 3D en los medios. La impresiÛn 3D se populariza. La impresiÛn 3D open source ha entrado en nuestras vidas es a˙n m·s f·cil conseguir una. Te la puedes construir con tus propias manos... `øEn quÈ estado se encuentra la impresiÛn 3D open source? `øCu·les son sus tendencias? `øQuÈ software existe? `øQuÈ hardware? En esta charla intentaremos dar respuesta a estas preguntas e ir m·s all· respondiendo a: `øQuÈ necesidades software y hardware hay?
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	
+	<!--TRACKS 19 Octubre TRACK PRINCIPAL-->
+	<div data-role="page" id="trackp-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 19 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+				<a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+				<a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+				<a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#trackp-19">Track Principal</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">MANDY WAITE</a></h3>
+						
+						<p>Building for Success: Cloud backends for your mobile apps</p><br/>
+						<p>19 Octubre, 09:00 -09:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Today, building the next generation of mobile apps and scaling them to manage success requires leading edge platforms and infrastructure. In this session we look at how you can use the Google Cloud Platform to build highly scalable mobile backends. Using a sample application and live demos, we'll show how applications built on Google App Engine and Compute Engine can make use of Google Cloud Endpoints to provide all that's needed to allow backend services to be accessed by mobile devices.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="#speaker1">MARIO FUSCO</a></h3>
+						
+						<p>Functional Programming in Java: lambdas and beyond</p><br/>
+						<p>19 Octubre, 10:00 - 10:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Finally Java is getting lambda expressions, allowing to employ some functional techniques into its strongly object oriented paradigm. Nevertheless not all the Java developers are convinced of their usefulness or anyway know how to leverage them to write more expressive, readable, reusable and effective software. Functional programming, indeed, requires a big mindshift from the imperative style we are used to. The purpose of this talk is to show, with a set of examples developed during a live coding session, how functional programming can make us better Java developer and help to avoid or limit some bad habits inherited from our OOP backgroud, like the abuse of side effects, external iterations, null references and exceptions in our code.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">DAVID BONILLA FUERTES</a></h3>
+						
+						<p>7 tÈcnicas para conseguir que un buen equipo llegue a ser brillante</p><br/>
+						<p>19 Octubre,11:30 - 12:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Vale, nos hemos tatuado el Manifiesto √Ågil en la espalda y hemos modificado nuestra forma de trabajar, adaptando nuestra metodologÌa a nosotros, no a la inversa. Somos m·s productivos que nunca y, sin embargo, nos preguntamos `øDe verdad no podemos mejorar a˙n m·s como equipo?
+							<br/><br/>En esta charla hablaremos sobre 7 acciones que la compa√±Ìa australiana Atlassian lleva aplicando desde que decidiÛ abrazar las metodologÌas ·giles en 2002 y que cualquiera puede aplicar en su propio equipo.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">ALFONSO DOU OBLANCA</a></h3>
+						
+						<p>javaLeague: programa tu equipo y crea tus propias competiciones</p><br/>
+						<p>19 Octubre,15:15 - 16:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Desde javaHispano.org se lleva organizando el torneo de javaCup desde 2007. Con el frameWork javaCup puedes programar tu propio equipo de f˙tbol indicando los movimientos a realizar por tus jugadores.
+							<br/><br/>javaLeague te permitir· crear y administrar tus propias competiciones. Reta a tus amigos, compa√±eros de trabajo/de estudios, etc .. Ya no tendr·s excusa para no crear tu equipo de f˙tbol.
+							<br/><br/>La web de javaLeague est· desarrollada utilizando Google Application Engine, Google Web Toolkit y Bootstrap. Veremos como esta hecha y sus funcionalidades y sobre todo hablaremos de como debe evolucionar.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">MIKE BENKOVICH</a></h3>
+						
+						<p>Microsoft Data Stack Smackdown</p><br/>
+						<p>19 Octubre,16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							WebAPI or OData? WCF or REST? ATOM, XML or JSON? Where does LINQ fit into all this? Data is the core of why we build systems and solutions, and knowing what's possible with the latest release can save your bacon and save you time so you can focus on the business of your application. What are the options and when do you make the tradeoffs? In this session, we'll look at what's new in the data stack and explore the pros and cons of each. We'll dive into Entity Framework explain how it works with W
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JORGE DEL CASAR</a></h3>
+						
+						<p>Desarrollo de Apps Multiplataforma con Apache Cordova 3</p><br/>
+						<p>19 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							 Cordova es un framework de desarrollo mÛvil de cÛdigo abierto que permite usar tecnologÌas web standard como HTML5, CSS3 y Javascript para el desarrollo multiplataforma, evitando desarrollar en el lenguaje nativo de cada plataforma. La nueva Command Line Interface (CLI) desarrollada en Node.js te permite automatizar la creaciÛn de proyectos, adiciÛn de plataformas y plugins asÌ como la construir la app y probarla en simuladores y dispositivos reales.
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 19 Octubre TRACK 1-->
+	<div data-role="page" id="track1-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+		<header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+		
+		    <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+			<h1>Tracks 19 Octubre</h1>
+			
+			<div class="segmented-control ui-bar-d">
+			<div data-role="navbar" data-type="horizontal" data-mini="true">
+				<a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+				<a href="#track1-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 1</a>
+				<a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+				<a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+				<a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+				<a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+				<a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+				<a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+				<a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+			</div>
+		</div>
+		
+		</header>
+		<div data-role="content" class="detalles">
+		
+
+			<div id="divOuterTrans">
+				<ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+					<li data-role="list-divider" id="#track1-19">Track 1</li> 
+				
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">MARC RUBI—O</a></h3>
+						
+						<p>ASP.NET MVC & SPA Web Applications</p><br/>
+						<p>19 Octubre, 09:00 -09:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Cada vez m·s las aplicaciones web se encaminan a tener m·s control en la interfaz y se intenta tener todo en la p·gina Html y cada dÌa surgen infinidad de librerÌas scripts que junto a los est·ndares HTML y CSS, hacen nuestras webs m·s din·micas y usables ante el usuario, proporcion·ndonos una potencia a nuestras web que hasta ahora no se habÌa visto.
+							<br/><br/>Pero no hay que perder el norte entre tanta moda y tener muy claro que los extremos siempre son malos, porque tener todo en el servidor o tener
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="#speaker1">ABRAHAM OTERO</a></h3>
+						
+						<p>Bitcoin una moneda digital</p><br/>
+						<p>19 Octubre, 10:00 - 10:45</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Bitcoin es una moneda virtual que no est· respaldada por ning˙n estado. Est· respaldada por una red P2P de usuarios en Internet. Y tanto la posesiÛn de Bitcoins como las transacciones en esta moneda pueden realizarse de un modo completamente anÛnimo.
+							<br/><br/>En esta charla se explicar·n las distintas motivaciones que han llevado a la creaciÛn de esta moneda virtual, los fundamentos criptogr·ficos en los que se basa, y las implicaciones legales, Èticas y econÛmicas que puede llegar a tener.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">JOSE SALGUERO</a></h3>
+						
+						<p>Data Driven Development</p><br/>
+						<p>19 Octubre,11:30 - 12:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Domain Driven Development, Test Driven Development, Behaviour Driven Development give us best practices to create good products, tell us how to develop new features, but not what features to develop, what is important for the user. We must find a way to let users drive us to create a better product for them using all the data we can gather through Tracking and A/B Testing
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">OLE MICHAELIS</a></h3>
+						
+						<p>What`Äôs wrong with php?</p><br/>
+						<p>19 Octubre,12:30 - 13:15</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							These days, it often feels like php is an old, creepy piece of code - it seems that all the cool code kids are using ruby or node.
+							<br/><br/>But is this true? I believe we are on the right way to take our tools, frameworks, and the community itself to a new level. Composer, Symfony, and PSR are just a first step in the right direction. Each of us can do their part - you could, and you should also be a part of it. So lets unite into an awesome, open-minded community, leaving the php 3 times behind us!
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">BRENDA JIN</a></h3>
+						
+						<p>Tips and Tricks for Tablet Optimization</p><br/>
+						<p>19 Octubre,15:15 - 16:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Not sure how to optimize your site for the diverse and ever-changing world of Tablet devices? Learn about best practices, useful frameworks, and browser idiosyncrasies for touch-based 'in-between' screen sizes from somebody who spends every day rapidly iterating on web-based Tablet experiences.
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">MIGUEL ARAUJO P…REZ</a></h3>
+						
+						<p>Desarrollo de Apps Multiplataforma con Apache Cordova 3</p><br/>
+						<p>19 Octubre,16:15 - 17:00</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							Computer Vision (CV) is an exciting field of Computer Science with plenty of room for innovations. In this talk we will:
+							<br/><br/>- Introduce SimpleCV (an awesome Open Source framework for building CV applications in Python)
+							<br/>- Learn some CV concepts from a high-level perspective, proving that CV is not only made for privileged minds
+							<br/>- Experiment combining SimpleCV, Machine Learning and a Raspberry Pi to develop a smart red-light camera that can tell us which car models run the red light more often
+							</div>
+						</div>
+					</li>
+					
+					<li class="ui-btn">
+						<img src="speaker.png"  alt="linux" />
+						<h3><a href="">KATHRYN ROTONDO</a></h3>
+						
+						<p>Designing Apps for Little Fingers</p><br/>
+						<p>19 Octubre,17:45 - 18:30</p>
+						
+						<div data-role="collapsible" data-theme="b">
+							<h3>Detalles</h3>
+							<div style="text-align:'justify'">
+							It`ís amazing to watch a young child play with a touch device, they can seem to `ìget it`î right away. But there are still special considerations to make when designing for young kids, to maximize their engagement and minimize their frustration.
+							<br/><br/>We will cover how to use characters, audio/visual indicators, and inactivity timeouts. We`íll discuss which gestures are the most and least intuitive for small fingers, how a child's grip of a tablet affects UI, and what to include for parents.
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<footer data-role="footer" id="footerLocation" data-position="fixed" >
+			<h1>CodeMotion 2013</h1>
+		</footer>
+	</div>
+	
+	<!--TRACKS 19 Octubre TRACK 2-->
+    <div data-role="page" id="track2-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track2-19">Track 2</li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JOS… IGNACIO HERRANZ</a></h3>
+                        
+                        <p>Estrategia para desarrollo mÛvil: Web o aplicaciÛn nativa</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Elegir la tecnologÌa adecuada para tu proyecto es la decisiÛn m·s importante dentro de un proyecto de movilidad.
+                            <br/><br/>Repasaremos las diferentes tecnologÌas y tendencias que dominan el panorama actual de los desarrollos mÛviles (Android, iOS, Titanium, PhoneGap, html5, responsive design, Web especÌficas para mÛvil, detecciÛn en servidor, etc.). Y explicaremos cuando conviene utilizar cada una de ellas, apoy·ndonos en ejemplos reales de empresas que han optado con Èxito por cada una de las opciones.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="#speaker1">FERNANDO RODRÕGUEZ ROMERO</a></h3>
+                        
+                        <p>They live!</p><br/>
+                        <p>19 Octubre, 10:00 - 10:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Ellos viven, t˙ duermes: vee por primera vez el mundo como realmente es. Una introducciÛn a la realidad aumentada y procesamiento de video con GPUImage, OpenCV y iOS.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">PEDRO VICENTE G”MEZ S¡NCHEZ</a></h3>
+                        
+                        <p>Software Design Patterns for Android</p><br/>
+                        <p>19 Octubre,11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            La construcciÛn de software extensible, estructurado y desacoplado es uno de los mayores retos que un desarrollador debe afrontar. DÌa a dÌa nos enfrentamos con problemas cuya base es muy similar y que intentamos modelar para obtener la soluciÛn. Aplicando patrones de diseÒo software podremos construir una soluciÛn extensible, reutilizable y bien estructurada a todos esos problemas. A lo largo de la charla se comentar·n alguno de los patrones m·s importantes y su uso en el desarrollo de apps.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">ARIEL FERRANDINI</a></h3>
+                        
+                        <p>De perdidos a Titanium</p><br/>
+                        <p>19 Octubre,15:15 - 16:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Titanium es una herramienta para desarrollo de aplicaciones mÛviles de forma r·pida y sencilla utilizando JavaScript como lenguaje de programaciÛn base.
+                            <br/><br/>Porque todo el mundo puede hacer aplicaciones mÛviles nativas y de calidad.
+                            <br/><br/>Si eres front-developer o back-developer, ya no tienes que preocuparte cuando te piden una aplicaciÛn mÛvil. En la charla te explicaremos como hacer tu aplicaciÛn con Titanium con un caso pr·ctico de desarrollo, sin necesidad de saber Java ni Objective-C.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">SANTIAGO PORRAS RODRÕGUEZ</a></h3>
+                        
+                        <p>Windows Phone: be modern, be cool</p><br/>
+                        <p>19 Octubre,16:15 - 17:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Recorrido por la guÌa de diseÒo Modern UI para Windows Phone, durante el cu·l se mostrar·n los controles m·s importantes para el desarrollo de Apps, cÛmo sacarles el m·ximo rendimiento y cÛmo personalizarlos para poder aplicar un diseÒo atractivo, din·mico, usable e intuitivo a nuestras Apps para conseguir fidelizar a los usuarios por medio de una experiencia fascinante
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JORGE JUAN BARROSO, FERNANDO CEJAS</a></h3>
+                        
+                        <p>Inside Android Listview</p><br/>
+                        <p>19 Octubre,17:45 - 18:30</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            En esta charla veremos como funcionan las listas de android por dentro, veremos los problemas que tienen, compararemos cÛdigo de las distintas versiones y veremos algunas cosas curiosas. Aprenderemos a optimizarlas y probaremos algunas cosas interesantes.
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+	
+    
+    <!--TRACKS 19 Octubre TRACK 3-->
+    <div data-role="page" id="track3-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track3-19">Track 3</li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">QUIQUE MARTÕNEZ AL…N, ALEX CASQUETE</a></h3>
+                        
+                        <p>ARQUITECTURAS DISTRIBUIDAS con Windows AZURE</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Crear aplicaciones distribuidas e interactivas puede convertirse en una tarea difÌcil y compleja si no se dispone de una plataforma que resuelva los problemas por nosotros.En esta sesiÛn veremos los obst·culos que nos podemos encontrar y cÛmo Service Bus est· creado para superarlos, proporcionando las herramientas que podemos usar para crear, implementar y administrar aplicaciones que pueden ayudar a que la promesa de 'software + servicios' sea real.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">MANDY WAITE</a></h3>
+                        
+                        <p>Sensor networks and data pipelines: Handling data at massive scale</p><br/>
+                        <p>19 Octubre, 11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            At Google I/O this year, attendees were greeted by the sight of 500 environmental sensor motes placed all around the conference center. The sensors spent 3 days gathering data and providing us with the ability to ask questions about how the environment changed throughout the conference. This talk takes a deep dive into that experiment and shows how to ingest, process, query and analyze massive amounts of data produced by large scale sensor networks using the Google Cloud Platform.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">IBON LANDA MARTÕN</a></h3>
+                        
+                        <p>GestiÛn de la identidad en Cloud</p><br/>
+                        <p>19 Octubre,12:30 - 13:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            La gestiÛn de la identidad es uno de los problemas habituales con los que se encuentran los desarrolladores a la hora de desarrollar una aplicaciÛn; evitar el acceso no autorizado de terceros, controlar la autorizaciÛn de acceso....
+                            <br/>
+                            Durante la sesiÛn veremos de forma pr·ctica:
+                            <br/><br/>
+                            1 IntroducciÛn a seguridad basada en claims.
+                            <br/>2 SecurizaciÛn de aplicaciones Web y REST desplegadas en Cloud
+                            <br/>3 Windows Azure Active Directory
+                            <br/>4 Escenarios de Single Sing On
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JORGE LERIA, WILLIAM VIANA</a></h3>
+                        
+                        <p>DON¥T PANIC: Large scale web development</p><br/>
+                        <p>19 Octubre,15:15 - 16:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            En Tuenti, todas las funcionalidades que desarrollamos han de estar preparadas para escalar a millones de usuarios en el momento en el que el cÛdigo salga a producciÛn. Mediante el uso de patrones de cacheo, borrado en diferido, primado de caches, dark launches y otras estrategias podemos estar seguros que la infraestructura aguantara . En esta charla queremos poner ejemplos reales (y no triviales) de cÛdigo escrito para escalar... y en general cosas que molan sobre escalabilidad.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">IV¡N L”PEZ MARTÕN</a></h3>
+                        
+                        <p>°Quiero tiempo real y lo quiero para ayer!</p><br/>
+                        <p>19 Octubre,16:15 - 17:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            En un mundo hiper-conectado el concepto Tiempo Real es cada vez m·s utilizado y las arquitecturas "message driven" son la manera de conseguirlo porque permiten crear aplicaciones modulares y escalables.
+                            <br/><br/>En esta charla veremos un tipo de arquitectura totalmente distinta a la estandar de Grails para aplicaciones web que nos permitir· servir contenido en tiempo real a muchos clientes de manera r·pida y sencilla teniendo distintos mÛdulos independientes que interactuar·n entre sÌ.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JAVIER RAMIREZ</a></h3>
+                        
+                        <p>Bigdata: AnalÌtica para tu API con Redis y Google Bigquery</p><br/>
+                        <p>19 Octubre,17:45 - 18:30</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            øQuieres monitorizar una API que potencialmente va a generar muchÌsima informaciÛn? Es el momento de empezar a pensar en bigdata.
+                            <br/><br/>En teowaki hemos montado un sistema de analÌtica de nuestra API usando redis como intermediario y Bigquery como almacÈn de datos. øEl resultado? Consultas inmediatas sobre todos los logs de tr·fico de nuestro sistema en apenas milisegundos.
+                            <br/><br/>HablarÈ de las diferentes alternativas evaluadas, y cÛmo estamos usano Bigquery para resolver nuestro problema
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+    
+    <!--TRACKS 19 Octubre TRACK 4-->
+    <div data-role="page" id="track4-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track4-19">Track 4    </li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">MIGUEL ¡NGEL PASTOR OLIVAR</a></h3>
+                        
+                        <p>Construyendo aplicaciones concurrentes y distribuidas con Akka</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            El hardware cada vez ofrece una mayor nivel de paralelismo de modo que los nuevos lenguajes deben soportar mecanismos de concurrencia si desean tener Èxito. Las abstracciones utilizadas habitualmente (hilos, sem·foros, locks, ...) suelen ser propensos a errores y razonar sobre los mismos es complicado. A lo largo de esta charla analizaremos las oportunidades que Akka nos brinda para construir aplicaciones concurrentes, distribuidas, escalables y tolerantes a fallos de manera sumamente sencilla.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">PABLO CARBALLUDE GONZ¡LEZ</a></h3>
+                        
+                        <p>Cracking exploiting and fixing your Windows 8 App</p><br/>
+                        <p>19 Octubre, 10:00 - 10:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            In 'this' session we will examine and exploit different examples to learn what the common mistakes are, how bad they are and we will learn how to fix them.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">¡LVARO S¡NCHEZ-MARISCAL</a></h3>
+                        
+                        <p>Developing SPI applications using Grails and AngularJS</p><br/>
+                        <p>19 Octubre,11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Client-side MVC frameworks like AngularJS are getting more popular over time. They represent a big architectural change to what web developers are used to: moving from server-side MVC to a browser based one. In this talk I will speak about how Grails can fit with a single-page architecture and discuss the pros and cons of developing that kind of applications.
+                            <br/><br/> I will also 'do' a live demo of a sample web application using AngularJS, Grails, the events-push plugin and MongoDB.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">DANIEL GONZ¡LEZ</a></h3>
+                        
+                        <p>Creando mÛdulos para PHP</p><br/>
+                        <p>19 Octubre,12:30 - 13:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            El intÈrprete de PHP est· escrito en C, asÌ como la mayor parte de la SPL, esto lo convierte en uno de los lenguajes conocidos como 'lenguaje pegamento'.
+                            <br/><br/>øQuÈ pasa si tengo una caracterÌstica nueva, que quiero implementar? Generalmente utilizamos PHP, y escribimos una librerÌa, pero øpor quÈ no implementarla en C?
+                             <br/><br/>Luego podemos compilarla y acceder a la API de nuestra librerÌa desde nuestras aplicaciones PHP.
+                             <br/><br/>øQuÈ ocurre si quiero incluir mi caracterÌstica en PHP? Veremos cual es el proceso desde que se presenta el RFC, hasta que se acepta, y quienes son las personas que intervienen en las decisiones.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">MANUEL ¡NGEL RUBIO JIM…NEZ</a></h3>
+                        
+                        <p>Erlang Un Mundo Concurrente</p><br/>
+                        <p>19 Octubre,15:15 - 16:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            La idea de esta charla es mostrar las ventajas de la plataforma Erlang, el cÛmo ha contribuido a grandes empresas y cÛmo cada vez m·s est· presente en desarrollos y elementos cotidianos de Internet como Facebook, Twitter, Whatsapp, ... Damos un recorrido sobre los hitos que favorecen que Erlang cada vez sea m·s visible y ejemplos en el propio lenguaje de Erlang para mostrar su facilidad.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">ALEJANDRO G”MEZ</a></h3>
+                        
+                        <p>Python Idiom·tico</p><br/>
+                        <p>19 Octubre,17:45 - 18:30</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Entre los usuarios de un lenguaje de programaciÛn se establecen con el tiempo una serie de idiomas y buenas pr·cticas que hacen el cÛdigo m·s elegante, expresivo y en muchos casos m·s eficiente. El propÛsito de esta charla es mostrar un cat·logo de idiomas en Python, haciendo hincapiÈ en aquellos que no son del todo intuitivos para gente que se acerca a Python desde otros lenguajes de programaciÛn. Me gustarÌa que usuarios principiantes, medios y avanzados puedan llevarse algo de esta charla.
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+    
+    <!--TRACKS 19 Octubre TRACK 5-->
+    <div data-role="page" id="track5-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track5-19">Track 5  </li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">PABLO GUARDIOLA</a></h3>
+                        
+                        <p>Testeas o k ase??</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            En la sesiÛn se pretende explicar la importancia del testing en dispositivos mÛviles, asÌ como animar a los desarrolladores a que implementen tests unitarios en sus aplicaciones, concretamente usando el framework Robolectric para Android. Se explicar· el funcionamiento de la herramienta, mostrando por quÈ es tan potente junto con las posibilidades que nos ofrece y, finalmente, se enseÒar· un ejemplo pr·ctico detallando lo f·cil que es tanto configurarlo como empezar a escribir tests.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">VÕCTOR GARCÕA P…REZ</a></h3>
+                        
+                        <p>El proceso de release de Tuenti</p><br/>
+                        <p>19 Octubre, 10:00 - 10:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Cuando una empresa crece r·pidamente como es el caso de Tuenti, el proceso de desarrollo y release necesita adaptarse. De un proceso manual, inestable, costoso y propenso a fallos a uno totalmente automatizado, r·pido, fiable y que requiere la atenciÛn de muy poca gente, pudiendo hacer un deploy o una integraciÛn de cÛdigo haciendo sÛlamente click en un botÛn.
+                            <br/><br/>QuÈ pasa en Tuenti desde que se empieza a programar, hasta que el cÛdigo llega a producciÛn.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">ANTONIO MATARRANZ</a></h3>
+                        
+                        <p>No vendas tu producto, publica tus APIs. El caso de las herramientas sem·nticas.</p><br/>
+                        <p>19 Octubre,11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            øCÛmo desarrollar el negocio alrededor de nuevas tecnologÌas software? Las herramientas sem·nticas ofrecen muchas posibilidades para procesar y rentabilizar el contenido no estructurado que inunda las empresas. Sin embargo su adopciÛn ha sido lenta debido a riesgos tÈcnicos, coste total de propiedad y otras barreras. Los modelos de negocio basados en API pueden eliminar alguna de estas barreras y estimular el uso, lamentablemente no todos los modelos basados en API son eficaces. Esta presentaciÛn resume las experiencias de Daedalus comercializando API sem·nticas (tanto SaaS como on-premises).
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">NIKOLAS MARTENS</a></h3>
+                        
+                        <p>Specification by Example - to the point</p><br/>
+                        <p>19 Octubre,12:30 - 13:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Specification by Example is a powerful software development technique that can maximize your productivity and minimize your frustration. Yet the multitude of names is a symptom of how scattered the community is about its main concepts.
+                            <br/><br/>In 'this' talk, I introduce Specification by Example and how it can be implemented both management- and technology-wise in green- as well as brown-field projects so you can start taking full advantage of its benefits in your work, 'with' your tools, right now.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JULIEN FEMIA</a></h3>
+                        
+                        <p>When eZ Publish 5 meets Symfony 2</p><br/>
+                        <p>19 Octubre,15:15 - 16:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            HMVC model for the front controller, Twig for the template engine, the new version of the CMS eZ Publish is entirely based on the Symfony2 components. Sometimes forgotten when talking about CMSs, eZ Publish is a huge competitor to the well-known Drupal.
+                            <br/><br/>In this conference, we will dive into the architecture of the CMS, the new REST API, and we`ll see how the choice to adopt the Symfony2 Components is a breakthrough for the PHP community.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">ALBERTO GIMENO</a></h3>
+                        
+                        <p>DesafÌos y lecciones aprendidas haciendo grandes aplicaciones con Node.js</p><br/>
+                        <p>19 Octubre,16:15 - 17:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            - Desarrollo: organizaciÛn del cÛdigo, testing y cobertura de tests. GestiÛn de errores en un mundo asÌncrono y errores que te matan el servidor web y cÛmo evitarlos o gestionarlos
+                            <br/>- Herramientas: trucos para exprimir expressjs, npm y mÛdulos de terceros que te resuelven la vida
+                            <br/>- Sistemas: despliegues y alta disponibilidad y por quÈ Nodejs es genial para hacer scripts de sistemas
+                            <br/>- Hardcore Node.js: overview de acceso a funcionalidad de red de bajo nivel, mÛdulos cluster y virtual-machine
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                    <img src="speaker.png"  alt="linux" />
+                    <h3><a href="">ALEJANDRO LLORENTE PINTO</a></h3>
+                    
+                    <p>øSomos los consumidores predecibles?</p><br/>
+                    <p>19 Octubre,17:45 - 18:30</p>
+                    
+                    <div data-role="collapsible" data-theme="b">
+                        <h3>Detalles</h3>
+                        <div style="text-align:'justify'">
+                        Consideramos cientos de miles de transacciones con tarjetas de crÈdito para responder a la pregunta "øsomos los consumidores predecibles?".
+                        <br/> <br/>Bas·ndonos en estos datos, hemos visto que, a pesar de ser animales de costumbres y volver con regularidad a cierto n˙mero de sitios, no siempre lo hacemos en el mismo orden y por tanto, dentro de los sitios a nuestro alcance, somos muy impredecibles en cada elecciÛn individual. En la charla mostraremos cÛmo utilizar el algoritmo de compresiÛn ZIP para medir si nuestros patrones son repetitivao y por tanto predecibles. Finalmente, mostramos cÛmo construir un modelo para predecir dÛnde compraremos la siguiente vez y enseÒaremos que lo que ha hecho la gente de nuestro entorno, nuestra red social indirecta, ayuda a identificar estos sitios.
+                        </div>
+                    </div>
+                </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+    
+    <!--TRACKS 19 Octubre TRACK 6-->
+    <div data-role="page" id="track6-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track6-19">Track 6</li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JES⁄S ESPINO GARCÕA</a></h3>
+                        
+                        <p>IntroducciÛn a Django Rest Framework</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            El desarrollo de APIs RESTful se est· convirtiendo en una tarea muy habitual por la existencia de cada vez m·s y m·s aplicaciones y frameworks javascript, adem·s se est· posicionando como una fuerte alternativa a tecnologÌas como SOAP.
+                            <br/><br/>Mi objetivo es explicar cÛmo de f·cil es hacer una API RESTful simple con Django Rest Framework, y hacer un recorrido por la estructura de clases con las que podemos construir APIs muy complejas y extender el comportamiento.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JULIO GALAR”N</a></h3>
+                        
+                        <p>Javascript meets hardware</p><br/>
+                        <p>19 Octubre, 10:00 - 10:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            øAlguna vez te has planteado poder interactuar con dispositivos hardware mediante el uso de Javascript? Descubre quÈ frameworks, APIs, plataformas hardware puedes emplear para alcanzar dicho fin.
+                            <br/><br/> Durante la charla se mostraran distintos ejemplos de interacciÛn haciendo uso de las nuevas APIs de HTML5 como Text to Speech, Joystick, WebGL, Web socket,... a travÈs de NodeJS, Raspberry Pi y plataformas de prototipado r·pido como Arduino, Vinciduino,...
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JORGE MAROTO GARCÕA</a></h3>
+                        
+                        <p>Cuando haces Pods ya no hay stop</p><br/>
+                        <p>19 Octubre,11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Con plataformas como GitHub, cada vez es m·s sencillo encontrar librerÌas para reutilizar en nuestros proyectos de XCode. Pero... øquÈ pasa cuando se introduce una mejora en Èsta y la queremos actualizar? Anteriormente existÌan los submodulos en Git, pero entonces apareciÛ Cocoa Pods, el "apt-get" para Obj-C. En esta sesiÛn veremos su potencial para manejar librerÌas de terceros asÌ como a crear y compartir las nuestras incluso de manera interna privada en nuestra compaÒÌa.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">SERGIO ARBEO</a></h3>
+                        
+                        <p>El diablo est· en los detalles</p><br/>
+                        <p>19 Octubre,12:30 - 13:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            En la charla se describir·n "desatinos" de distintos lenguajes e implementaciones. Estos errores nos permitir·n adentrarnos en temas como optimizaciones de lenguajes interpretados diseÒo de APIs en lenguajes funcionales o simplemente nos har·n echarnos unas risas.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">RUB…N AGUILERA DÕAZ-HEREDERO</a></h3>
+                        
+                        <p>Mybatis como alternativa a Hibernate</p><br/>
+                        <p>19 Octubre,15:15 - 16:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Esta charla se divice en tres bloques:
+
+                                <br/>1.- Comparativa entre JDBC, Mybatis e Hibernate exponiendo en que situaciones es mejor uno u otro
+                                <br/>2.- IntroducciÛn a Mybatis como funciona y caracterÌsticas b·sicas del framework
+                                <br/>3.- Demo: integraciÛn con Maven y Spring para crear una API de acceso a datos sencilla con Mybatis
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">”SCAR GARCÕA AMOR</a></h3>
+                        
+                        <p>Taller de GitLab</p><br/>
+                        <p>19 Octubre,16:15 - 17:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Taller completamente pr·ctico de GitLab. En una primera parte se mostrar· como hacer una instalaciÛn del producto de forma sencilla utilizando una Ubuntu Server para luego hacer una introducciÛn de como utilizarlo y administrarlo.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                    <img src="speaker.png"  alt="linux" />
+                    <h3><a href="">¡LVARO HERN¡NDEZ</a></h3>
+                    
+                    <p>The Billion Tables Project</p><br/>
+                    <p>19 Octubre,17:45 - 18:30</p>
+                    
+                    <div data-role="collapsible" data-theme="b">
+                        <h3>Detalles</h3>
+                        <div style="text-align:'justify'">
+                        Usually large databases are such that hold a large number of records, reaching billions. But what about creating a billion... tables?
+                        <br/><br/> Sometime ago, 'this' apparently crazy question was found in a database soup.It may not be your day-to-day task, but the task of creating them exposes some topics about PostgreSQL internals, performance and large databases that may be really worth for your day-to-day.
+                        </div>
+                    </div>
+                </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+    
+    <!--TRACKS 19 Octubre TRACK 7-->
+    <div data-role="page" id="track7-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track7-19">Track 7</li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">LORENZO GONZ¡LEZ GASC”N</a></h3>
+                        
+                        <p>IntroducciÛn a AngularJS</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            La charla empezar· con un breve repaso a algunos frameworoks JavaScript MVC (backbone, knockout, EmberJS). DespuÈs empezaremos contando lo b·sico de AngularJS como $scope, controladores, directivas, filtros y validaciones. Seguiremos con rutas (routes) , mÛdulos, inyecciÛn de dependencias y servicios. Seguiremos con aspectos avanzados de creaciÛn de directivas , creaciÛn de servicios y creaciÛn de filtros. Acabaremos con test y RequireJS en AngularJS.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">ANTONIO DE PASQUALE, SIMONE LIPPOLIS</a></h3>
+                        
+                        <p>Motion & Gesture interaction patterns in modern web design</p><br/>
+                        <p>19 Octubre, 10:00 - 10:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Technological advances have allowed, in the last few years, a big step forward in the dynamic behaviors and interactions patterns that we used to do on the web, in the past. Starting from understanding the rules of motion design and how people interact with it during the processes of interaction we'll discover through practical insights and examples what is "under the hood" and how to prototype and develop all this design patterns with a more integrated and efficient design to code workflow.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">GUILLERMO L”PEZ LEAL</a></h3>
+                        
+                        <p>Push notifications for the [mobile] open web</p><br/>
+                        <p>19 Octubre,11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Push notifications are awesome. You can send notifications from your servers to your app, and it will do something spectacular. But push notifications are not widely available on the [mobile] web. We aim to create a protocol and a specification for webs, webapps, based on open standards (like WebSockets), so anyone could implement it. Focused on battery usage and data transmission, using easy techniques on cellular networks. We will talk about NodeJS, MongoDB and RabbitMQ, focusing on High Availability and performance.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">RAM”N COROMINAS</a></h3>
+                        
+                        <p>Contenido din·mico accesible: Yes we can!</p><br/>
+                        <p>19 Octubre,12:30 - 13:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            Desde simples men˙s desplegables, pasando por carruseles, lightboxes... a bloques de informaciÛn actualizada mediante AJAX; muchos de estos contenidos pueden provocar graves barreras de accesibilidad que deben tenerse en cuenta para no dejar fuera a nadie.
+                            <br/>
+                            Contenido:
+                            <br/>
+                            1. Lectores de pantalla y buffer virtual
+                            <br/>2. Casos tÌpicos y sus problemas
+                            <br/>3. Posibles soluciones accesibles
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">AURELIO DE ROSA</a></h3>
+                        
+                        <p>People don't give a f**k of JavaScript</p><br/>
+                        <p>19 Octubre,15:15 - 16:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            People don't give a f**k of JavaScript. You shouldn't either. We are here to do stuffs, whether you call them websites, web applications, web services or hybrid apps. People want to perform tasks, not listen you talking about your favourite programming language. So, use the one you feel more comfortable with and just release the next big thing. But, if your favourite language is JavaScript, let's write better code. What does better means? Better for developers, better for devices, better for users.
+                            <br/>
+                            In this talk, I'll describe some of the latest HTML5 APIs, many of which still experimental, that can help you develop great code. In a bunch of minutes, you'll see how to use:
+                                <br/>
+                            <br/>- The High Resolution Time and the User Timing APIs to help yourself testing your code performances
+                            <br/>- The Page Visibility and the Battery APIs to take care of devices' resources
+                            <br/> - The Vibration and the GetUserMedia APIs to create better User Experiences
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">MARCO CASARIO</a></h3>
+                        
+                        <p>Implementing responsive web apps with HTML5 and CSS3</p><br/>
+                        <p>19 Octubre,16:15 - 17:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            In this talk the speaker will share with the audience what he has learned during the last year of mobile web app development.
+                            <br/><br/>The workflows used, the errors made and the optimization techniques for creating better responsive web applications using HTML5, CSS3 and Javascript.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                    <img src="speaker.png"  alt="linux" />
+                    <h3><a href="">SANDRO PAGANOTTI</a></h3>
+                    
+                    <p>Experimenting with WebRCT</p><br/>
+                    <p>19 Octubre,17:45 - 18:30</p>
+                    
+                    <div data-role="collapsible" data-theme="b">
+                        <h3>Detalles</h3>
+                        <div style="text-align:'justify'">
+                        This talk aims to show how WebRTC works through a series of small well explained live demos. First we'll learn how to interact with camera and microphone and then how to stream the data acquired from these sensors over a peer to peer connection. Last but not least we'll explore some interesting scenarios of interaction between WebRTC and other HTML5 elements, such as canvas.
+                        </div>
+                    </div>
+                </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+    
+    <!--TRACKS 19 Octubre TRACK 8-->
+    <div data-role="page" id="track8-19" class="mainBody" data-add-back-btn="true" data-fullscreen="true">
+        <header data-role="header" id="headerTracks" data-position="fixed" data-inline="true" class="detalles">
+        
+            <a href="#jqm" data-role="button" data-theme="b" data-icon="home">Home</a>
+            <h1>Tracks 19 Octubre</h1>
+            
+            <div class="segmented-control ui-bar-d">
+            <div data-role="navbar" data-type="horizontal" data-mini="true">
+                <a href="#trackp-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track Principal</a>
+                <a href="#track1-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 1</a>
+                <a href="#track2-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 2</a>
+                <a href="#track3-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 3</a>
+                <a href="#track4-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 4</a>
+                <a href="#track5-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 5</a>
+                <a href="#track6-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 6</a>
+                <a href="#track7-19" data-role="button" data-theme="d" data-transition="none" data-icon="grid"> Track 7</a>
+                <a href="#track8-19" data-role="button" data-theme="b" data-transition="none" data-icon="grid"> Track 8</a>
+            </div>
+        </div>
+        
+        </header>
+        <div data-role="content" class="detalles">
+        
+
+            <div id="divOuterTrans">
+                <ul data-role="listview" data-inset="true" id="listviewtracks" data-filter="true">
+
+                    <li data-role="list-divider" id="#track8-19">Track 8</li> 
+                
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">RA⁄L OTAOLEA</a></h3>
+                        
+                        <p>The Web is the next game platform</p><br/>
+                        <p>19 Octubre, 09:00 -09:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JAMES WILLIAMS</a></h3>
+                        
+                        <p>Creating Games With Three.js</p><br/>
+                        <p>19 Octubre, 10:00 - 10:45</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            There was once a time where gaming in the browser meant Flash. That time is no more. Based on OpenGL ES, WebGL brings the 3D world to the browser without any plugins. Three.js, a scenegraph library for WebGL, allows us to make creating 3D web apps easier by abstracting away many of the low-level API calls.
+                            <br/><br/>In this session, you`ll learn the basics of game programming, WebGL, and how to use Three.js to create WebGL applications.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JOSE JAVIER GARCÕA ARANDA</a></h3>
+                        
+                        <p>Cloud Gaming usando el protocolo Q4S</p><br/>
+                        <p>19 Octubre,11:30 - 12:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            El creciente desarrollo de los juegos online multijugador exige necesidades a la red mas all· del simple incremento del ancho de banda. Estas necesidades se ven incrementadas en los juegos virtualizados en la nube (cloud gaming) donde adem·s de enfrentarse al problema de varios jugadores con diferentes latencias, la pÈrdida de paquetes y las variaciones en los retardos afectan dram·ticamente a la jugabilidad. Q4S es un protocolo libre desarrollado por la Universidad PolitÈcnica de Madrid y Alcatel-lucent y presentado en el IETF-80 que nace con el objetivo de resolver el problema de la degradaciÛn de la jugabilidad debida a las diferencias de calidades de conexiÛn de cada participante. Durante una partida, Q4S informa al game server de las condiciones de red en cada momento para cada usuario, permitiendo que la resoluciÛn de los gr·ficos y la velocidad del juego se adapte a las condiciones de los jugadores.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">MANUEL GOMEZ ZOTANO</a></h3>
+                        
+                        <p>GestiÛn de App de Gaming</p><br/>
+                        <p>19 Octubre,12:30 - 13:15</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            El tema que vamos a tratar para la charla va a tratar sobre los elementos que flotan alrededor de las aplicaciones que hacen que pueda llegar a todos los p˙blicos. En concreto vamos a tratar el papel de las cdns como elementos de distribuciÛn de los contenidos y el formato json como formato universal de distribuciÛn.
+                            <br/><br/>
+                            GuiÛn:
+                            <br/><br/>
+                            1. DistribuciÛn de objetos mediante api rest.<br/>
+                            2. DistribuciÛn masiva de objetos a travÈs de internet. CDNs.<br/>
+                            a. Elementos http involucrados<br/>
+                            b. Peticiones get vs post. Idempotencia.<br/>
+                            3. Caso de ejemplo: hora global.<br/>
+                            4. Formatos de vÌdeo para vod y para live en aplicaciones mÛviles. Android e ios.<br/>
+                            a. HLS<br/>
+                            b. Smooth Streaming<br/>
+                            c. Mp4<br/>
+                            d. http live<br/>
+                            5. Caso de ejemplo: live de RTVE y adaptaciÛn a pantallas.<br/>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="ui-btn">
+                        <img src="speaker.png"  alt="linux" />
+                        <h3><a href="">JORGE RUIZ MAGA—A</a></h3>
+                        
+                        <p>Utilizando el contexto y la movilidad como nueva forma de diversiÛn.</p><br/>
+                        <p>19 Octubre,16:15 - 17:00</p>
+                        
+                        <div data-role="collapsible" data-theme="b">
+                            <h3>Detalles</h3>
+                            <div style="text-align:'justify'">
+                            El juego nos mantiene jÛvenes y saludables, es una vÌa de entrada a la vitalidad, es gratificante, genera optimismo, busca la novedad y lleva a la maestrÌa...
+                            <br/><br/>Ven a descubrir cÛmo la revoluciÛn de los smartphones est· cambiando nuestra forma tradicional de divertirnos. DiviÈrtete a cualquier hora y en cualquier sitio.
+                            </div>
+                        </div>
+                    </li>
+                    
+
+                    
+                    <li class="ui-btn">
+                    <img src="speaker.png"  alt="linux" />
+                    <h3><a href="">CARLOS BENÕTEZ, SERGIO RUIZ</a></h3>
+                    
+                    <p>Desarrollo de juegos con tecnologÌas web: HTML5 y JavaScript</p><br/>
+                    <p>19 Octubre,17:45 - 18:30</p>
+                    
+                    <div data-role="collapsible" data-theme="b">
+                        <h3>Detalles</h3>
+                        <div style="text-align:'justify'">
+                        Actualmente, el desarrollo de videojuegos para tecnologÌas mÛviles ha vuelto la cara al pasado reciente de los 8 y 16 bits. Una Època donde las limitaciones de las viejas m·quinas obligaban a exprimir el ingenio de los desarrolladores para conseguir asÌ llevar a cabo aquellas creaciones que hoy son consideradas cl·sicos.
+                        <br/><br/>Por otro lado, el gusto por lo que hoy se denomina 'retro' y el creciente movimiento indie no han hecho sino subrayar a˙n m·s el gusto por lo cl·sico, impulsando m·s si cabe el rescate de las viejas tÈcnicas de finales de los 80.
+                        <br/><br/>En esta breve charla, se pondr·n sobre la mesa algunas de las metodologÌas tradicionales junto a otras m·s recientes para conseguir asÌ que los interesados dispongan de las herramientas necesarias que el desarrollador moderno de videojuegos necesita.
+                        </div>
+                    </div>
+                </li>
+                    
+                </ul>
+            </div>
+
+        </div>
+        <footer data-role="footer" id="footerLocation" data-position="fixed" >
+            <h1>CodeMotion 2013</h1>
+        </footer>
+    </div>
+    
+	<!-- About Dialog -->
+    <div id="about" data-role="page" class="detalles">
+      <div data-role="header" >
+        <h1>About CodeMotion</h1>
+      </div>
+      <div data-role="content">
+        Evento para desarrolladores que se realiza en Madrid durante los d&iacute;as 18-19 Octubre
+      </div>
+    </div>
+	
+    <!-- MY LOCATION -->
+    <div id="mylocation" data-role="page" data-theme="a" class="detalles">
+      <div data-role="header" data-theme="b" data-add-back-btn="true" data-inline="true">
+        <a href="#location" data-role="button" data-theme="b" data-icon="back" data-rel="back">Back</a>
+        <h1>GeoLocalizaci&oacute;n</h1>
+      </div>
+      <div data-role="content">
+        <p>You current Position is ...</p>
+        <div id="geopos"></div>
+        
+        <input type="button" value="Actualizar localizaci&oacute;n" onclick="getLocation();" data-theme="b">
+        
+       
+        
+      </div>
+      <div id="map_holder"></div>
+      <footer data-role="footer" id="footerLocationAux" data-position="fixed" data-add-back-btn="true" data-inline="true">
+          <a href="#location" data-role="button" data-theme="b" data-icon="back" data-rel="back">Back</a>
+          <h1>CodeMotion 2013</h1>
+      </footer>
+    </div>
+    
+    
+    <!-- MAP -->
+	<div data-role="page" id="map-page" class="mainBody" data-fullscreen="true">
+	<div data-role="header" data-position="fixed" data-inline="true" class="detalles">
+
+        <input type="radio" name="switch" id="map-switch" checked="true" />
+        <label for="map-switch">Press here to view the Location map</label>
+
+	</div>
+	<div data-role="content" class="ui-content-list">	
+        <div id="list-canvas">
+            <ul id="list-results" data-role="listview">
+            	<li data-marker-info="40.38905,-3.62967">
+				  <div>
+				    <div class="ui-gmap-marker-info">
+				  	  <h1><a id="gmap-marker-link" href="#">Campus Sur UPM</a></h1>
+				  	  <p>Carretera de Valencia, km. 7, 28031 Madrid</p>
+				  	</div>
+				  </div>
+            	  <a href="#">
+            	  	<h1 class="ui-gmap-marker-title wrap">Campus Sur UPM</h1>
+            	  	<div class="ui-li-count">
+            	  		<span>Carretera de Valencia, km. 7, 28031 Madrid</span>
+            	  	</div>
+            	  </a>
+            	</li>				
+			</ul>
+		</div>
+	</div>
+	<footer data-role="footer" id="footerLocation" data-position="fixed" data-add-back-btn="true" data-inline="true">
+			<a href="#location" data-role="button" data-theme="b" data-icon="back" data-rel="back">Back</a>
+			<h1>CodeMotion 2013</h1>
+	</footer>
+	<div data-role="content" id="map-canvas" data-initial-view="40.38905,-3.62967,10"></div>
+	
+	
+<!-- Load map assets at bottom for performance -->
+<script type="text/javascript" src="jquery.gmap.js"></script>
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.0/src/infobox_packed.js"></script>			
+</div>
+</body>
+</html>

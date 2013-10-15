@@ -1,0 +1,164 @@
+.ui-mobile-viewport {
+	background: #76abc9;	
+}
+
+.ui-li, .ui-li.ui-field-contain {
+	overflow: hidden;
+}
+
+.mainBody {
+	background: url('images/bg.png') repeat-x top center;
+	font-style: italic;
+    font-size:20px;
+}
+	.mainBody #header {
+		background: url('images/codemotion.png') no-repeat center 50px;
+		height: 120px;
+		border: none;
+		font-style: italic;
+     	font-size:20px;
+	}
+		.mainBody #header h1{
+			text-indent: -100em;
+			font-style: italic;
+    		 font-size:20px;
+		}
+
+#divOuterTrans {
+	margin: 1em 0;
+	padding: .5em;
+	background-color: rgba(255,255,255, .3);
+	-moz-border-radius: 0.6em 0.6em 0.6em 0.6em;
+	-webkit-border-radius: 0.6em 0.6em 0.6em 0.6em;
+	}
+	#divOuterTrans > *, #divOuterTrans form > div {
+		margin-top: 0px;
+	}
+	#divOuterTrans p {
+		text-align: center;
+		font-size: .8em;
+	}
+	#divOuterTrans form.ui-listview-filter {
+		margin: 0px 0px 5px 0px;
+	}
+	#divOuterTrans.speaker p {
+		text-align: left;
+		font-size: .8em;
+	}
+		#divOuterTrans.speaker p img {
+			float: left;
+			margin: 0px 10px 10px 0px;
+		}
+		#divOuterTrans.speaker p a {
+			color: #ffffff;
+		}
+
+.ui-li-divider, .ui-li-static {
+	font-size: 25px;
+	padding: .75em auto;
+}
+
+#speakers li p {
+	text-align: left;
+	 font-size:20px;
+}
+
+.divSwipe {
+	text-align: center;
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+	min-height: 83px;
+	display: none;
+	top: 0px;
+	left: 0px;
+	padding-top: 15px;
+	background: #555555; /* old browsers */
+	background: -moz-linear-gradient(top, #555555 0%, #BBBBBB 20%, #BBBBBB 70%, #555555 90%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#555555), color-stop(15%,#BBBBBB), color-stop(70%,#BBBBBB), color-stop(90%,#555555)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endColorstr='#555555',GradientType=0 ); /* ie */
+}
+.aSwipeBtn {
+	padding: 0.6em;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin: 12px 10px 0 0;
+	position: relative;
+	top: 20px;
+	font-size: 25px;
+}
+#speakers .ui-link {
+	color: #000000;
+	font-weight: bold;
+	text-decoration: none;
+	 font-size:20px;
+}
+#speakers .ui-li-count {
+	right: 35px;
+	 font-size:20px;
+}
+
+/* red color buttons */
+.ui-btn-up-r { border: 1px solid #953403; background: #2567ab; font-weight: bold; color: #fff; cursor: pointer;  text-shadow: 0 -1px 1px #953403; text-decoration: none; background-image: -moz-linear-gradient(top, #ec4a0b, #ad390c); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ec4a0b),color-stop(1, #ad390c));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ec4a0b', EndColorStr='#ad390c')"; }
+.ui-btn-up-r a.ui-link-inherit { color: #fff; }
+.ui-btn-hover-r { border: 1px solid #953403; background: #f15c22; font-weight: bold; color: #fff;  text-shadow: 0 -1px 1px #014D68; background-image: -moz-linear-gradient(top, #f15c22, #f15c22); text-decoration: none; background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f15c22),color-stop(1, #f15c22));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f15c22', EndColorStr='#f15c22')";  }
+.ui-btn-hover-r a.ui-link-inherit { color: #fff; }
+.ui-btn-down-r { border: 1px solid #225377; background: #79ae21; font-weight: bold; color: #fff; text-shadow: 0 -1px 1px #225377; background-image: -moz-linear-gradient(top, #bc770f, #e6590c); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #bc770f),color-stop(1, #e6590c));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#bc770f', EndColorStr='#e6590c')"; }
+.ui-btn-down-r a.ui-link-inherit { color: #fff; }
+.ui-btn-up-r, .ui-btn-hover-r, .ui-btn-down-r { font-family: Helvetica, Arial, sans-serif; }
+
+
+ /*!
+ * jQuery UI Stars v2.0.3
+ * http://plugins.jquery.com/project/Star_Rating_widget
+ *
+ * Copyright (c) 2009 Orkan (orkans@gmail.com)
+ * Dual licensed under the MIT and GPL licenses.
+ * http://docs.jquery.com/License
+ *
+ * $Rev: 102 $
+ * $Date:: 2009-06-07 #$
+ * $Build: 23 (2009-06-07)
+ *
+ * Theme: Crystal
+ *
+ */
+.ui-stars-star,
+.ui-stars-cancel {
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-indent: -999em;
+	cursor: pointer;
+	 font-size:20px;
+}
+.ui-stars-star a,
+.ui-stars-cancel a {
+	width: 28px;
+	height: 26px;
+	display: block;
+	position: relative;
+	background: url('images/crystal-stars.png') no-repeat 0 0;
+	 font-size:20px;
+}
+.ui-stars-star a {
+	background-position: 0 -56px;
+}
+.ui-stars-star-on a {
+	background-position: 0 -84px;
+}
+.ui-stars-star-hover a {
+	background-position: 0 -112px;
+}
+.ui-stars-cancel-hover a {
+	background-position: 0 -28px;
+}
+.ui-stars-star-disabled,
+.ui-stars-star-disabled a,
+.ui-stars-cancel-disabled a {
+	cursor: default !important;
+}
+.starify {
+	width: 140px;
+	margin: 0px auto;
+}
