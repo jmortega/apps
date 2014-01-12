@@ -7,11 +7,14 @@
   
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-	<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>     
+	     
 	<script type="text/javascript" src="jquery.mobile/jquery-1.5.2.min.jsX"></script>
 	<script type="text/javascript" charset="utf-8" src="underscore.js"></script>
 	<script type="text/javascript" charset="utf-8" src="backbone.js"></script>
 	<script type="text/javascript" charset="utf-8" src="university.json"></script>
+	
+	<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+	
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	
 	<link rel="stylesheet" href="gmapdemo.css" type="text/css" />
@@ -20,7 +23,7 @@
 	
 
 	<script type="text/javascript" charset="utf-8" src="jquery-mobile.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ui/jquery.ui.map.min.js"></script>
+
 	<script type="text/javascript" charset="utf-8" src="application.js"></script>
 
  	<script type="text/javascript" charset="utf-8">
@@ -34,10 +37,16 @@
   	
   		if(navigator.onLine){
   		
-  			loadjscssfile("http://maps.google.com/maps/api/js?sensor=true", "js") //dynamically load and add this .js file
+  			//loadjscssfile("http://maps.google.com/maps/api/js?sensor=true", "js") //dynamically load and add this .js file
   		
   		}
   	
+  		var networkstate = navigator.connection.type;
+  		alert(networkstate);
+   		if(networkstate == "none"){
+       		$(".offline").css("visibility","visible");
+              
+  		 }
   	
   	}
   	

@@ -248,19 +248,14 @@
   };
   
   app.Controller = new Controller();
+  
   $(document).ready(function() {
-      
+
    $('#exit_btn').click(function() {
           navigator.app.exitApp();
    });
       
-   var networkstate = navigator.connection.type;
-   if(networkstate == "none"){
-       $(".offline").css("visibility","visible");
-              
-   }
-   
-   
+
    $('#botonConnection').click(function() {
       
        var networkState = navigator.connection.type;

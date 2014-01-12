@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="gmapdemo.css" type="text/css" />
     <script type="text/javascript" src="jquery.mobile/jquery-1.5.2.min.jsX"></script>
     
-    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>         
+    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>     
     
     <!-- To use PhoneGap APIs uncomment the following -->         
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -20,15 +20,9 @@
     <script type="text/javascript" src="jquery.mobile/jquery.mobile.min.20110527.js"></script>
     <script type="text/javascript" src="ui/jquery.ui.map.min.js"></script>
     
-    <script type="text/javascript">
-    $(document).bind('mobileinit',function(){
-        $.mobile.selectmenu.prototype.options.nativeMenu = false;
-    });
-    </script>
-    
     </head>
     
-    <body> 
+    <body onload="onBodyLoad()"> 
     <div data-role="page" id="gmap-ex3">
     
     <header data-role="header" data-theme="c" class="detalles" data-position="fixed">
@@ -36,178 +30,7 @@
         <h1>Rutas</h1>
     </header>
     
-    <script type="text/javascript">
-    $('#gmap-ex3').live("pagebeforecreate", function() {
-        var useragent = navigator.userAgent;
-        var mapdiv = document.getElementById("map_canvas_2");
-        var mapitem = document.getElementById("map_item");
-        var currentLatLng;
-        $('#alert').hide();
     
-        
-        if ((useragent.indexOf('Android 3.') != -1) && (screen.width >= 800) && (screen.height >= 800)) {
-            // galaxy tab
-            mapdiv.style.height = '480px';
-            mapdiv.style.margin = '0.8em';  				
-        } else if ((useragent.indexOf('Android 2.') != -1 ) || (useragent.indexOf('Android 3.') != -1 )) {
-            mapitem.style.maxWidth = '490px';
-            mapdiv.style.height = '290px';
-            mapdiv.style.margin = '0.4em';
-        } else {
-            mapdiv.style.height = '450px';
-            mapdiv.style.margin = '1em';
-        }
-    }); 
-    $('#gmap-ex3').live("pageshow", function() {
-        $('.ctrlbtns').fadeIn(3300);
-    
-        var mapdiv = document.getElementById("map_canvas_2");
-    
-        var networkstate = navigator.connection.type;
-        
-        if(networkstate == "none"){
-           
-            alert('Debe disponer de una conexión para obtener las rutas');
-            
-            $('#map_canvas_2').hide();
-            
-            $('#alert').show();
-                   
-        }else{
-        
-
-        
-        if ( navigator.geolocation ) {
-            navigator.geolocation.getCurrentPosition ( function( position ) {
-                currentLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                accuracy = position.coords.accuracy;
-                makeMap(currentLatLng, accuracy);
-            }, function(error) {
-                currentLatLng = new google.maps.LatLng(42.3375879, -83.049514);
-                fadingMsg(null);
-                makeMap(currentLatLng);
-            } , { timeout: 3400, enableHighAccuracy: true }
-            );                                     
-        } else { 
-            currentLatLng = new google.maps.LatLng(42.3375879, -83.049514);
-            fadingMsg(null);
-            makeMap(currentLatLng);
-        } 
-        
-        }
-    
-        $('.ctrlbtns').fadeIn(3300);
-    
-        function makeMap (curLatLng, accuracy) { 
-            $('#map_canvas_2').gmap( { 'center': curLatLng,  'zoom': 11, 'callback': function (map) { 
-                $('#map_canvas_2').gmap('displayStreetView', 'map_canvas_2', { 'position' : curLatLng, 'visible' : false, pov: { heading: 15, pitch: 10, zoom: 1 } });
-                $('#map_canvas_2').gmap('addMarker', { 'title': 'Your position!', 'bound': true, 
-                    'animation': google.maps.Animation.DROP, 'position': curLatLng }, function(map, marker) {
-                        $('#map_canvas_2').gmap('addInfoWindow', { 'position': marker.getPosition() },
-                                function(iw) {
-                            $(marker).click(function() {
-                                getGeoSearchData(iw, accuracy, marker);
-                                // recenter on marker when iw is closed
-                                google.maps.event.addListener(iw, 'closeclick', function() { 
-                                    $('#map_canvas_2').gmap('option', 'center', marker.getPosition());
-                                });                                                
-                            });
-                        });  // end addInfoWindow
-                    });
-    
-    
-    
-    
-            }
-            });
-        } // end makeMap
-    
-        function getGeoSearchData(iw, accuracy, marker) {
-            var accuracyStr = (accuracy === -1) ? 'Near:' : 'Within ' + accuracy + 'm of:';
-            $('#map_canvas_2').gmap('search', {'location': marker.getPosition() }, function(found, results) {
-                if ( found ) {
-                    var addr = results[0].formatted_address.split(', ', 4);
-
-                    iw.setContent('<div id="ex2-iw-content" style="font-weight: bold;font-size:20px;max-width:240px;width:240px;height:9em;max-height:9em;color:blue;">Your Location<br/>Lat: ' 
-                            + marker.getPosition().lat().toFixed(4) + ', Lng: ' + marker.getPosition().lng().toFixed(4)
-                            + '<br/>' + addr[0] + '<br/>' + addr[1] + ', ' + addr[2] + '<br/>' + addr[3] + '</div>');
-                } else {
-                    fadingMsg('Datos de geoloalización no disponibles');
-                    iw.setContent('<div id="ex2-iw-content" style="font-weight: bold;font-size:20px;max-width:240px;width:240px;height:300px;max-height:300px; !important;color:blue;">Your Location<br/>Lat: ' 
-                            + marker.getPosition().lat().toFixed(4) + ', Lng: ' + marker.getPosition().lng().toFixed(4) + '</div>');
-                }
-                iw.open($('#map_canvas_2').gmap('getMap'), marker);
-            });
-        }
-        
-
-        function fadingMsg (locMsg) {
-            var msg = " <span style='color:#f33;font-size:20px;'> Localización no encontrada</span>.";
-            var opac = 1.0;
-            if (locMsg !== null) {
-                msg = locMsg;
-                opac = 0.9;
-            }
-            $("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"
-                + msg + "</h1></div>")
-                .css({ "display": "block", "opacity": opac, "top": $(window).scrollTop() + 250 })
-                .appendTo( $.mobile.pageContainer )
-                .delay( 2400 )
-                .fadeOut( 1200, function(){
-                    $(this).remove();
-                });
-        }
-    
-    
-        var resetbutton = function(buttonname) { $(buttonname).removeClass("ui-btn-active"); };
-        var travelModes = [google.maps.DirectionsTravelMode.DRIVING, google.maps.DirectionsTravelMode.BICYCLING, google.maps.DirectionsTravelMode.WALKING]; 
-        $('#ex3-drive').click(function() {
-            $('#map_canvas_2').gmap('displayDirections', { 'origin': currentLatLng, 'destination': $('#destino').val(), 'travelMode': travelModes[0],'region':'es' }, { 'panel': document.getElementById('directions')}, function(success, response) {
-                if ( success ) {
-                    $('#results').show();
-                    resetbutton('#ex3-bike');
-                    var valor=$('#destino').val();
-                    $('#resultados').html("Resultados ruta en coche "+$('#destino option:selected').text());
-                } else {
-                    noRouteMsg("ruta en coche");
-                    $('#results').hide();
-                }
-            });
-            return false;
-        });
-        $('#ex3-bike').click(function () {
-            $('#map_canvas_2').gmap('displayDirections', { 'origin': currentLatLng, 'destination': $('#destino').val(), 'travelMode': travelModes[1],'region':'es' }, { 'panel': document.getElementById('directions')}, function(success, response) {
-                if ( success ) {
-                    $('#results').show();
-                    $('#resultados').html("Resultados ruta en bici "+$('#destino option:selected').text());
-                    resetbutton('#ex3-drive');
-                } else {
-                    noRouteMsg("ruta en bici");
-                    $('#results').hide();
-                }
-            });
-            return false;
-        });                                                        
-        function noRouteMsg (mode) {
-            $('<div class="ui-loader ui-overlay-shadow ui-body-e ui-corner-all" style="font-size:22px;"><h1>'
-                    + '<span style="color:red;"> No es posible obtener la ' + mode + '</span></h1></div>')
-                    .css({ 'display': 'block', 'opacity': 0.9, 'top': $(window).scrollTop() + 100 })
-                    .appendTo( $.mobile.pageContainer )
-                    .delay( 2400 )
-                    .fadeOut( 1100, function(){
-                        $(this).remove();
-                    });
-        }                                           
-        var trafficLayer = new google.maps.TrafficLayer();
-        $('#ex3-traffic').toggle(function () {                                                  
-            trafficLayer.setMap($('#map_canvas_2').gmap('getMap')); 
-        }, function() {
-            resetbutton(this);
-            trafficLayer.setMap(null); 
-        } 
-        );      
-    });
-    </script>
     <div data-role="content">
     
     <div class="ui-bar-c ui-corner-all ui-shadow" id="map_item" style="font-size:20px;">				
@@ -320,6 +143,222 @@
     </footer>
     
     </div>
+    
+    <script type="text/javascript">
+    
+    function onBodyLoad(){
+  		document.addEventListener("deviceready",onDeviceReady,false);
+  		
+  	}
+	
+	function loadjscssfile(filename, filetype){
+
+ 		if (filetype=="js"){ //if filename is a external JavaScript file
+  			var fileref=document.createElement('script')
+  			fileref.setAttribute("type","text/javascript")
+  			fileref.setAttribute("src", filename)
+ 		}
+ 		else if (filetype=="css"){ //if filename is an external CSS file
+  			var fileref=document.createElement("link")
+  			fileref.setAttribute("rel", "stylesheet")
+  			fileref.setAttribute("type", "text/css")
+  			fileref.setAttribute("href", filename)
+ 		}
+ 		if (typeof fileref!="undefined")
+  			document.getElementsByTagName("head")[0].appendChild(fileref)
+	}
+	
+  	function onDeviceReady(){
+  	
+  		if(navigator.onLine){
+  		
+  			//loadjscssfile("http://maps.google.com/maps/api/js?sensor=true", "js") //dynamically load and add this .js file
+  		
+  		}
+  	
+  		var networkstate = navigator.network.connection.type;
+  		
+   		if(networkstate == "none"){
+       		$(".offline").css("visibility","visible");
+              
+  		 }
+  		 
+  		  $('.ctrlbtns').fadeIn(3300);
+        
+        var mapdiv = document.getElementById("map_canvas_2");
+    
+        var networkstate = navigator.network.connection.type;
+        
+        if(networkstate == "none"){
+           
+            alert('Debe disponer de una conexión para obtener las rutas');
+            
+            $('#map_canvas_2').hide();
+            
+            $('#alert').show();
+                   
+        }else{
+        
+
+        
+        if ( navigator.geolocation ) {
+            navigator.geolocation.getCurrentPosition ( function( position ) {
+                currentLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                accuracy = position.coords.accuracy;
+                makeMap(currentLatLng, accuracy);
+            }, function(error) {
+                currentLatLng = new google.maps.LatLng(42.3375879, -83.049514);
+                fadingMsg(null);
+                makeMap(currentLatLng);
+            } , { timeout: 3400, enableHighAccuracy: true }
+            );                                     
+        } else { 
+            currentLatLng = new google.maps.LatLng(42.3375879, -83.049514);
+            fadingMsg(null);
+            makeMap(currentLatLng);
+        } 
+        
+        }
+    
+        $('.ctrlbtns').fadeIn(3300);
+    
+        function makeMap (curLatLng, accuracy) { 
+            $('#map_canvas_2').gmap( { 'center': curLatLng,  'zoom': 11, 'callback': function (map) { 
+                $('#map_canvas_2').gmap('displayStreetView', 'map_canvas_2', { 'position' : curLatLng, 'visible' : false, pov: { heading: 15, pitch: 10, zoom: 1 } });
+                $('#map_canvas_2').gmap('addMarker', { 'title': 'Your position!', 'bound': true, 
+                    'animation': google.maps.Animation.DROP, 'position': curLatLng }, function(map, marker) {
+                        $('#map_canvas_2').gmap('addInfoWindow', { 'position': marker.getPosition() },
+                                function(iw) {
+                            $(marker).click(function() {
+                                getGeoSearchData(iw, accuracy, marker);
+                                // recenter on marker when iw is closed
+                                google.maps.event.addListener(iw, 'closeclick', function() { 
+                                    $('#map_canvas_2').gmap('option', 'center', marker.getPosition());
+                                });                                                
+                            });
+                        });  // end addInfoWindow
+                    });
+    
+    
+    
+    
+            }
+            });
+        } // end makeMap
+    
+        function getGeoSearchData(iw, accuracy, marker) {
+            var accuracyStr = (accuracy === -1) ? 'Near:' : 'Within ' + accuracy + 'm of:';
+            $('#map_canvas_2').gmap('search', {'location': marker.getPosition() }, function(found, results) {
+                if ( found ) {
+                    var addr = results[0].formatted_address.split(', ', 4);
+
+                    iw.setContent('<div id="ex2-iw-content" style="font-weight: bold;font-size:20px;max-width:240px;width:240px;height:9em;max-height:9em;color:blue;">Your Location<br/>Lat: ' 
+                            + marker.getPosition().lat().toFixed(4) + ', Lng: ' + marker.getPosition().lng().toFixed(4)
+                            + '<br/>' + addr[0] + '<br/>' + addr[1] + ', ' + addr[2] + '<br/>' + addr[3] + '</div>');
+                } else {
+                    fadingMsg('Datos de geoloalización no disponibles');
+                    iw.setContent('<div id="ex2-iw-content" style="font-weight: bold;font-size:20px;max-width:240px;width:240px;height:300px;max-height:300px; !important;color:blue;">Your Location<br/>Lat: ' 
+                            + marker.getPosition().lat().toFixed(4) + ', Lng: ' + marker.getPosition().lng().toFixed(4) + '</div>');
+                }
+                iw.open($('#map_canvas_2').gmap('getMap'), marker);
+            });
+        }
+        
+
+        function fadingMsg (locMsg) {
+            var msg = " <span style='color:#f33;font-size:20px;'> Localización no encontrada</span>.";
+            var opac = 1.0;
+            if (locMsg !== null) {
+                msg = locMsg;
+                opac = 0.9;
+            }
+            $("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"
+                + msg + "</h1></div>")
+                .css({ "display": "block", "opacity": opac, "top": $(window).scrollTop() + 250 })
+                .appendTo( $.mobile.pageContainer )
+                .delay( 2400 )
+                .fadeOut( 1200, function(){
+                    $(this).remove();
+                });
+        }
+    
+    
+        var resetbutton = function(buttonname) { $(buttonname).removeClass("ui-btn-active"); };
+        var travelModes = [google.maps.DirectionsTravelMode.DRIVING, google.maps.DirectionsTravelMode.BICYCLING, google.maps.DirectionsTravelMode.WALKING]; 
+        $('#ex3-drive').click(function() {
+       
+            $('#map_canvas_2').gmap('displayDirections', { 'origin': currentLatLng, 'destination': $('#destino').val(), 'travelMode': travelModes[0],'region':'es' }, { 'panel': document.getElementById('directions')}, function(success, response) {
+                if ( success ) {
+                    $('#results').show();
+                    resetbutton('#ex3-bike');
+                    var valor=$('#destino').val();
+                    $('#resultados').html("Resultados ruta en coche "+$('#destino option:selected').text());
+                } else {
+                    noRouteMsg("ruta en coche");
+                    $('#results').hide();
+                }
+            });
+            return false;
+        });
+        $('#ex3-bike').click(function () {
+            $('#map_canvas_2').gmap('displayDirections', { 'origin': currentLatLng, 'destination': $('#destino').val(), 'travelMode': travelModes[1],'region':'es' }, { 'panel': document.getElementById('directions')}, function(success, response) {
+                if ( success ) {
+                    $('#results').show();
+                    $('#resultados').html("Resultados ruta en bici "+$('#destino option:selected').text());
+                    resetbutton('#ex3-drive');
+                } else {
+                    noRouteMsg("ruta en bici");
+                    $('#results').hide();
+                }
+            });
+            return false;
+        });                                                        
+        function noRouteMsg (mode) {
+            $('<div class="ui-loader ui-overlay-shadow ui-body-e ui-corner-all" style="font-size:22px;"><h1>'
+                    + '<span style="color:red;"> No es posible obtener la ' + mode + '</span></h1></div>')
+                    .css({ 'display': 'block', 'opacity': 0.9, 'top': $(window).scrollTop() + 100 })
+                    .appendTo( $.mobile.pageContainer )
+                    .delay( 2400 )
+                    .fadeOut( 1100, function(){
+                        $(this).remove();
+                    });
+        }                                           
+        var trafficLayer = new google.maps.TrafficLayer();
+        $('#ex3-traffic').toggle(function () {                                                  
+            trafficLayer.setMap($('#map_canvas_2').gmap('getMap')); 
+        }, function() {
+            resetbutton(this);
+            trafficLayer.setMap(null); 
+        } 
+        );      
+  	
+  	}
+  	
+  	
+    $('#gmap-ex3').live("pagebeforecreate", function() {
+    
+        var useragent = navigator.userAgent;
+        var mapdiv = document.getElementById("map_canvas_2");
+        var mapitem = document.getElementById("map_item");
+        var currentLatLng;
+        $('#alert').hide();
+    
+        
+        if ((useragent.indexOf('Android 3.') != -1) && (screen.width >= 800) && (screen.height >= 800)) {
+            // galaxy tab
+            mapdiv.style.height = '480px';
+            mapdiv.style.margin = '0.8em';  				
+        } else if ((useragent.indexOf('Android 2.') != -1 ) || (useragent.indexOf('Android 3.') != -1 )) {
+            mapitem.style.maxWidth = '490px';
+            mapdiv.style.height = '290px';
+            mapdiv.style.margin = '0.4em';
+        } else {
+            mapdiv.style.height = '450px';
+            mapdiv.style.margin = '1em';
+        }
+    }); 
+
+    </script>
     
     </body>	
     </html>
