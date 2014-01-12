@@ -31,10 +31,22 @@
     
     	var drawStatus = function(info){
         
-            var s = "<p><b>Battery Status</b><br/>";
-            s += "Level is "+info.level + "<br/>";
+            var s = "<p style='align:center'><b>Battery Status</b><br/>";
+            s += "Level: "+info.level + "<br/>";
             s += "Plugged in is "+info.isPlugged;
+            s += "<br/>";
             s += "</p>";
+            
+
+           if(info.isPlugged==true){
+
+             document.getElementById("imageAux").setAttribute('src', 'style/conectado.png');
+            
+           }else{
+           
+            document.getElementById("imageAux").setAttribute('src', 'style/desconectado.png');
+            
+           }
             statusdiv.innerHTML = s;
                         
             var el = document.getElementById('capacity');
@@ -72,13 +84,22 @@
      </script> 
     </head>
     <body onload="init();">
+      <div>
       
-      <div id="status"></div>
       
       <div id="battery">
         <img src="style/battery.png" />
         <div id="capacity" class="full"></div>
       </div>
       
+      <div id="status">
+      
+      </div>
+
+	  
+      
+      </div>
+      
+      <div id="statusImage"><img id="imageAux" src='style/desconectado.png' /></div>
     </body> 
 </html>

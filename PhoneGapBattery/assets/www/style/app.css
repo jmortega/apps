@@ -19,7 +19,7 @@ img {
 #capacity {
   height:135px;
   left:28px;
-  position:absolute;
+  position:relative;
   top:22px;
   width:270px;
   z-index:1;
@@ -44,14 +44,22 @@ h1 {
 
 #status {
   height:135px;
-  left:150px;
-  position:absolute;
   top:140px;
-  width:270px;
+  width:100%
   z-index:1;
    font-family:verdana, helvetica;
   font-size:40px;
   color:#1B1D20;
   text-align:center;
   text-shadow: #888 0px 1px 0px;
+}
+
+#statusImage {
+  height:135px;
+  top:25px;
+  width:100%;
+  left:50%;
+  float:center;
+  position:relative;
+  z-index:1;
 }
