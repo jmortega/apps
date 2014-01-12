@@ -9,10 +9,10 @@
     <meta name="viewport" content="width=screen.width, initial-scale=1.0, user-scalable=no" />  
     
     <link rel="stylesheet" href="js/jquery.mobile/jquery.mobile.min.20110527.css" type="text/css" />
-    <link rel="stylesheet" href="css/gmapdemo.css" type="text/css" />
+     <link rel="stylesheet" href="css/gmapdemo.css" type="text/css" />
     <script type="text/javascript" src="js/jquery.mobile/jquery-1.5.2.min.jsX"></script>
     
-    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>         
+    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>     
     
     <!-- To use PhoneGap APIs uncomment the following -->         
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -20,15 +20,9 @@
     <script type="text/javascript" src="js/jquery.mobile/jquery.mobile.min.20110527.js"></script>
     <script type="text/javascript" src="js/ui/jquery.ui.map.min.js"></script>
     
-    <script type="text/javascript">
-    $(document).bind('mobileinit',function(){
-        $.mobile.selectmenu.prototype.options.nativeMenu = false;
-    });
-    </script>
-    
     </head>
     
-    <body> 
+    <body onload="onBodyLoad()"> 
     <div data-role="page" id="gmap-ex3">
     
     <header data-role="header" data-theme="c" class="detalles" data-position="fixed">
@@ -36,38 +30,114 @@
         <h1>Ruta Codemotion</h1>
     </header>
     
+    
+    <div data-role="content">
+    
+    <div class="ui-bar-c ui-corner-all ui-shadow" id="map_item" style="font-size:20px;">				
+    <div id="map_canvas_2"></div>
+    </div>
+    
+    <div class="ui-bar-c ui-corner-all ui-shadow" style="margin-top:0.2em;font-size:20px;">
+    
+    <fieldset class="ui-grid-a">
+    <div class="ui-block-a" style="font-size:20px;">
+    <label for="from" class="select" style="font-size:20px;">Origen:</label>
+    <select name="from" id="from">
+    <option value="Your Location">Your Location</option>
+    </select>
+    </div>
+    <div class="ui-block-b" style="font-size:20px;">
+    <label for="to" class="select" style="font-size:20px;">Destino:</label>
+    <select name="destino" id="destino">
+
+	<option value="40.38903, -3.62873">Universidad Politécnica de Madrid.Campus Sur</option>
+	
+    </select>
+    </div>
+    </fieldset>
+    
+    <div data-role="controlgroup" data-type="horizontal" style="margin:0.6em 0.3em;font-size:20px;" class="ctrlbtns">
+    <a data-role="button" id="ex3-drive">Ruta en coche</a>					
+    <a data-role="button" id="ex3-bike">Ruta en bici</a>					
+    <a data-role="button" id="ex3-traffic" style="color:#139;">Tráfico</a>			
+    </div>
+    
+    </div>
+    
+    <div id="results" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;font-size:20px;">
+    <div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined" style="opacity:1;font-size:20px;" id="resultados">Resultados</div>
+    <div id="directions" style="background:#eee;opacity:1;"></div>
+    <div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-bottom ui-btn-up-undefined"></div>
+    </div>
+    </div>
+    
+    <div id="alert" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;font-size:20px;">
+    <div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined" style="opacity:1;font-size:20px;" id="resultados">No hay conexi&oacute;n</div>
+    <div id="directions" style="background:#eee;opacity:1;"></div>
+    <p style="text-align:center">
+        <img  src="alert.png" />
+    </p>
+    </div>
+
+    
+    <footer data-role="footer" data-theme="c" class="detalles" data-position="fixed">
+    <div data-role="navbar">
+    <ul>
+    <li><a rel="external" href="index.html" style="font-size:20px;">Back to Menu</a></li>
+    </ul>
+    </div>
+    </footer>
+    
+    </div>
+    
     <script type="text/javascript">
-    $('#gmap-ex3').live("pagebeforecreate", function() {
-        var useragent = navigator.userAgent;
-        var mapdiv = document.getElementById("map_canvas_2");
-        var mapitem = document.getElementById("map_item");
-        var currentLatLng;
-        $('#alert').hide();
     
+    function onBodyLoad(){
+  		document.addEventListener("deviceready",onDeviceReady,false);
+  		
+  	}
+	
+	function loadjscssfile(filename, filetype){
+
+ 		if (filetype=="js"){ //if filename is a external JavaScript file
+  			var fileref=document.createElement('script')
+  			fileref.setAttribute("type","text/javascript")
+  			fileref.setAttribute("src", filename)
+ 		}
+ 		else if (filetype=="css"){ //if filename is an external CSS file
+  			var fileref=document.createElement("link")
+  			fileref.setAttribute("rel", "stylesheet")
+  			fileref.setAttribute("type", "text/css")
+  			fileref.setAttribute("href", filename)
+ 		}
+ 		if (typeof fileref!="undefined")
+  			document.getElementsByTagName("head")[0].appendChild(fileref)
+	}
+	
+  	function onDeviceReady(){
+  	
+  		if(navigator.onLine){
+  		
+  			//loadjscssfile("http://maps.google.com/maps/api/js?sensor=true", "js") //dynamically load and add this .js file
+  		
+  		}
+  	
+  		var networkstate = navigator.network.connection.type;
+  		
+   		if(networkstate == "none"){
+       		$(".offline").css("visibility","visible");
+              
+  		 }
+  		 
+  		  $('.ctrlbtns').fadeIn(3300);
         
-        if ((useragent.indexOf('Android 3.') != -1) && (screen.width >= 800) && (screen.height >= 800)) {
-            // galaxy tab
-            mapdiv.style.height = '480px';
-            mapdiv.style.margin = '0.8em';  				
-        } else if ((useragent.indexOf('Android 2.') != -1 ) || (useragent.indexOf('Android 3.') != -1 )) {
-            mapitem.style.maxWidth = '490px';
-            mapdiv.style.height = '290px';
-            mapdiv.style.margin = '0.4em';
-        } else {
-            mapdiv.style.height = '450px';
-            mapdiv.style.margin = '1em';
-        }
-    }); 
-    $('#gmap-ex3').live("pageshow", function() {
-        $('.ctrlbtns').fadeIn(3300);
-    
         var mapdiv = document.getElementById("map_canvas_2");
     
-        var networkstate = navigator.connection.type;
+        var networkstate = navigator.network.connection.type;
         
         if(networkstate == "none"){
            
-            alert('Debe disponer de una conexión para obtener la ruta');
+            alert('Debe disponer de una conexión para obtener las rutas');
             
             $('#map_canvas_2').hide();
             
@@ -99,7 +169,7 @@
         $('.ctrlbtns').fadeIn(3300);
     
         function makeMap (curLatLng, accuracy) { 
-            $('#map_canvas_2').gmap( { 'center': curLatLng,  'zoom': 7, 'callback': function (map) { 
+            $('#map_canvas_2').gmap( { 'center': curLatLng,  'zoom': 11, 'callback': function (map) { 
                 $('#map_canvas_2').gmap('displayStreetView', 'map_canvas_2', { 'position' : curLatLng, 'visible' : false, pov: { heading: 15, pitch: 10, zoom: 1 } });
                 $('#map_canvas_2').gmap('addMarker', { 'title': 'Your position!', 'bound': true, 
                     'animation': google.maps.Animation.DROP, 'position': curLatLng }, function(map, marker) {
@@ -162,6 +232,7 @@
         var resetbutton = function(buttonname) { $(buttonname).removeClass("ui-btn-active"); };
         var travelModes = [google.maps.DirectionsTravelMode.DRIVING, google.maps.DirectionsTravelMode.BICYCLING, google.maps.DirectionsTravelMode.WALKING]; 
         $('#ex3-drive').click(function() {
+       
             $('#map_canvas_2').gmap('displayDirections', { 'origin': currentLatLng, 'destination': $('#destino').val(), 'travelMode': travelModes[0],'region':'es' }, { 'panel': document.getElementById('directions')}, function(success, response) {
                 if ( success ) {
                     $('#results').show();
@@ -206,64 +277,34 @@
             trafficLayer.setMap(null); 
         } 
         );      
-    });
-    </script>
-    <div data-role="content">
+  	
+  	}
+  	
+  	
+    $('#gmap-ex3').live("pagebeforecreate", function() {
     
-    <div class="ui-bar-c ui-corner-all ui-shadow" id="map_item" style="font-size:20px;">				
-    <div id="map_canvas_2"></div>
-    </div>
+        var useragent = navigator.userAgent;
+        var mapdiv = document.getElementById("map_canvas_2");
+        var mapitem = document.getElementById("map_item");
+        var currentLatLng;
+        $('#alert').hide();
     
-    <div class="ui-bar-c ui-corner-all ui-shadow" style="margin-top:0.2em;font-size:20px;">
-    
-    <fieldset class="ui-grid-a">
-    <div class="ui-block-a" style="font-size:20px;">
-    <label for="from" class="select" style="font-size:20px;">Origen:</label>
-    <select name="from" id="from">
-    <option value="Su Localizaci&oacute;n">Su Localizaci&oacute;n</option>
-    </select>
-    </div>
-    <div class="ui-block-b" style="font-size:20px;">
-    <label for="to" class="select" style="font-size:20px;">Destino:</label>
-    <select name="destino" id="destino">
-    <option value="40.38903, -3.62873">Universidad Politécnica de Madrid.Campus Sur</option>
-    </select>
-    </div>
-    </fieldset>
-    
-    <div data-role="controlgroup" data-type="horizontal" style="margin:0.6em 0.3em;font-size:20px;" class="ctrlbtns">
-    <a data-role="button" id="ex3-drive">Ruta en coche</a>					
-    <a data-role="button" id="ex3-bike">Ruta en bici</a>					
-    <a data-role="button" id="ex3-traffic" style="color:#139;">Tráfico</a>			
-    </div>
-    
-    </div>
-    
-    <div id="results" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;font-size:20px;">
-    <div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined" style="opacity:1;font-size:20px;" id="resultados">Resultados</div>
-    <div id="directions" style="background:#eee;opacity:1;"></div>
-    <div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-bottom ui-btn-up-undefined"></div>
-    </div>
-    </div>
-    
-    <div id="alert" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;font-size:20px;">
-    <div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined" style="opacity:1;font-size:20px;" id="resultados">No hay conexi&oacute;n</div>
-    <div id="directions" style="background:#eee;opacity:1;"></div>
-    <p style="text-align:center">
-        <img  src="alert.png" />
-    </p>
-    </div>
+        
+        if ((useragent.indexOf('Android 3.') != -1) && (screen.width >= 800) && (screen.height >= 800)) {
+            // galaxy tab
+            mapdiv.style.height = '480px';
+            mapdiv.style.margin = '0.8em';  				
+        } else if ((useragent.indexOf('Android 2.') != -1 ) || (useragent.indexOf('Android 3.') != -1 )) {
+            mapitem.style.maxWidth = '490px';
+            mapdiv.style.height = '290px';
+            mapdiv.style.margin = '0.4em';
+        } else {
+            mapdiv.style.height = '450px';
+            mapdiv.style.margin = '1em';
+        }
+    }); 
 
-    
-    <footer data-role="footer" data-theme="c" class="detalles" data-position="fixed">
-    <div data-role="navbar">
-    <ul>
-    <li><a rel="external" href="index.html" style="font-size:20px;">Back to Menu</a></li>
-    </ul>
-    </div>
-    </footer>
-    
-    </div>
+    </script>
     
     </body>	
     </html>
