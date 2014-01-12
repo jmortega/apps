@@ -180,15 +180,32 @@ function onDeviceReady() {
         navigator.app.exitApp();
     });
     
-    var networkstate = navigator.connection.type;
+    
+    var networkstate = navigator.network.connection.type;
     if(networkstate == "none")
-    {
+    { 
             $(".offline").css("visibility","visible");
             
     }else{
-        
+
             $(".java").css("visibility","visible");
     }
+    
+     if(networkstate != "none")
+    {
+        getRemoteFeed();
+    }
+	
+	
+	$('#showList').on('tap', 'li', function(){
+		localStorage.clear();
+		localStorage.setItem("enclosureURL", $(this).attr('data-enclosure'));
+		localStorage.setItem("showTitle", $(this).attr('data-show-title'));
+		localStorage.setItem("showDescription", $(this).attr('data-show-description'));
+			 
+		$.mobile.changePage('#itemdetail'); 
+    });
+	
 }
 
 function checkConnection() {
@@ -204,28 +221,8 @@ function checkConnection() {
     alert('Connection type: ' + states[networkState]);
 }
 
-$("#home").bind("pagecreate", function(e) {
-	
-    var networkstate = navigator.connection.type;
-    if(networkstate != "none")
-    {
-        getRemoteFeed();
-    }
-	
-	
-	$('#showList').on('tap', 'li', function(){
-		localStorage.clear();
-		localStorage.setItem("enclosureURL", $(this).attr('data-enclosure'));
-		localStorage.setItem("showTitle", $(this).attr('data-show-title'));
-		localStorage.setItem("showDescription", $(this).attr('data-show-description'));
-			 
-		$.mobile.changePage('#itemdetail'); 
-    });
-	
 
-})
 
-  
 var getRemoteFeed = function() {
 	
 	$.get("http://feeds2.feedburner.com/JHPodcasts", 
