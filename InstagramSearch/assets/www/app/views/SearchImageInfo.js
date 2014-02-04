@@ -12,7 +12,7 @@
             name: 'proyecto',
             label: 'Proyecto',
             maxLength: 80,
-            placeHolder: 'Instagram Search',
+            placeHolder: 'SearchImageSenchaTouch',
             readOnly:true,
             style: 'height:100px;font-size:25px;'
         };
@@ -28,12 +28,12 @@
         };
 
 
-instagramSearch.views.InstagramInfo = Ext.extend(Ext.Panel, {
+SearchImageSenchaTouch.views.SearchImageInfo = Ext.extend(Ext.Panel, {
     layout: 'fit',
 	requires: ['Ext.device.Connection'],
     dockedItems: [{
 			xtype: "panel",
-			title: '<p style="text-align: right">Instagram Search Images</p>',
+			title: '<p style="text-align: right">Search Images</p>',
             items: [
 	
                     proyecto,descripcion,autor  

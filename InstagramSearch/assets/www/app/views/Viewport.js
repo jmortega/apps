@@ -1,4 +1,4 @@
-instagramSearch.views.Viewport = Ext.extend(Ext.TabPanel, {
+SearchImageSenchaTouch.views.Viewport = Ext.extend(Ext.TabPanel, {
 
     fullscreen: true,
     layout: 'fit',
@@ -16,25 +16,25 @@ instagramSearch.views.Viewport = Ext.extend(Ext.TabPanel, {
         },
     initComponent: function() {
 
-        instagramSearch.views.instagramList = new instagramSearch.views.InstagramList();
-        instagramSearch.views.instagramInfo = new instagramSearch.views.InstagramInfo();
+        SearchImageSenchaTouch.views.searchImageList = new SearchImageSenchaTouch.views.SearchImageList();
+        SearchImageSenchaTouch.views.searchImageInfo = new SearchImageSenchaTouch.views.SearchImageInfo();
         
         Ext.apply(this, {
             items: [
                 {
                         xtype: 'container',
                         layout: 'fit',
-                        html: '<div><img src="css/images/picture.png" align="left" /><img src="css/images/instagram.png" align="right" /></div>',
+                        html: '<div><img src="css/images/picture.png" align="left" /><img src="css/images/icon.png" align="right" /></div>',
                         iconCls: 'home',
                         title: 'Home'
                 },
-                instagramSearch.views.instagramList,
-                instagramSearch.views.instagramInfo
+                SearchImageSenchaTouch.views.searchImageList,
+                SearchImageSenchaTouch.views.searchImageInfo
                 
             ]
         });
 
-        instagramSearch.views.Viewport.superclass.initComponent.apply(this, arguments);
+        SearchImageSenchaTouch.views.Viewport.superclass.initComponent.apply(this, arguments);
     }
 
 });

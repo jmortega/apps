@@ -61,7 +61,7 @@ var busqueda = {
                           // If you're offline, uncomment the two lines below and comment the line above and the line with the Instagram URL.
                            //type: 'ajax',
                            //url: 'app/models/data_from_instagram_api.json',
-                           url: 'https://api.instagram.com/v1/tags/'+task_search_value+'/media/recent?access_token=2260821.f59def8.7fe0d31e791e4e62a00fc8f44b831140'+'&limit=50',
+                           url: 'https://api.instagram.com/v1/tags/'+task_search_value+'/media/recent?client_id=2b751d04969b47468e410f6a0a4388c0',
                            params:{limit: '50',
                            },
                            reader: {
@@ -90,10 +90,10 @@ var busqueda = {
 
 // This is the list item inside in the main list.  It is created for every record in the model, or simply
 // each item in the array returned from the Instagram API.
-instagramSearch.views.InstragramViewList = Ext.extend(Ext.List, {
+SearchImageSenchaTouch.views.SearchImageList = Ext.extend(Ext.List, {
 
     // Each item in the InnerList will be rendered with our imgTpl() declared in our Templates.js file.
-    itemTpl: instagramSearch.views.innerListItemTpl(),
+    itemTpl: SearchImageSenchaTouch.views.innerListItemTpl(),
 	requires: ['Ext.device.Connection'],
 
     // The class name associated with each InnerList item.  We can style using this as the root CSS class for
@@ -165,12 +165,13 @@ instagramSearch.views.InstragramViewList = Ext.extend(Ext.List, {
 
 });
 
-instagramSearch.views.InstagramList = Ext.extend(Ext.Panel, {
+
+SearchImageSenchaTouch.views.SearchImageList = Ext.extend(Ext.Panel, {
     layout: 'fit',
 	requires: ['Ext.device.Connection'],
     dockedItems: [{
 			xtype: "toolbar",
-			title: '<p style="text-align: right">Instagram Search Images</p>',
+			title: '<p style="text-align: right">Image Search</p>',
             items: [
 	
                 search,
@@ -180,7 +181,7 @@ instagramSearch.views.InstagramList = Ext.extend(Ext.Panel, {
 	  }],
     items: [
 
-        new instagramSearch.views.InstragramViewList({
+        new SearchImageSenchaTouch.views.SearchImageList({
                    store: new Ext.data.Store({
 				   
                        // We provide an id for the store so it's easy to debug.
@@ -188,7 +189,7 @@ instagramSearch.views.InstagramList = Ext.extend(Ext.Panel, {
                        // Ext.getStore('store_tp');
                        id: 'store_tp',
                        
-                       model: 'instagramSearch.models.InstagramModel',
+                       model: 'SearchImageSenchaTouch.models.SearchImageModel',
 
                        // Fire off a request when the page loads.  Here is why we don't *need* a controller for this simple view.
                        autoLoad: false,

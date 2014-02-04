@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.proyecto.InstagramSearch"
+    package="com.project.SearchImageSenchaTouch"
     android:versionCode="2"
     android:versionName="2.0" >
 
@@ -16,15 +16,12 @@
         />
 
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application android:icon="@drawable/icon"
         android:label="@string/app_name" android:allowBackup="true" >
-        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".InstagramSearchActivity"
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name="com.project.SearchImageSenchaTouch.SearchImageSenchaTouchActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

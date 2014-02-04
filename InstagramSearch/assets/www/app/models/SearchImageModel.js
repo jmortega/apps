@@ -1,4 +1,4 @@
-instagramSearch.models.InstagramModel = Ext.regModel("instagramSearch.models.InstagramModel", {
+SearchImageSenchaTouch.models.SearchImageModel = Ext.regModel("SearchImageSenchaTouch.models.SearchImageModel", {
     fields: [
         {name: "filter", type: "string"},
         {name: "link", type: "string"},

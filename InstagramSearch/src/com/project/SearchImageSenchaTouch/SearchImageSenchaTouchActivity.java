@@ -1,11 +1,11 @@
-package com.proyecto.InstagramSearch;
+package com.project.SearchImageSenchaTouch;
 
 import org.apache.cordova.DroidGap;
 
 
 import android.os.Bundle;
 
-public class InstagramSearchActivity extends DroidGap {
+public class SearchImageSenchaTouchActivity extends DroidGap {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
